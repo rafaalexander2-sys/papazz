@@ -75,15 +75,20 @@ export default function Home() {
 
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8">
           {[
-            { icon: "👨‍🍳", title: "Receitas", link: "/receitas" },
-            { icon: "⏰", title: "Cronograma", link: "/cronograma" },
-            { icon: "📅", title: "Planejamento", link: null },
-            { icon: "🛒", title: "Lista", link: null },
-            { icon: "📖", title: "Diário", link: null },
-            { icon: "💡", title: "Guia IA", link: null },
+            { icon: "👨‍🍳", title: "Receitas", link: "/receitas", premium: false },
+            { icon: "⏰", title: "Cronograma", link: "/cronograma", premium: false },
+            { icon: "📅", title: "Planejamento", link: null, premium: true },
+            { icon: "🛒", title: "Lista", link: null, premium: true },
+            { icon: "📖", title: "Diário", link: null, premium: true },
+            { icon: "💡", title: "Guia IA", link: null, premium: true },
           ].map((item, i) => {
             const CardContent = (
-              <div className="bg-white p-4 rounded-xl shadow text-center hover:shadow-lg transition-shadow cursor-pointer">
+              <div className="bg-white p-4 rounded-xl shadow text-center hover:shadow-lg transition-shadow cursor-pointer relative">
+                {item.premium && (
+                  <div className="absolute -top-2 -right-2 bg-gradient-to-r from-[#FFD700] to-[#FFA500] text-white text-xs font-bold px-2 py-1 rounded-full shadow-lg">
+                    👑
+                  </div>
+                )}
                 <div className="text-2xl mb-2">{item.icon}</div>
                 <p className="text-sm font-semibold text-[#333]">
                   {item.title}
@@ -91,15 +96,23 @@ export default function Home() {
               </div>
             );
 
-            return item.link ? (
-              <Link key={i} to={item.link}>
-                {CardContent}
-              </Link>
-            ) : (
-              <div key={i}>
-                {CardContent}
-              </div>
-            );
+            if (item.link) {
+              return (
+                <Link key={i} to={item.link}>
+                  {CardContent}
+                </Link>
+              );
+            }
+
+            if (item.premium) {
+              return (
+                <div key={i} onClick={() => setMostrarPremium(true)}>
+                  {CardContent}
+                </div>
+              );
+            }
+
+            return <div key={i}>{CardContent}</div>;
           })}
         </div>
 
