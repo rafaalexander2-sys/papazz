@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import ModalPremium from '../components/ModalPremium';
 
 export default function Home() {
   const [idade, setIdade] = useState(9);
+  const [mostrarPremium, setMostrarPremium] = useState(false);
 
   const getFase = (meses) => {
     if (meses <= 8) return "6-8";
@@ -39,7 +41,10 @@ export default function Home() {
           Cada mordida, uma descoberta
         </p>
 
-        <button className="mt-3 bg-gradient-to-r from-[#FF6B6B] to-[#FF8B8B] text-white px-6 py-3 rounded-full shadow font-semibold">
+        <button 
+          onClick={() => setMostrarPremium(true)} 
+          className="mt-3 bg-gradient-to-r from-[#FF6B6B] to-[#FF8B8B] text-white px-6 py-3 rounded-full shadow font-semibold hover:shadow-lg transition-shadow"
+        >
           👑 Premium
         </button>
       </div>
@@ -68,39 +73,39 @@ export default function Home() {
           </div>
         </div>
 
-        
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8">
+          {[
+            { icon: "👨‍🍳", title: "Receitas", link: "/receitas" },
+            { icon: "⏰", title: "Cronograma", link: "/cronograma" },
+            { icon: "📅", title: "Planejamento", link: null },
+            { icon: "🛒", title: "Lista", link: null },
+            { icon: "📖", title: "Diário", link: null },
+            { icon: "💡", title: "Guia IA", link: null },
+          ].map((item, i) => {
+            const CardContent = (
+              <div className="bg-white p-4 rounded-xl shadow text-center hover:shadow-lg transition-shadow cursor-pointer">
+                <div className="text-2xl mb-2">{item.icon}</div>
+                <p className="text-sm font-semibold text-[#333]">
+                  {item.title}
+                </p>
+              </div>
+            );
+
+            return item.link ? (
+              <Link key={i} to={item.link}>
+                {CardContent}
+              </Link>
+            ) : (
+              <div key={i}>
+                {CardContent}
+              </div>
+            );
+          })}
+        </div>
 
         <div>
           <h2 className="text-lg font-bold text-[#333] mb-4">
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8">
-  {[
-    { icon: "👨‍🍳", title: "Receitas", link: "/receitas" },
-    { icon: "⏰", title: "Cronograma", link: "/cronograma" },
-    { icon: "📅", title: "Planejamento", link: null },
-    { icon: "🛒", title: "Lista", link: null },
-    { icon: "📖", title: "Diário", link: null },
-    { icon: "💡", title: "Guia IA", link: null },
-  ].map((item, i) => {
-    const CardContent = (
-      <div className="bg-white p-4 rounded-xl shadow text-center hover:shadow-lg transition-shadow cursor-pointer">
-        <div className="text-2xl mb-2">{item.icon}</div>
-        <p className="text-sm font-semibold text-[#333]">
-          {item.title}
-        </p>
-      </div>
-    );
-
-    return item.link ? (
-      <Link key={i} to={item.link}>
-        {CardContent}
-      </Link>
-    ) : (
-      <div key={i}>
-        {CardContent}
-      </div>
-    );
-  })}
-</div>    Receitas recomendadas
+            Receitas recomendadas
           </h2>
 
           <div className="grid gap-4">
@@ -118,6 +123,10 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {mostrarPremium && (
+        <ModalPremium onClose={() => setMostrarPremium(false)} />
+      )}
     </div>
   );
 }
