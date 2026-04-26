@@ -1,197 +1,327 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import receitas from "../data/receitas";
+import ModalUpgrade from "../components/premium/ModalUpgrade";
 
 export default function Receitas() {
+  const { isPremium } = useAuth();
   const [faseSelecionada, setFaseSelecionada] = useState("6-8");
   const [receitaSelecionada, setReceitaSelecionada] = useState(null);
+  const [mostrarUpgrade, setMostrarUpgrade] = useState(false);
 
   const fases = [
-    { id: "6-8", nome: "6-8 meses", cor: "from-[#FF8B94] to-[#FFB5A7]" },
-    { id: "8-10", nome: "8-10 meses", cor: "from-[#FFB347] to-[#FFCC7A]" },
-    { id: "10-12", nome: "10-12 meses", cor: "from-[#C9E4DE] to-[#B5E7DD]" },
-    { id: "12+", nome: "12+ meses", cor: "from-[#B5E7DD] to-[#A7D8C9]" },
+    { id: "6-8", nome: "6-8 meses", cor: "#FFB5A7", emoji: "🍼" },
+    { id: "8-10", nome: "8-10 meses", cor: "#FFCC7A", emoji: "🥄" },
+    { id: "10-12", nome: "10-12 meses", cor: "#B5E7DD", emoji: "🍽️" },
+    { id: "12+", nome: "12+ meses", cor: "#A7D8C9", emoji: "🍴" },
   ];
 
-  const receitas = [
-    {
-      id: 1,
-      nome: "Papa de Cenoura",
-      fase: "6-8",
-      tempo: "20 min",
-      dificuldade: "Fácil",
-      ingredientes: ["2 cenouras médias", "1 fio de azeite", "Água"],
-      preparo: [
-        "Descasque e corte as cenouras em rodelas",
-        "Cozinhe em água fervente por 15 minutos",
-        "Amasse com garfo até formar papa",
-        "Adicione um fio de azeite"
-      ]
-    },
-    {
-      id: 2,
-      nome: "Purê de Batata",
-      fase: "6-8",
-      tempo: "25 min",
-      dificuldade: "Fácil",
-      ingredientes: ["2 batatas médias", "1 colher de azeite"],
-      preparo: [
-        "Descasque e corte as batatas",
-        "Cozinhe até ficarem macias",
-        "Amasse bem",
-        "Misture com azeite"
-      ]
-    },
-    {
-      id: 3,
-      nome: "Banana Amassada",
-      fase: "8-10",
-      tempo: "5 min",
-      dificuldade: "Muito Fácil",
-      ingredientes: ["1 banana madura"],
-      preparo: [
-        "Descasque a banana",
-        "Amasse com garfo",
-        "Sirva imediatamente"
-      ]
-    },
-    {
-      id: 4,
-      nome: "Arroz com Legumes",
-      fase: "8-10",
-      tempo: "30 min",
-      dificuldade: "Média",
-      ingredientes: ["1/2 xícara de arroz", "Cenoura picada", "Abobrinha picada", "1 colher de azeite"],
-      preparo: [
-        "Refogue os legumes no azeite",
-        "Adicione o arroz e água",
-        "Cozinhe por 20 minutos",
-        "Amasse levemente"
-      ]
-    },
-    {
-      id: 5,
-      nome: "Macarrão com Frango",
-      fase: "10-12",
-      tempo: "35 min",
-      dificuldade: "Média",
-      ingredientes: ["Macarrão parafuso", "Peito de frango", "Cenoura", "Azeite"],
-      preparo: [
-        "Cozinhe o macarrão",
-        "Cozinhe o frango e desfie",
-        "Refogue com cenoura ralada",
-        "Misture tudo"
-      ]
-    },
-    {
-      id: 6,
-      nome: "Panqueca de Banana",
-      fase: "12+",
-      tempo: "15 min",
-      dificuldade: "Fácil",
-      ingredientes: ["1 banana", "1 ovo", "2 colheres de aveia"],
-      preparo: [
-        "Amasse a banana",
-        "Misture com ovo e aveia",
-        "Frite em frigideira antiaderente",
-        "Vire quando dourar"
-      ]
-    },
-  ];
+  const receitasFiltradas = receitas.filter((r) => r.fase === faseSelecionada);
 
-  const receitasFiltradas = receitas.filter(r => r.fase === faseSelecionada);
+  const abrirReceita = (receita) => {
+    if (receita.premium && !isPremium) {
+      setMostrarUpgrade(true);
+      return;
+    }
+    setReceitaSelecionada(receita);
+  };
 
   return (
-    <div className="bg-[#FFF9F0] min-h-screen pb-20">
+    <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#FF8B94] to-[#FFB5A7] text-white p-5">
-        <Link to="/" className="text-2xl">←</Link>
-        <h1 className="text-2xl font-bold text-center mt-2">Receitas</h1>
+      <div className="bg-gradient-to-r from-[#FF8B94] to-[#FFB5A7] border-b border-gray-100">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 py-12 md:py-16">
+          <h1 className="text-3xl md:text-4xl font-titulo font-bold text-white mb-4">
+            Receitas por Idade
+          </h1>
+          <p className="text-lg text-white/90 font-corpo">
+            Receitas nutritivas e práticas para cada fase do seu bebê
+          </p>
+        </div>
       </div>
 
       {/* Filtro de Fases */}
-      <div className="overflow-x-auto px-5 py-4">
-        <div className="flex gap-3">
-          {fases.map(fase => (
-            <button
-              key={fase.id}
-              onClick={() => setFaseSelecionada(fase.id)}
-              className={`px-6 py-2 rounded-full whitespace-nowrap font-semibold transition-all ${
-                faseSelecionada === fase.id
-                  ? `bg-gradient-to-r ${fase.cor} text-white shadow-lg scale-105`
-                  : 'bg-white text-[#636E72] shadow'
-              }`}
-            >
-              {fase.nome}
-            </button>
+      <div className="bg-gray-50 border-b border-gray-200 sticky top-16 md:top-20 z-40">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 py-4">
+          <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+            {fases.map((fase) => (
+              <button
+                key={fase.id}
+                onClick={() => setFaseSelecionada(fase.id)}
+                className={`flex items-center gap-2 px-4 py-2 rounded-full font-corpo font-semibold whitespace-nowrap transition ${
+                  faseSelecionada === fase.id
+                    ? "text-white shadow-md"
+                    : "bg-white text-gray-700 hover:bg-gray-100"
+                }`}
+                style={{
+                  backgroundColor:
+                    faseSelecionada === fase.id ? fase.cor : undefined,
+                }}
+              >
+                <span>{fase.emoji}</span>
+                <span className="text-sm">{fase.nome}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Grid de Receitas */}
+      <div className="max-w-6xl mx-auto px-4 md:px-6 py-12">
+        <div className="mb-6">
+          <h2 className="text-2xl font-titulo font-bold text-gray-900 mb-2">
+            {receitasFiltradas.length} receitas para {faseSelecionada} meses
+          </h2>
+          <p className="text-gray-600 font-corpo text-sm">
+            {receitasFiltradas.filter((r) => r.premium).length} receitas premium
+            disponíveis
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {receitasFiltradas.map((receita) => (
+            <ReceitaCard
+              key={receita.id}
+              receita={receita}
+              isPremium={isPremium}
+              onClick={() => abrirReceita(receita)}
+            />
           ))}
         </div>
       </div>
 
-      {/* Lista de Receitas */}
-      <div className="px-5 space-y-4">
-        {receitasFiltradas.map(receita => (
-          <div
-            key={receita.id}
-            onClick={() => setReceitaSelecionada(receita)}
-            className="bg-white p-4 rounded-xl shadow cursor-pointer hover:shadow-lg transition-shadow"
-          >
-            <h3 className="font-bold text-[#333] text-lg">{receita.nome}</h3>
-            <div className="flex gap-4 mt-2 text-sm text-[#636E72]">
-              <span>⏰ {receita.tempo}</span>
-              <span>📊 {receita.dificuldade}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-
       {/* Modal de Receita */}
       {receitaSelecionada && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-end sm:items-center justify-center z-50">
-          <div className="bg-white w-full sm:max-w-lg rounded-t-3xl sm:rounded-3xl p-6 max-h-[90vh] overflow-y-auto">
-            <div className="flex justify-between items-start mb-4">
-              <h2 className="text-2xl font-bold text-[#333]">{receitaSelecionada.nome}</h2>
-              <button
-                onClick={() => setReceitaSelecionada(null)}
-                className="text-3xl text-[#636E72] hover:text-[#333]"
-              >
-                ×
-              </button>
-            </div>
+        <ReceitaModal
+          receita={receitaSelecionada}
+          onClose={() => setReceitaSelecionada(null)}
+        />
+      )}
 
-            <div className="flex gap-4 mb-6 text-sm text-[#636E72]">
-              <span>⏰ {receitaSelecionada.tempo}</span>
-              <span>📊 {receitaSelecionada.dificuldade}</span>
-              <span>👶 {receitaSelecionada.fase} meses</span>
-            </div>
+      {/* Modal de Upgrade */}
+      {mostrarUpgrade && (
+        <ModalUpgrade onClose={() => setMostrarUpgrade(false)} />
+      )}
+    </div>
+  );
+}
 
-            <div className="mb-6">
-              <h3 className="font-bold text-lg text-[#333] mb-3">Ingredientes:</h3>
-              <ul className="space-y-2">
-                {receitaSelecionada.ingredientes.map((ing, i) => (
-                  <li key={i} className="flex items-start">
-                    <span className="text-[#FF6B6B] mr-2">•</span>
-                    <span className="text-[#636E72]">{ing}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+// Componente Card de Receita
+function ReceitaCard({ receita, isPremium, onClick }) {
+  const bloqueado = receita.premium && !isPremium;
 
-            <div>
-              <h3 className="font-bold text-lg text-[#333] mb-3">Modo de Preparo:</h3>
-              <ol className="space-y-3">
-                {receitaSelecionada.preparo.map((passo, i) => (
-                  <li key={i} className="flex items-start">
-                    <span className="bg-[#FF6B6B] text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold mr-3 flex-shrink-0">
-                      {i + 1}
-                    </span>
-                    <span className="text-[#636E72] pt-0.5">{passo}</span>
-                  </li>
-                ))}
-              </ol>
-            </div>
+  return (
+    <div
+      onClick={onClick}
+      className={`bg-white border border-gray-200 rounded-[10px] overflow-hidden hover:shadow-lg transition cursor-pointer ${
+        bloqueado ? "relative" : ""
+      }`}
+    >
+      {/* Badge Premium */}
+      {receita.premium && (
+        <div className="absolute top-3 right-3 z-10 bg-gradient-to-r from-[#FFD700] to-[#FFA500] text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg flex items-center gap-1">
+          <span>👑</span>
+          <span>Premium</span>
+        </div>
+      )}
+
+      {/* Imagem ou Placeholder */}
+      <div
+        className={`h-48 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center ${bloqueado ? "blur-sm" : ""}`}
+      >
+        {receita.foto ? (
+          <img
+            src={receita.foto}
+            alt={receita.nome}
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <span className="text-6xl">
+            {receita.fase === "6-8"
+              ? "🥕"
+              : receita.fase === "8-10"
+                ? "🍲"
+                : receita.fase === "10-12"
+                  ? "🍝"
+                  : "🍕"}
+          </span>
+        )}
+      </div>
+
+      {/* Blur overlay para premium bloqueado */}
+      {bloqueado && (
+        <div className="absolute inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center">
+          <div className="text-center">
+            <div className="text-5xl mb-2">🔒</div>
+            <p className="text-sm font-corpo font-bold text-gray-900">
+              Receita Premium
+            </p>
           </div>
         </div>
       )}
+
+      {/* Conteúdo do Card */}
+      <div className={`p-4 ${bloqueado ? "blur-sm" : ""}`}>
+        <h3 className="font-titulo font-bold text-lg text-gray-900 mb-2">
+          {receita.nome}
+        </h3>
+
+        <div className="flex items-center gap-4 text-sm text-gray-600 font-corpo mb-3">
+          <span className="flex items-center gap-1">
+            <span>⏰</span>
+            <span>{receita.tempo} min</span>
+          </span>
+          <span className="flex items-center gap-1">
+            <span>📊</span>
+            <span>{receita.dificuldade}</span>
+          </span>
+        </div>
+
+        <div className="flex flex-wrap gap-2">
+          {receita.tags.slice(0, 3).map((tag, i) => (
+            <span
+              key={i}
+              className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full font-corpo"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Componente Modal de Receita
+function ReceitaModal({ receita, onClose }) {
+  return (
+    <div
+      className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
+      onClick={onClose}
+    >
+      <div
+        className="bg-white rounded-[10px] max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header do Modal */}
+        <div className="sticky top-0 bg-white border-b border-gray-200 p-6 flex items-start justify-between">
+          <div>
+            <h2 className="text-2xl font-titulo font-bold text-gray-900 mb-2">
+              {receita.nome}
+            </h2>
+            <div className="flex items-center gap-4 text-sm text-gray-600 font-corpo">
+              <span>⏰ {receita.tempo} min</span>
+              <span>📊 {receita.dificuldade}</span>
+              <span>🍽️ {receita.fase} meses</span>
+            </div>
+          </div>
+          <button
+            onClick={onClose}
+            className="text-gray-400 hover:text-gray-600"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+
+        {/* Conteúdo do Modal */}
+        <div className="p-6 space-y-6">
+          {/* Nutrientes */}
+          <div className="bg-gray-50 rounded-[10px] p-4">
+            <h3 className="font-titulo font-bold text-gray-900 mb-3">
+              Informação Nutricional
+            </h3>
+            <div className="grid grid-cols-3 gap-3 text-sm font-corpo">
+              <div>
+                <p className="text-gray-600">Calorias</p>
+                <p className="font-bold text-gray-900">
+                  {receita.nutrientes.calorias} kcal
+                </p>
+              </div>
+              <div>
+                <p className="text-gray-600">Proteína</p>
+                <p className="font-bold text-gray-900">
+                  {receita.nutrientes.proteina}g
+                </p>
+              </div>
+              <div>
+                <p className="text-gray-600">Ferro</p>
+                <p className="font-bold text-gray-900">
+                  {receita.nutrientes.ferro}mg
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Ingredientes */}
+          <div>
+            <h3 className="font-titulo font-bold text-gray-900 mb-3">
+              Ingredientes
+            </h3>
+            <ul className="space-y-2 font-corpo text-gray-700">
+              {receita.ingredientes.map((ing, i) => (
+                <li key={i} className="flex items-start gap-2">
+                  <span className="text-[#FF6B6B] mt-1">•</span>
+                  <span>{ing}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Modo de Preparo */}
+          <div>
+            <h3 className="font-titulo font-bold text-gray-900 mb-3">
+              Modo de Preparo
+            </h3>
+            <ol className="space-y-3 font-corpo text-gray-700">
+              {receita.preparo.map((passo, i) => (
+                <li key={i} className="flex gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 bg-[#FF6B6B] text-white rounded-full flex items-center justify-center text-sm font-bold">
+                    {i + 1}
+                  </span>
+                  <span>{passo}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          {/* Dicas */}
+          {receita.dicas && (
+            <div className="bg-yellow-50 border border-yellow-200 rounded-[10px] p-4">
+              <h3 className="font-titulo font-bold text-gray-900 mb-2 flex items-center gap-2">
+                <span>💡</span>
+                <span>Dica</span>
+              </h3>
+              <p className="font-corpo text-gray-700 text-sm leading-relaxed">
+                {receita.dicas}
+              </p>
+            </div>
+          )}
+
+          {/* Tags */}
+          <div className="flex flex-wrap gap-2">
+            {receita.tags.map((tag, i) => (
+              <span
+                key={i}
+                className="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full font-corpo"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

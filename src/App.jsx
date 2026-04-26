@@ -1,3 +1,6 @@
+import Planejamento from "./pages/Planejamento";
+import ListaCompras from "./pages/ListaCompras";
+import DiarioAlimentar from "./pages/DiarioAlimentar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import Layout from "./components/layout/Layout";
@@ -33,6 +36,9 @@ function App() {
             <Route path="/contato" element={<Contato />} />
             <Route path="/privacidade" element={<Privacidade />} />
             <Route path="/termos" element={<Termos />} />
+            <Route path="/planejamento" element={<Planejamento />} />
+            <Route path="/lista-compras" element={<ListaCompras />} />
+            <Route path="/diario" element={<DiarioAlimentar />} />
           </Route>
         </Routes>
       </Router>

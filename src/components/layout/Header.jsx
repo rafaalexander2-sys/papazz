@@ -61,6 +61,48 @@ export default function Header() {
               Blog
             </Link>
 
+            {/* Dropdown Premium - só aparece se for premium */}
+            {user && isPremium && (
+              <div className="relative group">
+                <button className="font-corpo font-semibold text-gray-700 hover:text-[#FF6B6B] transition flex items-center gap-1">
+                  <span>👑 Premium</span>
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
+                <div className="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-200 rounded-[10px] shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                  <Link
+                    to="/planejamento"
+                    className="block px-4 py-3 text-sm font-corpo text-gray-700 hover:bg-gray-50 rounded-t-[10px]"
+                  >
+                    📅 Planejamento Semanal
+                  </Link>
+                  <Link
+                    to="/lista-compras"
+                    className="block px-4 py-3 text-sm font-corpo text-gray-700 hover:bg-gray-50"
+                  >
+                    🛒 Lista de Compras
+                  </Link>
+                  <Link
+                    to="/diario"
+                    className="block px-4 py-3 text-sm font-corpo text-gray-700 hover:bg-gray-50 rounded-b-[10px]"
+                  >
+                    📖 Diário Alimentar
+                  </Link>
+                </div>
+              </div>
+            )}
+
             {user ? (
               <div className="flex items-center gap-4">
                 <span className="text-sm text-gray-600 font-corpo">
@@ -138,10 +180,43 @@ export default function Header() {
               >
                 Blog
               </Link>
+
+              {/* Links Premium no Mobile */}
+              {user && isPremium && (
+                <>
+                  <div className="border-t border-gray-200 pt-4 mt-2">
+                    <p className="text-xs font-corpo font-bold text-gray-500 mb-3 px-2">
+                      👑 PREMIUM
+                    </p>
+                    <Link
+                      to="/planejamento"
+                      className="block font-corpo font-semibold text-gray-700 hover:text-[#FF6B6B] mb-3"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      📅 Planejamento Semanal
+                    </Link>
+                    <Link
+                      to="/lista-compras"
+                      className="block font-corpo font-semibold text-gray-700 hover:text-[#FF6B6B] mb-3"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      🛒 Lista de Compras
+                    </Link>
+                    <Link
+                      to="/diario"
+                      className="block font-corpo font-semibold text-gray-700 hover:text-[#FF6B6B]"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      📖 Diário Alimentar
+                    </Link>
+                  </div>
+                </>
+              )}
+
               {user ? (
                 <>
-                  <span className="text-sm text-gray-600 font-corpo">
-                    {user.email}
+                  <span className="text-sm text-gray-600 font-corpo border-t border-gray-200 pt-4">
+                    {user.email} {isPremium && "👑"}
                   </span>
                   <button
                     onClick={() => {
