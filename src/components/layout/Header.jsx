@@ -6,7 +6,7 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { user, logout } = useAuth();
+  const { user, logout, isPremium } = useAuth();
 
   const isActive = (path) => location.pathname === path;
 
@@ -64,7 +64,7 @@ export default function Header() {
             {user ? (
               <div className="flex items-center gap-4">
                 <span className="text-sm text-gray-600 font-corpo">
-                  {user.email}
+                  {user.email} {isPremium && "👑"}
                 </span>
                 <button
                   onClick={handleLogout}

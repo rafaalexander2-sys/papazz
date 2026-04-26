@@ -8,16 +8,19 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 import { auth } from "../services/firebase";
+import { isPremiumUser } from "../utils/premiumUsers";
 
 const AuthContext = createContext({});
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [isPremium, setIsPremium] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
+      setIsPremium(user ? isPremiumUser(user.email) : false);
       setLoading(false);
     });
 
@@ -43,6 +46,7 @@ export function AuthProvider({ children }) {
 
   const value = {
     user,
+    isPremium,
     signup,
     login,
     logout,
