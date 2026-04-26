@@ -279,21 +279,14 @@ function ReceitaModal({ receita, onClose }) {
             </ul>
           </div>
 
-          {/* Modo de Preparo */}
+          {/* Modo de Preparo - CORRIGIDO AQUI! ✅ */}
           <div>
             <h3 className="font-titulo font-bold text-gray-900 mb-3">
               Modo de Preparo
             </h3>
-            <ol className="space-y-3 font-corpo text-gray-700">
-              {receita.preparo.map((passo, i) => (
-                <li key={i} className="flex gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 bg-[#FF6B6B] text-white rounded-full flex items-center justify-center text-sm font-bold">
-                    {i + 1}
-                  </span>
-                  <span>{passo}</span>
-                </li>
-              ))}
-            </ol>
+            <div className="font-corpo text-gray-700 leading-relaxed whitespace-pre-line">
+              {receita.preparo}
+            </div>
           </div>
 
           {/* Dicas */}
