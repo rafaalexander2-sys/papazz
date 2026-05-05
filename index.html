@@ -4,23 +4,154 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/app-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- SEO Básico -->
-    <title>Papazz - Receitas para Bebês</title>
-    <meta name="description" content="Cada mordida, uma descoberta. Receitas e cronogramas para introdução alimentar infantil." />
-    
-    <!-- Open Graph (WhatsApp, Facebook, etc) -->
-    <meta property="og:title" content="Papazz - Receitas para Bebês" />
-    <meta property="og:description" content="Cada mordida, uma descoberta. Receitas e cronogramas para introdução alimentar infantil." />
+
+    <!-- SEO Principal -->
+    <title>Papazz | App de Introdução Alimentar — Receitas e Planejamento para Bebês</title>
+    <meta name="description" content="Papazz é o app de introdução alimentar com 45 receitas por fase de idade, cronograma, planejamento semanal, lista de compras e diário alimentar. Baseado em OMS e SBP. Gratuito e Premium." />
+    <meta name="keywords" content="introdução alimentar, receitas bebê, papinha bebê, BLW, app introdução alimentar, receitas 6 meses, planejamento alimentar bebê, diário alimentar bebê, lista de compras bebê, cronograma introdução alimentar" />
+    <meta name="author" content="Papazz" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="canonical" href="https://papazz.vercel.app/" />
+
+    <!-- Geo / Language -->
+    <meta name="geo.region" content="BR" />
+    <meta name="geo.placename" content="Brasil" />
+    <meta http-equiv="content-language" content="pt-BR" />
+
+    <!-- Open Graph -->
+    <meta property="og:site_name" content="Papazz" />
+    <meta property="og:title" content="Papazz | App de Introdução Alimentar para Bebês" />
+    <meta property="og:description" content="45 receitas por fase de idade, cronograma, planejamento semanal automático e diário alimentar. Tudo que você precisa para a introdução alimentar do seu bebê." />
     <meta property="og:image" content="https://papazz.vercel.app/logo1.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Papazz — App de Introdução Alimentar" />
     <meta property="og:url" content="https://papazz.vercel.app" />
     <meta property="og:type" content="website" />
-    
+    <meta property="og:locale" content="pt_BR" />
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Papazz - Receitas para Bebês" />
-    <meta name="twitter:description" content="Cada mordida, uma descoberta" />
+    <meta name="twitter:site" content="@papazz" />
+    <meta name="twitter:title" content="Papazz | App de Introdução Alimentar para Bebês" />
+    <meta name="twitter:description" content="45 receitas por fase de idade, planejamento semanal e diário alimentar. Baseado em diretrizes da OMS e SBP." />
     <meta name="twitter:image" content="https://papazz.vercel.app/logo1.png" />
+
+    <!-- PWA / Mobile -->
+    <meta name="theme-color" content="#FF6B6B" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Papazz" />
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <!-- JSON-LD: Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Papazz",
+      "url": "https://papazz.vercel.app",
+      "logo": "https://papazz.vercel.app/logo1.png",
+      "description": "Plataforma de introdução alimentar infantil com receitas, planejamento semanal e diário alimentar baseados em diretrizes da OMS e Sociedade Brasileira de Pediatria.",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "contato@papazz.com.br",
+        "contactType": "customer support",
+        "availableLanguage": "Portuguese"
+      },
+      "sameAs": [
+        "https://instagram.com/papazz",
+        "https://facebook.com/papazz"
+      ],
+      "foundingDate": "2025",
+      "areaServed": "BR",
+      "knowsAbout": ["introdução alimentar", "nutrição infantil", "BLW", "papinha", "alimentação bebê"]
+    }
+    </script>
+
+    <!-- JSON-LD: WebSite + SearchAction -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Papazz",
+      "url": "https://papazz.vercel.app",
+      "description": "App de introdução alimentar com receitas por fase de idade, planejamento semanal, lista de compras e diário alimentar.",
+      "inLanguage": "pt-BR",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://papazz.vercel.app/receitas?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- JSON-LD: WebApplication (para aparecer em buscas de app) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Papazz — App de Introdução Alimentar",
+      "url": "https://papazz.vercel.app",
+      "applicationCategory": "HealthApplication",
+      "applicationSubCategory": "Nutrição Infantil",
+      "operatingSystem": "Web, iOS, Android",
+      "description": "Aplicativo web de introdução alimentar para bebês de 6 a 18 meses. Oferece 45 receitas por fase de idade, cronograma de refeições, planejamento semanal com lista de compras automática e diário de aceitação alimentar.",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Plano Gratuito",
+          "price": "0",
+          "priceCurrency": "BRL",
+          "description": "20 receitas gratuitas, cronograma e blog"
+        },
+        {
+          "@type": "Offer",
+          "name": "Plano Premium",
+          "description": "45 receitas, planejamento semanal, lista de compras e diário alimentar"
+        }
+      ],
+      "featureList": [
+        "45 receitas para bebês de 6 a 18 meses",
+        "Receitas organizadas por fase de idade",
+        "Cronograma de refeições por idade",
+        "Planejamento semanal com grade interativa",
+        "Lista de compras gerada automaticamente do planejamento",
+        "Diário alimentar com registro de aceitação",
+        "Análise de padrões de aceitação",
+        "Exportação de histórico em CSV",
+        "Blog com guias de introdução alimentar",
+        "Baseado em diretrizes OMS e SBP"
+      ],
+      "inLanguage": "pt-BR",
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Pais e cuidadores de bebês em introdução alimentar",
+        "geographicArea": "Brasil"
+      }
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList para homepage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Início", "item": "https://papazz.vercel.app/" },
+        { "@type": "ListItem", "position": 2, "name": "Receitas", "item": "https://papazz.vercel.app/receitas" },
+        { "@type": "ListItem", "position": 3, "name": "Cronograma", "item": "https://papazz.vercel.app/cronograma" },
+        { "@type": "ListItem", "position": 4, "name": "Guia", "item": "https://papazz.vercel.app/guia" },
+        { "@type": "ListItem", "position": 5, "name": "FAQ", "item": "https://papazz.vercel.app/faq" },
+        { "@type": "ListItem", "position": 6, "name": "Blog", "item": "https://papazz.vercel.app/blog" }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

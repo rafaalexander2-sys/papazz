@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(git -C \"c:\\\\Users\\\\santo\\\\papazz\" log --oneline -10)",
+      "PowerShell(Get-ChildItem \"c:\\\\Users\\\\santo\\\\papazz\" -Recurse -File | Where-Object { $_.Extension -in '.html','.js','.css' } | Select-Object FullName | Sort-Object FullName)",
+      "PowerShell(Get-ChildItem \"c:\\\\Users\\\\santo\\\\papazz\\\\src\\\\pages\" -Force | ForEach-Object { $_.Name })",
+      "PowerShell(Get-ChildItem \"c:\\\\Users\\\\santo\\\\papazz\\\\src\\\\components\" -Force | ForEach-Object { $_.Name })",
+      "PowerShell(git -C \"c:\\\\Users\\\\santo\\\\papazz\" status)",
+      "PowerShell(git -C \"c:\\\\Users\\\\santo\\\\papazz\" add src/App.jsx src/pages/ListaCompras.jsx src/pages/Receitas.jsx src/context/ListaComprasContext.jsx)",
+      "PowerShell(git -C \"c:\\\\Users\\\\santo\\\\papazz\" push origin main)",
+      "PowerShell(git -C \"c:\\\\Users\\\\santo\\\\papazz\" add src/context/PlanejamentoContext.jsx src/App.jsx src/pages/Planejamento.jsx src/pages/Receitas.jsx)",
+      "PowerShell(git -C \"c:\\\\Users\\\\santo\\\\papazz\" add src/context/DiarioContext.jsx src/App.jsx src/pages/DiarioAlimentar.jsx)",
+      "PowerShell(git -C \"c:\\\\Users\\\\santo\\\\papazz\" add src/components/FotoReceita.jsx src/context/PlanejamentoContext.jsx src/pages/Receitas.jsx src/pages/Planejamento.jsx src/pages/DiarioAlimentar.jsx)"
+    ]
+  }
+}

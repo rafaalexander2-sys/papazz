@@ -54,6 +54,22 @@ export default function Footer() {
                   Blog
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/guia"
+                  className="text-gray-400 hover:text-white transition"
+                >
+                  Guia de Introdução Alimentar
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/faq"
+                  className="text-gray-400 hover:text-white transition"
+                >
+                  Perguntas Frequentes
+                </Link>
+              </li>
             </ul>
           </div>
 

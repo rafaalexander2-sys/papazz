@@ -19,6 +19,8 @@ import Contato from "./pages/Contato";
 import Privacidade from "./pages/Privacidade";
 import Termos from "./pages/Termos";
 import Login from "./pages/Login";
+import Guia from "./pages/Guia";
+import FAQ from "./pages/FAQ";
 
 function App() {
   return (
@@ -42,6 +44,8 @@ function App() {
             <Route path="/contato" element={<Contato />} />
             <Route path="/privacidade" element={<Privacidade />} />
             <Route path="/termos" element={<Termos />} />
+            <Route path="/guia" element={<Guia />} />
+            <Route path="/faq" element={<FAQ />} />
             <Route path="/planejamento" element={<Planejamento />} />
             <Route path="/lista-compras" element={<ListaCompras />} />
             <Route path="/diario" element={<DiarioAlimentar />} />
