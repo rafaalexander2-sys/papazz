@@ -1,12 +1,25 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { usePlanejamento } from "../context/PlanejamentoContext";
+import { useListaCompras } from "../context/ListaComprasContext";
+import receitas from "../data/receitas";
 import ModalUpgrade from "../components/premium/ModalUpgrade";
+
+const DIAS = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"];
+const REFEICOES = ["Café da Manhã", "Lanche Manhã", "Almoço", "Lanche Tarde", "Jantar"];
+const FASES = [
+  { id: "todas", nome: "Todas" },
+  { id: "6-8", nome: "6-8m" },
+  { id: "8-10", nome: "8-10m" },
+  { id: "10-12", nome: "10-12m" },
+  { id: "12+", nome: "12+m" },
+];
 
 export default function Planejamento() {
   const { isPremium } = useAuth();
   const [mostrarUpgrade, setMostrarUpgrade] = useState(false);
 
-  // Se não for premium, mostra tela bloqueada
   if (!isPremium) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
@@ -17,8 +30,7 @@ export default function Planejamento() {
               Planejamento Semanal
             </h1>
             <p className="text-gray-600 font-corpo mb-6 leading-relaxed">
-              Monte cardápios da semana completa, economize tempo e garanta
-              alimentação balanceada para seu bebê.
+              Monte cardápios da semana, conecte com as receitas e gere sua lista de compras automaticamente.
             </p>
             <button
               onClick={() => setMostrarUpgrade(true)}
@@ -28,114 +40,340 @@ export default function Planejamento() {
             </button>
           </div>
         </div>
-
-        {mostrarUpgrade && (
-          <ModalUpgrade onClose={() => setMostrarUpgrade(false)} />
-        )}
+        {mostrarUpgrade && <ModalUpgrade onClose={() => setMostrarUpgrade(false)} />}
       </div>
     );
   }
 
-  // Se for premium, mostra a funcionalidade
   return <PlanejamentoPremium />;
 }
 
-// Componente para usuários premium
 function PlanejamentoPremium() {
-  const diasDaSemana = [
-    "Segunda",
-    "Terça",
-    "Quarta",
-    "Quinta",
-    "Sexta",
-    "Sábado",
-    "Domingo",
-  ];
-  const refeicoes = [
-    "Café da Manhã",
-    "Lanche da Manhã",
-    "Almoço",
-    "Lanche da Tarde",
-    "Jantar",
-  ];
+  const { plano, adicionarReceita, removerReceita, limparPlano, receitasUnicas, chave } = usePlanejamento();
+  const { adicionarIngredientes } = useListaCompras();
+
+  const [celula, setCelula] = useState(null);
+  const [toast, setToast] = useState(null);
+
+  const totalCelulas = Object.keys(plano).length;
+  const totalReceitas = receitasUnicas().length;
+
+  const mostrarToast = (msg) => {
+    setToast(msg);
+    setTimeout(() => setToast(null), 3000);
+  };
+
+  const handleGerarLista = () => {
+    const unicas = receitasUnicas();
+    if (unicas.length === 0) {
+      mostrarToast("Adicione receitas ao planejamento primeiro.");
+      return;
+    }
+    let total = 0;
+    unicas.forEach((r) => {
+      total += adicionarIngredientes(r.ingredientes, r.nome);
+    });
+    mostrarToast(
+      total > 0
+        ? `✅ ${total} ingredientes adicionados à lista!`
+        : "Ingredientes já estão na lista de compras."
+    );
+  };
 
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#FFD700] to-[#FFA500] border-b border-gray-100">
-        <div className="max-w-6xl mx-auto px-4 md:px-6 py-12 md:py-16">
-          <div className="flex items-center gap-3 mb-4">
-            <span className="text-4xl">📅</span>
-            <h1 className="text-3xl md:text-4xl font-titulo font-bold text-white">
-              Planejamento Semanal
-            </h1>
+      <div className="bg-gradient-to-r from-[#FFD700] to-[#FFA500]">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-10 md:py-14">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-4xl">📅</span>
+                <h1 className="text-3xl md:text-4xl font-titulo font-bold text-white">
+                  Planejamento Semanal
+                </h1>
+              </div>
+              <p className="text-white/90 font-corpo">
+                {totalCelulas === 0
+                  ? "Clique em + para adicionar receitas"
+                  : `${totalCelulas} refeições planejadas · ${totalReceitas} receita${totalReceitas !== 1 ? "s" : ""} diferente${totalReceitas !== 1 ? "s" : ""}`}
+              </p>
+            </div>
+
+            <div className="flex gap-3 flex-wrap">
+              <button
+                onClick={handleGerarLista}
+                className="flex items-center gap-2 px-5 py-2.5 bg-white text-[#FF6B6B] font-corpo font-bold rounded-[10px] hover:shadow-lg transition text-sm"
+              >
+                <span>🛒</span>
+                <span>Gerar Lista de Compras</span>
+              </button>
+              {totalCelulas > 0 && (
+                <button
+                  onClick={limparPlano}
+                  className="px-4 py-2.5 bg-white/20 text-white font-corpo font-semibold rounded-[10px] hover:bg-white/30 transition text-sm"
+                >
+                  Limpar tudo
+                </button>
+              )}
+            </div>
           </div>
-          <p className="text-lg text-white/90 font-corpo">
-            Organize as refeições da semana e facilite sua rotina
-          </p>
         </div>
       </div>
 
-      {/* Conteúdo */}
-      <div className="max-w-6xl mx-auto px-4 md:px-6 py-12">
-        {/* Botões de Ação */}
-        <div className="flex gap-3 mb-6">
-          <button className="px-4 py-2 bg-[#FF6B6B] text-white font-corpo font-semibold rounded-[10px] hover:shadow-lg transition">
-            Gerar Planejamento Automático
-          </button>
-          <button className="px-4 py-2 border border-gray-300 text-gray-700 font-corpo font-semibold rounded-[10px] hover:bg-gray-50 transition">
-            Exportar PDF
-          </button>
+      {/* Grid */}
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-8">
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse" style={{ minWidth: 720 }}>
+            <thead>
+              <tr>
+                <th className="w-28 p-3 text-left font-titulo font-bold text-gray-500 text-sm border-b border-r border-gray-200">
+                  Refeição
+                </th>
+                {DIAS.map((dia) => (
+                  <th
+                    key={dia}
+                    className="p-3 text-center font-titulo font-bold text-gray-900 text-sm border-b border-gray-200 min-w-[130px]"
+                  >
+                    {dia}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {REFEICOES.map((refeicao, ri) => (
+                <tr key={refeicao} className={ri % 2 === 0 ? "bg-white" : "bg-gray-50/50"}>
+                  <td className="p-3 font-corpo font-semibold text-gray-700 text-sm border-r border-gray-200 align-top whitespace-nowrap">
+                    {refeicao}
+                  </td>
+                  {DIAS.map((dia) => {
+                    const item = plano[chave(dia, refeicao)];
+                    return (
+                      <td key={dia} className="p-1.5 align-top">
+                        {item ? (
+                          <CelulaPreenchida
+                            item={item}
+                            onRemover={() => removerReceita(dia, refeicao)}
+                          />
+                        ) : (
+                          <button
+                            onClick={() => setCelula({ dia, refeicao })}
+                            className="w-full h-20 border-2 border-dashed border-gray-200 rounded-[8px] hover:border-[#FF6B6B] hover:bg-red-50/30 transition flex items-center justify-center text-gray-300 hover:text-[#FF6B6B]"
+                          >
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4v16m8-8H4" />
+                            </svg>
+                          </button>
+                        )}
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
 
-        {/* Tabela de Planejamento */}
-        <div className="bg-white border border-gray-200 rounded-[10px] overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="bg-gray-50">
-                  <th className="p-4 text-left font-titulo font-bold text-gray-900 border-b border-r border-gray-200">
-                    Refeição
-                  </th>
-                  {diasDaSemana.map((dia) => (
-                    <th
-                      key={dia}
-                      className="p-4 text-center font-titulo font-bold text-gray-900 border-b border-gray-200 min-w-[150px]"
-                    >
-                      {dia}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {refeicoes.map((refeicao, i) => (
-                  <tr
-                    key={refeicao}
-                    className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}
-                  >
-                    <td className="p-4 font-corpo font-semibold text-gray-900 border-r border-gray-200">
-                      {refeicao}
-                    </td>
-                    {diasDaSemana.map((dia) => (
-                      <td key={dia} className="p-2 border-gray-200">
-                        <button className="w-full h-20 border-2 border-dashed border-gray-300 rounded-[10px] hover:border-[#FF6B6B] hover:bg-gray-50 transition flex items-center justify-center text-gray-400 hover:text-gray-600">
-                          <span className="text-2xl">+</span>
-                        </button>
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        {/* Dica quando vazio */}
+        {totalCelulas === 0 && (
+          <div className="mt-8 bg-yellow-50 border border-yellow-200 rounded-[10px] p-4 text-center">
+            <p className="font-corpo text-sm text-gray-700">
+              💡 <strong>Dica:</strong> Monte o plano e clique em{" "}
+              <strong>"Gerar Lista de Compras"</strong> — todos os ingredientes das receitas vão direto para sua lista, sem duplicatas.
+            </p>
+          </div>
+        )}
+
+        {/* Resumo das receitas no plano */}
+        {totalReceitas > 0 && (
+          <div className="mt-8">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-titulo font-bold text-gray-900">
+                Receitas desta semana
+              </h2>
+              <Link
+                to="/lista-compras"
+                className="text-sm font-corpo font-semibold text-[#FF6B6B] hover:underline"
+              >
+                Ver lista de compras →
+              </Link>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+              {receitasUnicas().map((r) => (
+                <div
+                  key={r.id}
+                  className="flex items-center gap-3 p-3 bg-gray-50 border border-gray-200 rounded-[10px]"
+                >
+                  {r.foto ? (
+                    <img
+                      src={r.foto}
+                      alt={r.nome}
+                      className="w-10 h-10 rounded-[6px] object-cover flex-shrink-0"
+                    />
+                  ) : (
+                    <div className="w-10 h-10 rounded-[6px] bg-gray-200 flex items-center justify-center text-lg flex-shrink-0">
+                      🍽️
+                    </div>
+                  )}
+                  <p className="font-corpo text-sm font-medium text-gray-800 leading-tight line-clamp-2">
+                    {r.nome}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Modal picker */}
+      {celula && (
+        <PickerReceita
+          dia={celula.dia}
+          refeicao={celula.refeicao}
+          onSelecionar={(receita) => {
+            adicionarReceita(celula.dia, celula.refeicao, receita);
+            setCelula(null);
+          }}
+          onClose={() => setCelula(null)}
+        />
+      )}
+
+      {/* Toast */}
+      {toast && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-gray-900 text-white font-corpo text-sm font-semibold px-5 py-3 rounded-full shadow-lg whitespace-nowrap">
+          {toast}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function CelulaPreenchida({ item, onRemover }) {
+  return (
+    <div className="relative group w-full h-20 rounded-[8px] overflow-hidden border border-gray-200">
+      {item.foto ? (
+        <img src={item.foto} alt={item.nome} className="w-full h-full object-cover" />
+      ) : (
+        <div className="w-full h-full bg-orange-50 flex items-center justify-center text-2xl">
+          🍽️
+        </div>
+      )}
+      <div className="absolute inset-0 bg-black/40 flex items-end p-1.5">
+        <p className="text-white text-xs font-corpo font-semibold leading-tight line-clamp-2">
+          {item.nome}
+        </p>
+      </div>
+      <button
+        onClick={onRemover}
+        className="absolute top-1 right-1 w-5 h-5 bg-black/60 hover:bg-red-600 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition"
+        aria-label="Remover"
+      >
+        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  );
+}
+
+function PickerReceita({ dia, refeicao, onSelecionar, onClose }) {
+  const [busca, setBusca] = useState("");
+  const [fase, setFase] = useState("todas");
+
+  const filtradas = receitas.filter((r) => {
+    const buscaOk = r.nome.toLowerCase().includes(busca.toLowerCase());
+    const faseOk = fase === "todas" || r.fase === fase;
+    return buscaOk && faseOk;
+  });
+
+  return (
+    <div
+      className="fixed inset-0 bg-black/50 z-50 flex items-end md:items-center justify-center p-0 md:p-4"
+      onClick={onClose}
+    >
+      <div
+        className="bg-white w-full md:max-w-2xl rounded-t-2xl md:rounded-[10px] max-h-[85vh] flex flex-col"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="p-5 border-b border-gray-200 flex-shrink-0">
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h2 className="font-titulo font-bold text-gray-900">Escolher receita</h2>
+              <p className="text-sm text-gray-500 font-corpo">
+                {dia} · {refeicao}
+              </p>
+            </div>
+            <button onClick={onClose} className="text-gray-400 hover:text-gray-600 p-1">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          <input
+            type="text"
+            placeholder="Buscar receita..."
+            value={busca}
+            onChange={(e) => setBusca(e.target.value)}
+            className="w-full border border-gray-200 rounded-[8px] px-4 py-2.5 font-corpo text-sm focus:outline-none focus:border-[#FF6B6B] mb-3"
+            autoFocus
+          />
+
+          <div className="flex gap-2 overflow-x-auto pb-1">
+            {FASES.map((f) => (
+              <button
+                key={f.id}
+                onClick={() => setFase(f.id)}
+                className={`px-3 py-1 rounded-full text-xs font-corpo font-semibold whitespace-nowrap transition ${
+                  fase === f.id
+                    ? "bg-[#FF6B6B] text-white"
+                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                }`}
+              >
+                {f.nome}
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* Dica */}
-        <div className="mt-6 bg-yellow-50 border border-yellow-200 rounded-[10px] p-4">
-          <p className="font-corpo text-sm text-gray-700">
-            💡 <strong>Dica:</strong> Clique nos quadrados para adicionar
-            receitas do seu catálogo. O planejamento é salvo automaticamente.
-          </p>
+        {/* Lista */}
+        <div className="overflow-y-auto flex-1 p-3">
+          {filtradas.length === 0 ? (
+            <p className="text-center text-gray-400 font-corpo py-8">
+              Nenhuma receita encontrada.
+            </p>
+          ) : (
+            <div className="grid grid-cols-2 gap-2">
+              {filtradas.map((r) => (
+                <button
+                  key={r.id}
+                  onClick={() => onSelecionar(r)}
+                  className="flex items-center gap-3 p-3 bg-white border border-gray-200 rounded-[8px] hover:border-[#FF6B6B] hover:bg-red-50/20 transition text-left"
+                >
+                  {r.foto ? (
+                    <img
+                      src={r.foto}
+                      alt={r.nome}
+                      className="w-12 h-12 rounded-[6px] object-cover flex-shrink-0"
+                    />
+                  ) : (
+                    <div className="w-12 h-12 rounded-[6px] bg-gray-100 flex items-center justify-center text-xl flex-shrink-0">
+                      🍽️
+                    </div>
+                  )}
+                  <div className="min-w-0">
+                    <p className="font-corpo font-semibold text-gray-900 text-xs leading-tight line-clamp-2 mb-1">
+                      {r.nome}
+                    </p>
+                    <p className="text-xs text-gray-400 font-corpo">
+                      {r.fase}m · {r.tempo}min
+                    </p>
+                  </div>
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

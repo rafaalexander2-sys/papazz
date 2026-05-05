@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useListaCompras } from "../context/ListaComprasContext";
+import { usePlanejamento } from "../context/PlanejamentoContext";
 import receitas from "../data/receitas";
 import ModalUpgrade from "../components/premium/ModalUpgrade";
 
@@ -194,13 +195,23 @@ function ReceitaCard({ receita, isPremium, onClick }) {
   );
 }
 
+const DIAS_PLANO = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"];
+const REFEICOES_PLANO = ["Café da Manhã", "Lanche Manhã", "Almoço", "Lanche Tarde", "Jantar"];
+
 // Componente Modal de Receita
 function ReceitaModal({ receita, isPremium, onClose }) {
   const { adicionarIngredientes } = useListaCompras();
+  const { adicionarReceita } = usePlanejamento();
+
   const [selecionados, setSelecionados] = useState(
     () => new Set(receita.ingredientes)
   );
   const [adicionadoCount, setAdicionadoCount] = useState(null);
+
+  const [planoAberto, setPlanoAberto] = useState(false);
+  const [diaSelecionado, setDiaSelecionado] = useState("Segunda");
+  const [refeicaoSelecionada, setRefeicaoSelecionada] = useState("Almoço");
+  const [planoFeedback, setPlanoFeedback] = useState(false);
 
   const toggleIngrediente = (ing) => {
     setSelecionados((prev) => {
@@ -211,12 +222,18 @@ function ReceitaModal({ receita, isPremium, onClose }) {
   };
 
   const handleAdicionarLista = () => {
-    const count = adicionarIngredientes(
-      [...selecionados],
-      receita.nome
-    );
+    const count = adicionarIngredientes([...selecionados], receita.nome);
     setAdicionadoCount(count);
     setTimeout(() => setAdicionadoCount(null), 3000);
+  };
+
+  const handleAdicionarPlano = () => {
+    adicionarReceita(diaSelecionado, refeicaoSelecionada, receita);
+    setPlanoFeedback(true);
+    setTimeout(() => {
+      setPlanoFeedback(false);
+      setPlanoAberto(false);
+    }, 2000);
   };
 
   return (
@@ -361,7 +378,71 @@ function ReceitaModal({ receita, isPremium, onClose }) {
             )}
           </div>
 
-          {/* Modo de Preparo - CORRIGIDO AQUI! ✅ */}
+          {/* Adicionar ao Planejamento */}
+          {isPremium && (
+            <div className="border border-gray-200 rounded-[10px] overflow-hidden">
+              <button
+                onClick={() => setPlanoAberto((v) => !v)}
+                className="w-full flex items-center justify-between px-4 py-3 bg-gray-50 hover:bg-gray-100 transition"
+              >
+                <span className="font-corpo font-semibold text-gray-800 text-sm flex items-center gap-2">
+                  <span>📅</span> Adicionar ao Planejamento
+                </span>
+                <svg
+                  className={`w-4 h-4 text-gray-400 transition-transform ${planoAberto ? "rotate-180" : ""}`}
+                  fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              {planoAberto && (
+                <div className="p-4 space-y-3">
+                  {planoFeedback ? (
+                    <div className="flex items-center gap-2 text-green-700 font-corpo text-sm font-semibold">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      Adicionado ao planejamento!
+                    </div>
+                  ) : (
+                    <>
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <label className="block text-xs font-corpo font-semibold text-gray-500 mb-1">Dia</label>
+                          <select
+                            value={diaSelecionado}
+                            onChange={(e) => setDiaSelecionado(e.target.value)}
+                            className="w-full border border-gray-200 rounded-[8px] px-3 py-2 font-corpo text-sm focus:outline-none focus:border-[#FF6B6B]"
+                          >
+                            {DIAS_PLANO.map((d) => <option key={d}>{d}</option>)}
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs font-corpo font-semibold text-gray-500 mb-1">Refeição</label>
+                          <select
+                            value={refeicaoSelecionada}
+                            onChange={(e) => setRefeicaoSelecionada(e.target.value)}
+                            className="w-full border border-gray-200 rounded-[8px] px-3 py-2 font-corpo text-sm focus:outline-none focus:border-[#FF6B6B]"
+                          >
+                            {REFEICOES_PLANO.map((r) => <option key={r}>{r}</option>)}
+                          </select>
+                        </div>
+                      </div>
+                      <button
+                        onClick={handleAdicionarPlano}
+                        className="w-full py-2.5 bg-[#FFD700] text-white font-corpo font-semibold rounded-[10px] hover:bg-[#FFA500] transition text-sm"
+                      >
+                        Confirmar
+                      </button>
+                    </>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Modo de Preparo */}
           <div>
             <h3 className="font-titulo font-bold text-gray-900 mb-3">
               Modo de Preparo
