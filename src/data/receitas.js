@@ -1,10 +1,10 @@
-// �Y�� BANCO DE RECEITAS PAPAZZ
+// 🍼 BANCO DE RECEITAS PAPAZZ
 // 45 receitas: 20 grátis + 25 premium
-// �o. IMAGENS ATUALIZADAS - Pexels/Pixabay
+// ✅ IMAGENS ATUALIZADAS - Pexels/Pixabay
 
 export const receitas = [
   // ========================================
-  // �Y?" RECEITAS GRÁTIS - FASE 6-8 MESES (10)
+  // 🆓 RECEITAS GRÁTIS - FASE 6-8 MESES (10)
   // ========================================
 
   {
@@ -55,7 +55,7 @@ export const receitas = [
       calcio: 21,
     },
     dicas:
-      "A abóbora tem sabor naturalmente doce e suave que os bebês adoram. �? rica em vitamina A e fibras, ajudando no funcionamento intestinal. Prefira abóbora cabotiá ou japonesa, que são mais secas e saborosas.",
+      "A abóbora tem sabor naturalmente doce e suave que os bebês adoram. É rica em vitamina A e fibras, ajudando no funcionamento intestinal. Prefira abóbora cabotiá ou japonesa, que são mais secas e saborosas.",
     foto: null,
     tags: ["vegetais", "fácil digestão", "vitamina A"],
   },
@@ -108,7 +108,7 @@ export const receitas = [
       calcio: 5,
     },
     dicas:
-      "Banana é fonte rápida de energia, rica em potássio e fibras solúveis que ajudam o intestino. Escolha sempre bananas bem maduras - as verdes podem causar constipação. �? uma das primeiras frutas oferecidas pela facilidade de preparo.",
+      "Banana é fonte rápida de energia, rica em potássio e fibras solúveis que ajudam o intestino. Escolha sempre bananas bem maduras - as verdes podem causar constipação. É uma das primeiras frutas oferecidas pela facilidade de preparo.",
     foto: null,
     tags: ["frutas", "rápido", "energia", "potássio"],
   },
@@ -217,7 +217,7 @@ export const receitas = [
       calcio: 17,
     },
     dicas:
-      "Inhame é conhecido por fortalecer o sistema imunológico e tem propriedades anti-inflamatórias naturais. �? excelente fonte de carboidratos complexos. Use luvas ao descascar para evitar coceira nas mãos.",
+      "Inhame é conhecido por fortalecer o sistema imunológico e tem propriedades anti-inflamatórias naturais. É excelente fonte de carboidratos complexos. Use luvas ao descascar para evitar coceira nas mãos.",
     foto: null,
     tags: ["vegetais", "imunidade", "energia"],
   },
@@ -267,13 +267,13 @@ export const receitas = [
       calcio: 16,
     },
     dicas:
-      "Beterraba é rica em ferro, ácido fólico e antioxidantes. �"tima para prevenir anemia. A cor roxa vibrante chama atenção do bebê. Pode manchar fraldas e roupas, mas é normal e sai na lavagem.",
+      "Beterraba é rica em ferro, ácido fólico e antioxidantes. Ótima para prevenir anemia. A cor roxa vibrante chama atenção do bebê. Pode manchar fraldas e roupas, mas é normal e sai na lavagem.",
     foto: null,
     tags: ["vegetais", "ferro", "ácido fólico"],
   },
 
   // ========================================
-  // �Y?" RECEITAS GRÁTIS - FASE 8-10 MESES (10)
+  // 🆓 RECEITAS GRÁTIS - FASE 8-10 MESES (10)
   // ========================================
 
   {
@@ -513,7 +513,7 @@ export const receitas = [
       calcio: 25,
     },
     dicas:
-      "ATEN�?�fO com espinhas - verifique múltiplas vezes! Peixe é excelente fonte de proteína magra e ômega 3. Introduza peixe gradualmente, observando reações alérgicas. Use apenas peixes frescos.",
+      "ATENÇÃO com espinhas - verifique múltiplas vezes! Peixe é excelente fonte de proteína magra e ômega 3. Introduza peixe gradualmente, observando reações alérgicas. Use apenas peixes frescos.",
     foto: null,
     tags: ["peixe", "ômega 3", "proteína magra"],
   },
@@ -546,7 +546,7 @@ export const receitas = [
       calcio: 40,
     },
     dicas:
-      "Sopa completa com proteína, carboidratos e vegetais. O macarrão cabelo de anjo cozinha rapidamente. A couve adicionada no final mantém mais nutrientes. �"tima opção para refeições únicas.",
+      "Sopa completa com proteína, carboidratos e vegetais. O macarrão cabelo de anjo cozinha rapidamente. A couve adicionada no final mantém mais nutrientes. Ótima opção para refeições únicas.",
     foto: null,
     tags: ["sopa", "completa", "nutritiva"],
   },
@@ -582,7 +582,7 @@ export const receitas = [
   },
 
   // ========================================
-  // �Y'' RECEITAS PREMIUM - FASE 6-8 MESES (15)
+  // 👑 RECEITAS PREMIUM - FASE 6-8 MESES (15)
   // ========================================
 
   {
@@ -932,7 +932,7 @@ export const receitas = [
       calcio: 40,
     },
     dicas:
-      "A apresentação visual colorida estimula o interesse do bebê pela comida. Cada cor representa nutrientes diferentes: branco (energia), roxo (antioxidantes), verde (ferro e folato). �"timo para fotos!",
+      "A apresentação visual colorida estimula o interesse do bebê pela comida. Cada cor representa nutrientes diferentes: branco (energia), roxo (antioxidantes), verde (ferro e folato). Ótimo para fotos!",
     foto: null,
     tags: ["colorido", "visual", "nutritivo"],
   },
@@ -992,7 +992,7 @@ export const receitas = [
       calcio: 25,
     },
     dicas:
-      "Quinoa real (tricolor) tem ainda mais nutrientes que a branca. �? proteína completa vegetal. O chuchu tem sabor neutro que não compete com a quinoa. Leve, nutritivo e colorido.",
+      "Quinoa real (tricolor) tem ainda mais nutrientes que a branca. É proteína completa vegetal. O chuchu tem sabor neutro que não compete com a quinoa. Leve, nutritivo e colorido.",
     foto: null,
     tags: ["proteína", "completo", "leve"],
   },
@@ -1028,7 +1028,7 @@ export const receitas = [
   },
 
   // ========================================
-  // �Y'' RECEITAS PREMIUM - FASE 8-10 MESES (10)
+  // 👑 RECEITAS PREMIUM - FASE 8-10 MESES (10)
   // ========================================
 
   {
@@ -1335,7 +1335,7 @@ export const receitas = [
       "1 ovo inteiro",
       "2 colheres (sopa) de aveia em flocos finos",
       "Canela em pó",
-      "�"leo de coco para untar",
+      "Óleo de coco para untar",
     ],
     preparo:
       "Esta receita tem apenas 3 ingredientes principais! Descasque 1 banana madura grande (com pontinhos marrons - mais doce) e coloque em uma tigela. Amasse muito bem com garfo até virar pasta lisa sem grumos. Quebre 1 ovo inteiro e adicione à banana amassada. Misture bem com garfo ou batedor pequeno até incorporar completamente - a mistura vai ficar líquida. Adicione 2 colheres de sopa de aveia em flocos finos (não use aveia grossa) e misture. A aveia vai absorver um pouco do líquido. Polvilhe uma pitada de canela em pó e misture. Deixe a massa descansar 5 minutos para a aveia hidratar - ficará mais espessa. Aqueça uma frigideira antiaderente em fogo médio-baixo. Unte levemente com óleo de coco (apenas uma passada). Com uma colher, coloque porções pequenas da massa na frigideira formando mini panquecas (tamanho de uma moeda grande). Cozinhe por 2 minutos de um lado até fazer bolhinhas, vire com espátula e cozinhe mais 2 minutos do outro lado. Devem ficar douradas mas macias. Faça várias mini panquecas. Sirva morno - formato perfeito para bebê pegar com a mão.",
@@ -1348,11 +1348,10 @@ export const receitas = [
       calcio: 35,
     },
     dicas:
-      "Apenas 3 ingredientes! Sem farinha, sem açúcar, sem leite. Banana madura dá toda doçura. Formato finger food estimula autonomia. �"timo para café da manhã ou lanche. Pode congelar.",
+      "Apenas 3 ingredientes! Sem farinha, sem açúcar, sem leite. Banana madura dá toda doçura. Formato finger food estimula autonomia. Ótimo para café da manhã ou lanche. Pode congelar.",
     foto: null,
     tags: ["café da manhã", "BLW", "rápido", "3 ingredientes"],
   },
 ];
 
 export default receitas;
-
