@@ -4,6 +4,7 @@ import { useListaCompras } from "../context/ListaComprasContext";
 import { usePlanejamento } from "../context/PlanejamentoContext";
 import receitas from "../data/receitas";
 import ModalUpgrade from "../components/premium/ModalUpgrade";
+import FotoReceita from "../components/FotoReceita";
 
 export default function Receitas() {
   const { isPremium } = useAuth();
@@ -129,27 +130,13 @@ function ReceitaCard({ receita, isPremium, onClick }) {
       )}
 
       {/* Imagem ou Placeholder */}
-      <div
-        className={`h-48 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center ${bloqueado ? "blur-sm" : ""}`}
-      >
-        {receita.foto ? (
-          <img
-            src={receita.foto}
-            alt={receita.nome}
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <span className="text-6xl">
-            {receita.fase === "6-8"
-              ? "🥕"
-              : receita.fase === "8-10"
-                ? "🍲"
-                : receita.fase === "10-12"
-                  ? "🍝"
-                  : "🍕"}
-          </span>
-        )}
-      </div>
+      <FotoReceita
+        foto={receita.foto}
+        alt={receita.nome}
+        categoria={receita.categoria}
+        fase={receita.fase}
+        className={`h-48 w-full object-cover ${bloqueado ? "blur-sm" : ""}`}
+      />
 
       {/* Blur overlay para premium bloqueado */}
       {bloqueado && (

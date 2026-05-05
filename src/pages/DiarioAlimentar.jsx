@@ -3,6 +3,7 @@ import { useAuth } from "../context/AuthContext";
 import { useDiario } from "../context/DiarioContext";
 import receitas from "../data/receitas";
 import ModalUpgrade from "../components/premium/ModalUpgrade";
+import FotoReceita from "../components/FotoReceita";
 
 const REFEICOES = ["Café da Manhã", "Lanche Manhã", "Almoço", "Lanche Tarde", "Jantar"];
 
@@ -537,11 +538,13 @@ function PickerReceita({ onSelecionar, onClose }) {
               onClick={() => onSelecionar(r.nome)}
               className="w-full flex items-center gap-3 p-3 rounded-[8px] hover:bg-gray-50 transition text-left"
             >
-              {r.foto ? (
-                <img src={r.foto} alt={r.nome} className="w-10 h-10 rounded-[6px] object-cover flex-shrink-0" />
-              ) : (
-                <div className="w-10 h-10 rounded-[6px] bg-gray-100 flex items-center justify-center text-lg flex-shrink-0">🍽️</div>
-              )}
+              <FotoReceita
+                foto={r.foto}
+                alt={r.nome}
+                categoria={r.categoria}
+                fase={r.fase}
+                className="w-10 h-10 rounded-[6px] object-cover flex-shrink-0"
+              />
               <div className="min-w-0">
                 <p className="font-corpo font-semibold text-gray-900 text-sm truncate">{r.nome}</p>
                 <p className="text-xs text-gray-400 font-corpo">{r.fase}m</p>

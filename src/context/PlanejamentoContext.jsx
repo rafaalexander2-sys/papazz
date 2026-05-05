@@ -25,6 +25,8 @@ export function PlanejamentoProvider({ children }) {
         id: receita.id,
         nome: receita.nome,
         foto: receita.foto,
+        categoria: receita.categoria,
+        fase: receita.fase,
         ingredientes: receita.ingredientes,
       },
     }));

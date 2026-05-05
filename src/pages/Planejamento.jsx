@@ -5,6 +5,7 @@ import { usePlanejamento } from "../context/PlanejamentoContext";
 import { useListaCompras } from "../context/ListaComprasContext";
 import receitas from "../data/receitas";
 import ModalUpgrade from "../components/premium/ModalUpgrade";
+import FotoReceita from "../components/FotoReceita";
 
 const DIAS = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"];
 const REFEICOES = ["Café da Manhã", "Lanche Manhã", "Almoço", "Lanche Tarde", "Jantar"];
@@ -204,17 +205,13 @@ function PlanejamentoPremium() {
                   key={r.id}
                   className="flex items-center gap-3 p-3 bg-gray-50 border border-gray-200 rounded-[10px]"
                 >
-                  {r.foto ? (
-                    <img
-                      src={r.foto}
-                      alt={r.nome}
-                      className="w-10 h-10 rounded-[6px] object-cover flex-shrink-0"
-                    />
-                  ) : (
-                    <div className="w-10 h-10 rounded-[6px] bg-gray-200 flex items-center justify-center text-lg flex-shrink-0">
-                      🍽️
-                    </div>
-                  )}
+                  <FotoReceita
+                    foto={r.foto}
+                    alt={r.nome}
+                    categoria={r.categoria}
+                    fase={r.fase}
+                    className="w-10 h-10 rounded-[6px] object-cover flex-shrink-0"
+                  />
                   <p className="font-corpo text-sm font-medium text-gray-800 leading-tight line-clamp-2">
                     {r.nome}
                   </p>
@@ -251,13 +248,13 @@ function PlanejamentoPremium() {
 function CelulaPreenchida({ item, onRemover }) {
   return (
     <div className="relative group w-full h-20 rounded-[8px] overflow-hidden border border-gray-200">
-      {item.foto ? (
-        <img src={item.foto} alt={item.nome} className="w-full h-full object-cover" />
-      ) : (
-        <div className="w-full h-full bg-orange-50 flex items-center justify-center text-2xl">
-          🍽️
-        </div>
-      )}
+      <FotoReceita
+        foto={item.foto}
+        alt={item.nome}
+        categoria={item.categoria}
+        fase={item.fase}
+        className="w-full h-full object-cover"
+      />
       <div className="absolute inset-0 bg-black/40 flex items-end p-1.5">
         <p className="text-white text-xs font-corpo font-semibold leading-tight line-clamp-2">
           {item.nome}
@@ -351,17 +348,13 @@ function PickerReceita({ dia, refeicao, onSelecionar, onClose }) {
                   onClick={() => onSelecionar(r)}
                   className="flex items-center gap-3 p-3 bg-white border border-gray-200 rounded-[8px] hover:border-[#FF6B6B] hover:bg-red-50/20 transition text-left"
                 >
-                  {r.foto ? (
-                    <img
-                      src={r.foto}
-                      alt={r.nome}
-                      className="w-12 h-12 rounded-[6px] object-cover flex-shrink-0"
-                    />
-                  ) : (
-                    <div className="w-12 h-12 rounded-[6px] bg-gray-100 flex items-center justify-center text-xl flex-shrink-0">
-                      🍽️
-                    </div>
-                  )}
+                  <FotoReceita
+                    foto={r.foto}
+                    alt={r.nome}
+                    categoria={r.categoria}
+                    fase={r.fase}
+                    className="w-12 h-12 rounded-[6px] object-cover flex-shrink-0"
+                  />
                   <div className="min-w-0">
                     <p className="font-corpo font-semibold text-gray-900 text-xs leading-tight line-clamp-2 mb-1">
                       {r.nome}
