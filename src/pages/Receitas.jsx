@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import { useListaCompras } from "../context/ListaComprasContext";
 import receitas from "../data/receitas";
 import ModalUpgrade from "../components/premium/ModalUpgrade";
 
@@ -94,6 +95,7 @@ export default function Receitas() {
       {receitaSelecionada && (
         <ReceitaModal
           receita={receitaSelecionada}
+          isPremium={isPremium}
           onClose={() => setReceitaSelecionada(null)}
         />
       )}
@@ -193,7 +195,30 @@ function ReceitaCard({ receita, isPremium, onClick }) {
 }
 
 // Componente Modal de Receita
-function ReceitaModal({ receita, onClose }) {
+function ReceitaModal({ receita, isPremium, onClose }) {
+  const { adicionarIngredientes } = useListaCompras();
+  const [selecionados, setSelecionados] = useState(
+    () => new Set(receita.ingredientes)
+  );
+  const [adicionadoCount, setAdicionadoCount] = useState(null);
+
+  const toggleIngrediente = (ing) => {
+    setSelecionados((prev) => {
+      const next = new Set(prev);
+      next.has(ing) ? next.delete(ing) : next.add(ing);
+      return next;
+    });
+  };
+
+  const handleAdicionarLista = () => {
+    const count = adicionarIngredientes(
+      [...selecionados],
+      receita.nome
+    );
+    setAdicionadoCount(count);
+    setTimeout(() => setAdicionadoCount(null), 3000);
+  };
+
   return (
     <div
       className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
@@ -266,17 +291,74 @@ function ReceitaModal({ receita, onClose }) {
 
           {/* Ingredientes */}
           <div>
-            <h3 className="font-titulo font-bold text-gray-900 mb-3">
-              Ingredientes
-            </h3>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="font-titulo font-bold text-gray-900">
+                Ingredientes
+              </h3>
+              {isPremium && (
+                <span className="text-xs text-gray-400 font-corpo">
+                  Selecione para adicionar à lista
+                </span>
+              )}
+            </div>
+
             <ul className="space-y-2 font-corpo text-gray-700">
-              {receita.ingredientes.map((ing, i) => (
-                <li key={i} className="flex items-start gap-2">
-                  <span className="text-[#FF6B6B] mt-1">•</span>
-                  <span>{ing}</span>
-                </li>
-              ))}
+              {receita.ingredientes.map((ing, i) =>
+                isPremium ? (
+                  <li
+                    key={i}
+                    onClick={() => toggleIngrediente(ing)}
+                    className="flex items-center gap-3 p-2 rounded-[8px] cursor-pointer hover:bg-gray-50 transition"
+                  >
+                    <div
+                      className={`flex-shrink-0 w-5 h-5 rounded border-2 flex items-center justify-center transition ${
+                        selecionados.has(ing)
+                          ? "bg-[#FF6B6B] border-[#FF6B6B]"
+                          : "border-gray-300"
+                      }`}
+                    >
+                      {selecionados.has(ing) && (
+                        <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                        </svg>
+                      )}
+                    </div>
+                    <span>{ing}</span>
+                  </li>
+                ) : (
+                  <li key={i} className="flex items-start gap-2">
+                    <span className="text-[#FF6B6B] mt-1">•</span>
+                    <span>{ing}</span>
+                  </li>
+                )
+              )}
             </ul>
+
+            {isPremium && (
+              <div className="mt-4">
+                {adicionadoCount !== null ? (
+                  <div className="flex items-center gap-2 text-green-700 bg-green-50 border border-green-200 rounded-[10px] px-4 py-3 font-corpo text-sm font-semibold">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    {adicionadoCount === 0
+                      ? "Ingredientes já estão na lista!"
+                      : `${adicionadoCount} ingrediente${adicionadoCount !== 1 ? "s" : ""} adicionado${adicionadoCount !== 1 ? "s" : ""}!`}
+                  </div>
+                ) : (
+                  <button
+                    onClick={handleAdicionarLista}
+                    disabled={selecionados.size === 0}
+                    className="w-full py-3 bg-[#FF6B6B] text-white font-corpo font-semibold rounded-[10px] hover:bg-[#ff5252] transition disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  >
+                    <span>🛒</span>
+                    <span>
+                      Adicionar {selecionados.size} ingrediente{selecionados.size !== 1 ? "s" : ""} à lista
+                    </span>
+                  </button>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Modo de Preparo - CORRIGIDO AQUI! ✅ */}

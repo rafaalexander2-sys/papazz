@@ -3,6 +3,7 @@ import ListaCompras from "./pages/ListaCompras";
 import DiarioAlimentar from "./pages/DiarioAlimentar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
+import { ListaComprasProvider } from "./context/ListaComprasContext";
 import Layout from "./components/layout/Layout";
 
 // Pages
@@ -20,6 +21,7 @@ import Login from "./pages/Login";
 function App() {
   return (
     <AuthProvider>
+      <ListaComprasProvider>
       <Router>
         <Routes>
           {/* Rota de login SEM Layout */}
@@ -42,6 +44,7 @@ function App() {
           </Route>
         </Routes>
       </Router>
+      </ListaComprasProvider>
     </AuthProvider>
   );
 }
