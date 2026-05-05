@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { ListaComprasProvider } from "./context/ListaComprasContext";
 import { PlanejamentoProvider } from "./context/PlanejamentoContext";
+import { DiarioProvider } from "./context/DiarioContext";
 import Layout from "./components/layout/Layout";
 
 // Pages
@@ -24,6 +25,7 @@ function App() {
     <AuthProvider>
       <ListaComprasProvider>
       <PlanejamentoProvider>
+      <DiarioProvider>
       <Router>
         <Routes>
           {/* Rota de login SEM Layout */}
@@ -46,6 +48,7 @@ function App() {
           </Route>
         </Routes>
       </Router>
+      </DiarioProvider>
       </PlanejamentoProvider>
       </ListaComprasProvider>
     </AuthProvider>
