@@ -31,7 +31,7 @@ export default function ModalPremium({ onClose }) {
                 <span className="text-4xl font-bold text-[#FF6B6B]">R$ 19,90</span>
                 <span className="text-[#636E72]">/mês</span>
               </div>
-              <button className="w-full bg-gradient-to-r from-[#FF6B6B] to-[#FF8B8B] text-white py-3 rounded-full font-semibold hover:shadow-lg transition-shadow">
+              <button className="w-full bg-gradient-to-br from-[#FFB06B] to-[#FF6B6B] text-white py-3 rounded-[10px] font-semibold hover:shadow-lg transition-shadow">
                 Assinar Mensal
               </button>
             </div>
@@ -49,7 +49,7 @@ export default function ModalPremium({ onClose }) {
               <p className="text-sm text-green-600 font-semibold mb-4">
                 Economize R$ 89,80 (37%)
               </p>
-              <button className="w-full bg-gradient-to-r from-[#FFD700] to-[#FFA500] text-white py-3 rounded-full font-semibold hover:shadow-lg transition-shadow">
+              <button className="w-full bg-gradient-to-r from-[#FFD700] to-[#FFA500] text-white py-3 rounded-[10px] font-semibold hover:shadow-lg transition-shadow">
                 Assinar Anual
               </button>
             </div>

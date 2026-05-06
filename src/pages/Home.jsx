@@ -29,7 +29,7 @@ export default function Home() {
 
         <Link
           to="/login"
-          className="inline-block mt-3 bg-gradient-to-r from-[#FF6B6B] to-[#FF8B8B] text-white px-6 py-3 rounded-full shadow font-semibold hover:shadow-lg transition-shadow"
+          className="inline-block mt-3 bg-gradient-to-br from-[#FFB06B] to-[#FF6B6B] text-white px-6 py-3 rounded-[10px] shadow font-semibold hover:shadow-lg transition-shadow"
         >
           👑 Premium
         </Link>

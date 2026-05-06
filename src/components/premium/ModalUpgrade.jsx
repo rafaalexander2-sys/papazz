@@ -101,7 +101,7 @@ export default function ModalUpgrade({ onClose }) {
           </div>
 
           {/* Botão de Upgrade */}
-          <button className="w-full bg-gradient-to-r from-[#FF6B6B] to-[#FF8B8B] text-white font-corpo font-bold py-4 rounded-[10px] hover:shadow-lg transition mb-4">
+          <button className="w-full bg-gradient-to-br from-[#FFB06B] to-[#FF6B6B] text-white font-corpo font-bold py-4 rounded-[10px] hover:shadow-lg transition mb-4">
             Assinar Premium Agora
           </button>
 
