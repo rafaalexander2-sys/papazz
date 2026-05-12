@@ -21,6 +21,7 @@ import Termos from "./pages/Termos";
 import Login from "./pages/Login";
 import Guia from "./pages/Guia";
 import FAQ from "./pages/FAQ";
+import AdminPanel from "./pages/admin/index";
 
 function App() {
   return (
@@ -32,6 +33,9 @@ function App() {
         <Routes>
           {/* Rota de login SEM Layout */}
           <Route path="/login" element={<Login />} />
+
+          {/* Painel Admin SEM Layout */}
+          <Route path="/admin" element={<AdminPanel />} />
 
           {/* Rotas COM Layout */}
           <Route element={<Layout />}>

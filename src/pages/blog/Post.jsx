@@ -1,12 +1,101 @@
 import { useParams, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { ArrowLeft, Calendar, Clock, Share2 } from "lucide-react";
 import { getPostBySlug } from "../../utils/blog";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
+const SITE_URL = "https://papazz.com.br";
+
+function SEOMeta({ post }) {
+  useEffect(() => {
+    if (!post) return;
+
+    document.title = `${post.title} | Papazz`;
+
+    const setMeta = (name, content, prop = false) => {
+      const attr = prop ? "property" : "name";
+      let el = document.querySelector(`meta[${attr}="${name}"]`);
+      if (!el) {
+        el = document.createElement("meta");
+        el.setAttribute(attr, name);
+        document.head.appendChild(el);
+      }
+      el.setAttribute("content", content);
+    };
+
+    setMeta("description", post.description || post.title);
+    setMeta("keywords", Array.isArray(post.keywords) ? post.keywords.join(", ") : post.keywords || "");
+    setMeta("author", post.author || "Equipe Papazz");
+    setMeta("robots", "index, follow");
+
+    // Open Graph
+    setMeta("og:title", post.title, true);
+    setMeta("og:description", post.description || post.title, true);
+    setMeta("og:image", post.image || `${SITE_URL}/og-default.jpg`, true);
+    setMeta("og:url", `${SITE_URL}/blog/${post.slug}`, true);
+    setMeta("og:type", "article", true);
+    setMeta("og:site_name", "Papazz", true);
+
+    // Twitter Card
+    setMeta("twitter:card", "summary_large_image");
+    setMeta("twitter:title", post.title);
+    setMeta("twitter:description", post.description || post.title);
+    if (post.image) setMeta("twitter:image", post.image);
+
+    // JSON-LD Article Schema
+    const existing = document.getElementById("json-ld-article");
+    if (existing) existing.remove();
+    const script = document.createElement("script");
+    script.id = "json-ld-article";
+    script.type = "application/ld+json";
+    script.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: post.title,
+      description: post.description,
+      image: post.image,
+      author: { "@type": "Organization", name: post.author || "Equipe Papazz" },
+      publisher: {
+        "@type": "Organization",
+        name: "Papazz",
+        logo: { "@type": "ImageObject", url: `${SITE_URL}/icon-app.png` },
+      },
+      datePublished: post.date,
+      url: `${SITE_URL}/blog/${post.slug}`,
+      keywords: Array.isArray(post.keywords) ? post.keywords.join(", ") : post.keywords,
+    });
+    document.head.appendChild(script);
+
+    return () => {
+      document.title = "Papazz";
+      const cleanup = document.getElementById("json-ld-article");
+      if (cleanup) cleanup.remove();
+    };
+  }, [post]);
+
+  return null;
+}
+
 export default function BlogPost() {
   const { slug } = useParams();
-  const post = getPostBySlug(slug);
+  const [post, setPost] = useState(undefined);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getPostBySlug(slug).then((p) => {
+      setPost(p || null);
+      setLoading(false);
+    });
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-gray-400">Carregando...</div>
+      </div>
+    );
+  }
 
   if (!post) {
     return (
@@ -28,6 +117,7 @@ export default function BlogPost() {
 
   return (
     <div className="min-h-screen bg-white">
+      <SEOMeta post={post} />
       {/* Header com Logo */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-6 py-4">

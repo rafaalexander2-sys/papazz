@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Calendar, Clock, Search } from "lucide-react";
 import { getAllPosts } from "../../utils/blog";
 
 export default function Blog() {
-  const posts = getAllPosts();
+  const [posts, setPosts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("Todos");
   const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    getAllPosts().then(setPosts);
+  }, []);
 
   const categories = ["Todos", ...new Set(posts.map((p) => p.category))];
 

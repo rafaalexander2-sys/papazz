@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useListaCompras } from "../context/ListaComprasContext";
 import { usePlanejamento } from "../context/PlanejamentoContext";
-import receitas from "../data/receitas";
+import receitasEstaticas from "../data/receitas";
+import { getReceitasFromFirestore } from "../services/firestoreService";
 import ModalUpgrade from "../components/premium/ModalUpgrade";
 import FotoReceita from "../components/FotoReceita";
 
@@ -11,6 +12,13 @@ export default function Receitas() {
   const [faseSelecionada, setFaseSelecionada] = useState("6-8");
   const [receitaSelecionada, setReceitaSelecionada] = useState(null);
   const [mostrarUpgrade, setMostrarUpgrade] = useState(false);
+  const [receitasFirestore, setReceitasFirestore] = useState([]);
+
+  useEffect(() => {
+    getReceitasFromFirestore().then(setReceitasFirestore);
+  }, []);
+
+  const receitas = [...receitasFirestore, ...receitasEstaticas];
 
   const fases = [
     { id: "6-8", nome: "6-8 meses", cor: "#FFB5A7", emoji: "🍼" },

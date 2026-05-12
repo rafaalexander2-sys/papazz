@@ -9,18 +9,21 @@ import {
 } from "firebase/auth";
 import { auth } from "../services/firebase";
 import { isPremiumUser } from "../utils/premiumUsers";
+import { isAdminUser } from "../utils/adminUsers";
 
 const AuthContext = createContext({});
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [isPremium, setIsPremium] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
       setIsPremium(user ? isPremiumUser(user.email) : false);
+      setIsAdmin(user ? isAdminUser(user.email) : false);
       setLoading(false);
     });
 
@@ -47,6 +50,7 @@ export function AuthProvider({ children }) {
   const value = {
     user,
     isPremium,
+    isAdmin,
     signup,
     login,
     logout,
