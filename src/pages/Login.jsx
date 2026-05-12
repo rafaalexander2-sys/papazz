@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { isAdminUser } from "../utils/adminUsers";
 
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
@@ -12,18 +13,23 @@ export default function Login() {
   const { login, signup, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
 
+  const redirectAfterLogin = (userEmail) => {
+    navigate(isAdminUser(userEmail) ? "/admin" : "/");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setLoading(true);
 
     try {
+      let result;
       if (isLogin) {
-        await login(email, password);
+        result = await login(email, password);
       } else {
-        await signup(email, password);
+        result = await signup(email, password);
       }
-      navigate("/");
+      redirectAfterLogin(result.user.email);
     } catch (err) {
       setError(
         err.code === "auth/email-already-in-use"
@@ -44,8 +50,8 @@ export default function Login() {
     setLoading(true);
 
     try {
-      await loginWithGoogle();
-      navigate("/");
+      const result = await loginWithGoogle();
+      redirectAfterLogin(result.user.email);
     } catch (err) {
       setError("Erro ao fazer login com Google");
     } finally {
