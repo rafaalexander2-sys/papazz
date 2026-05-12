@@ -10,7 +10,12 @@
       "PowerShell(git -C \"c:\\\\Users\\\\santo\\\\papazz\" push origin main)",
       "PowerShell(git -C \"c:\\\\Users\\\\santo\\\\papazz\" add src/context/PlanejamentoContext.jsx src/App.jsx src/pages/Planejamento.jsx src/pages/Receitas.jsx)",
       "PowerShell(git -C \"c:\\\\Users\\\\santo\\\\papazz\" add src/context/DiarioContext.jsx src/App.jsx src/pages/DiarioAlimentar.jsx)",
-      "PowerShell(git -C \"c:\\\\Users\\\\santo\\\\papazz\" add src/components/FotoReceita.jsx src/context/PlanejamentoContext.jsx src/pages/Receitas.jsx src/pages/Planejamento.jsx src/pages/DiarioAlimentar.jsx)"
+      "PowerShell(git -C \"c:\\\\Users\\\\santo\\\\papazz\" add src/components/FotoReceita.jsx src/context/PlanejamentoContext.jsx src/pages/Receitas.jsx src/pages/Planejamento.jsx src/pages/DiarioAlimentar.jsx)",
+      "Bash(git commit -m ' *)",
+      "Bash(npx vercel *)",
+      "Bash(nslookup papazz.com.br 8.8.8.8)",
+      "Bash(findstr /i \"address name\")",
+      "Bash(curl -sI https://papazz.com.br)"
     ]
   }
 }

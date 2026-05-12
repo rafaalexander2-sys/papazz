@@ -1,91 +1,85 @@
-import { useState, useEffect } from "react";
-import { Plus, Trash2, ChevronDown, ChevronUp, Save, X, Sparkles, AlertCircle } from "lucide-react";
-import {
-  getPostsFromFirestore,
-  addPost,
-  deletePost,
-} from "../../services/firestoreService";
+import { useState, useEffect, useRef } from "react";
+import { Plus, Trash2, ChevronDown, ChevronUp, Save, X, Sparkles, AlertCircle, PenLine, Link2, ImageIcon } from "lucide-react";
+import { getPostsFromFirestore, addPost, deletePost } from "../../services/firestoreService";
+import { uploadImage } from "../../services/storageService";
 
 const CATEGORIAS = ["Guias", "Nutrição", "BLW", "Dicas", "Receitas", "Desenvolvimento", "Saúde"];
 
-function slugify(text) {
-  return text
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .replace(/[^a-z0-9\s-]/g, "")
-    .trim()
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-");
-}
-
 function calcReadingTime(text) {
-  const words = text.split(/\s+/).length;
-  const mins = Math.ceil(words / 200);
-  return `${mins} min`;
+  return `${Math.ceil(text.split(/\s+/).length / 200)} min`;
 }
 
 const EMPTY_FORM = {
-  title: "",
-  description: "",
-  category: "Guias",
-  keywords: "",
-  author: "Equipe Papazz",
-  image: "",
-  content: "",
+  title: "", slug: "", description: "", category: "Guias",
+  keywords: "", author: "Equipe Papazz",
+  image: "", image2: "", content: "",
 };
 
 export default function AdminBlog() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showForm, setShowForm] = useState(false);
+  const [creationMode, setCreationMode] = useState(null); // null | "manual" | "ia"
   const [form, setForm] = useState(EMPTY_FORM);
   const [saving, setSaving] = useState(false);
   const [generating, setGenerating] = useState(false);
+  const [iaInput, setIaInput] = useState("");
+  const [iaKeywords, setIaKeywords] = useState("");
+  const [uploadingCover, setUploadingCover] = useState(false);
+  const [uploadingImg2, setUploadingImg2] = useState(false);
   const [expandedId, setExpandedId] = useState(null);
   const [msg, setMsg] = useState(null);
   const [claudeAvailable, setClaudeAvailable] = useState(true);
+  const coverRef = useRef(null);
+  const img2Ref = useRef(null);
 
-  useEffect(() => {
-    load();
-  }, []);
+  useEffect(() => { load(); }, []);
 
   async function load() {
     setLoading(true);
-    const data = await getPostsFromFirestore();
-    setPosts(data);
+    setPosts(await getPostsFromFirestore());
     setLoading(false);
   }
 
-  function setField(field, value) {
-    setForm((f) => ({ ...f, [field]: value }));
+  function setField(field, value) { setForm((f) => ({ ...f, [field]: value })); }
+
+  async function handleUploadCover(file) {
+    if (!file) return;
+    setUploadingCover(true);
+    try {
+      const url = await uploadImage(file, "blog/capas");
+      setField("image", url);
+    } catch (e) { setMsg({ type: "error", text: "Erro upload capa: " + e.message }); }
+    setUploadingCover(false);
+  }
+
+  async function handleUploadImg2(file) {
+    if (!file) return;
+    setUploadingImg2(true);
+    try {
+      const url = await uploadImage(file, "blog/conteudo");
+      setField("image2", url);
+    } catch (e) { setMsg({ type: "error", text: "Erro upload imagem 2: " + e.message }); }
+    setUploadingImg2(false);
   }
 
   async function handleGenerate() {
-    if (!form.title.trim()) {
-      setMsg({ type: "error", text: "Preencha o título antes de gerar o conteúdo." });
-      return;
-    }
+    if (!iaInput.trim()) { setMsg({ type: "error", text: "Digite um tema ou cole uma URL." }); return; }
     setGenerating(true);
     setMsg(null);
     try {
+      const isUrl = /^https?:\/\//i.test(iaInput.trim());
       const res = await fetch("/api/generate-blog", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          title: form.title,
-          keywords: form.keywords,
-          category: form.category,
-          description: form.description,
+          [isUrl ? "sourceUrl" : "topic"]: iaInput.trim(),
+          keywords: iaKeywords,
         }),
       });
 
       if (res.status === 503) {
         setClaudeAvailable(false);
-        setMsg({
-          type: "error",
-          text: "API do Claude não configurada. Adicione ANTHROPIC_API_KEY nas variáveis de ambiente da Vercel.",
-        });
+        setMsg({ type: "error", text: "API do Claude não configurada. Adicione ANTHROPIC_API_KEY na Vercel." });
         setGenerating(false);
         return;
       }
@@ -93,9 +87,19 @@ export default function AdminBlog() {
       const data = await res.json();
       if (data.error) throw new Error(data.error);
 
-      setField("content", data.content);
-      if (!form.description && data.description) setField("description", data.description);
-      setMsg({ type: "success", text: "Artigo gerado! Revise o conteúdo antes de publicar." });
+      setForm({
+        title: data.title || "",
+        slug: data.slug || "",
+        description: data.description || "",
+        category: data.category || "Guias",
+        keywords: Array.isArray(data.keywords) ? data.keywords.join(", ") : data.keywords || iaKeywords,
+        author: "Equipe Papazz",
+        image: "",
+        image2: "",
+        content: data.content || "",
+      });
+      setCreationMode("manual");
+      setMsg({ type: "success", text: "Artigo gerado pelo Claude! Adicione as imagens e revise antes de publicar." });
     } catch (e) {
       setMsg({ type: "error", text: "Erro ao gerar: " + e.message });
     }
@@ -103,26 +107,29 @@ export default function AdminBlog() {
   }
 
   async function handleSave() {
-    if (!form.title.trim() || !form.content.trim()) {
-      setMsg({ type: "error", text: "Título e conteúdo são obrigatórios." });
-      return;
-    }
+    if (!form.title.trim() || !form.content.trim()) { setMsg({ type: "error", text: "Título e conteúdo são obrigatórios." }); return; }
     setSaving(true);
     try {
-      const slug = slugify(form.title) + "-" + Date.now();
+      const slug = form.slug || (form.title.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9\s-]/g, "").trim().replace(/\s+/g, "-")) + "-" + Date.now();
       await addPost({
         ...form,
         slug,
-        keywords: form.keywords
-          .split(",")
-          .map((s) => s.trim())
-          .filter(Boolean),
+        keywords: form.keywords.split(",").map((s) => s.trim()).filter(Boolean),
         date: new Date().toISOString().split("T")[0],
         readingTime: calcReadingTime(form.content),
       });
+
+      // Tentar indexar no Google (silencioso se não configurado)
+      const siteUrl = typeof window !== "undefined" ? window.location.origin : "https://papazz.com.br";
+      fetch("/api/google-index", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url: `${siteUrl}/blog/${slug}` }),
+      }).catch(() => {});
+
       setMsg({ type: "success", text: `"${form.title}" publicado no blog!` });
       setForm(EMPTY_FORM);
-      setShowForm(false);
+      setCreationMode(null);
       await load();
     } catch (e) {
       setMsg({ type: "error", text: "Erro ao publicar: " + e.message });
@@ -137,205 +144,209 @@ export default function AdminBlog() {
     await load();
   }
 
+  const ImageUploadField = ({ label, fieldKey, uploadFn, uploading, inputRef, note }) => (
+    <div>
+      <label className="block text-sm font-semibold text-gray-700 mb-1">{label} <span className="font-normal text-gray-400 text-xs">{note}</span></label>
+      <div onClick={() => inputRef.current?.click()}
+        className="border-2 border-dashed border-gray-300 rounded-[10px] p-4 cursor-pointer hover:border-[#FF6B6B] hover:bg-[#FFF5F5] transition min-h-[80px] flex items-center justify-center">
+        {uploading ? (
+          <p className="text-sm text-purple-600 animate-pulse">Enviando...</p>
+        ) : form[fieldKey] ? (
+          <div className="w-full">
+            <img src={form[fieldKey]} alt="preview" className="h-20 w-full object-cover rounded-[8px] mb-1" />
+            <p className="text-xs text-center text-green-600">Clique para trocar</p>
+          </div>
+        ) : (
+          <div className="flex flex-col items-center gap-1 text-gray-400">
+            <ImageIcon size={24} />
+            <p className="text-xs">Clique para fazer upload</p>
+          </div>
+        )}
+      </div>
+      <input ref={inputRef} type="file" accept="image/*" className="hidden" onChange={(e) => uploadFn(e.target.files?.[0])} />
+      <input type="url" value={form[fieldKey]} onChange={(e) => setField(fieldKey, e.target.value)}
+        placeholder="Ou cole uma URL de imagem..."
+        className="mt-2 w-full border border-gray-300 rounded-[10px] px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30" />
+    </div>
+  );
+
   return (
     <div>
       {/* Cabeçalho */}
       <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
         <div>
           <h2 className="text-2xl font-bold text-gray-900">Gerenciar Blog</h2>
-          <p className="text-sm text-gray-500 mt-1">
-            {posts.length} post{posts.length !== 1 ? "s" : ""} publicados no Firestore
-          </p>
+          <p className="text-sm text-gray-500 mt-1">{posts.length} post{posts.length !== 1 ? "s" : ""} publicados</p>
         </div>
-        <button
-          onClick={() => { setShowForm(true); setMsg(null); }}
-          className="flex items-center gap-2 bg-[#FF6B6B] text-white px-5 py-2.5 rounded-[10px] font-semibold hover:bg-[#ff5252] transition"
-        >
-          <Plus size={18} />
-          Novo Post
-        </button>
+        {!creationMode && (
+          <div className="flex gap-2">
+            <button onClick={() => { setCreationMode("ia"); setMsg(null); setIaInput(""); setIaKeywords(""); }}
+              className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2.5 rounded-[10px] font-semibold hover:from-purple-700 hover:to-indigo-700 transition text-sm">
+              <Sparkles size={16} /> Gerar com IA
+            </button>
+            <button onClick={() => { setCreationMode("manual"); setForm(EMPTY_FORM); setMsg(null); }}
+              className="flex items-center gap-2 bg-[#FF6B6B] text-white px-4 py-2.5 rounded-[10px] font-semibold hover:bg-[#ff5252] transition text-sm">
+              <PenLine size={16} /> Escrever Manual
+            </button>
+          </div>
+        )}
+        {creationMode && (
+          <button onClick={() => { setCreationMode(null); setForm(EMPTY_FORM); setMsg(null); }}
+            className="flex items-center gap-2 text-gray-600 hover:text-gray-900 text-sm font-medium">
+            <X size={16} /> Cancelar
+          </button>
+        )}
       </div>
 
-      {/* Aviso Claude indisponível */}
+      {/* Aviso Claude */}
       {!claudeAvailable && (
         <div className="mb-4 px-4 py-3 rounded-[10px] bg-amber-50 border border-amber-200 text-amber-800 text-sm flex gap-2">
           <AlertCircle size={16} className="shrink-0 mt-0.5" />
-          <span>
-            <strong>Claude não configurado.</strong> Para ativar a geração automática de posts,
-            adicione <code className="bg-amber-100 px-1 rounded">ANTHROPIC_API_KEY</code> nas
-            variáveis de ambiente do projeto na Vercel. A chave pode ser obtida em{" "}
-            <strong>console.anthropic.com</strong>.
-          </span>
+          <span>Adicione <code className="bg-amber-100 px-1 rounded">ANTHROPIC_API_KEY</code> nas variáveis de ambiente da Vercel para ativar a geração automática.</span>
         </div>
       )}
 
       {/* Mensagem */}
       {msg && (
-        <div
-          className={`mb-4 px-4 py-3 rounded-[10px] text-sm font-medium ${
-            msg.type === "success"
-              ? "bg-green-50 text-green-700 border border-green-200"
-              : "bg-red-50 text-red-700 border border-red-200"
-          }`}
-        >
+        <div className={`mb-4 px-4 py-3 rounded-[10px] text-sm font-medium ${msg.type === "success" ? "bg-green-50 text-green-700 border border-green-200" : "bg-red-50 text-red-700 border border-red-200"}`}>
           {msg.text}
         </div>
       )}
 
-      {/* Formulário */}
-      {showForm && (
-        <div className="bg-white border border-gray-200 rounded-[10px] p-6 mb-8 shadow-sm">
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="text-lg font-bold text-gray-900">Novo Post do Blog</h3>
-            <button onClick={() => { setShowForm(false); setForm(EMPTY_FORM); }}>
-              <X size={20} className="text-gray-400 hover:text-gray-600" />
-            </button>
+      {/* MODO IA */}
+      {creationMode === "ia" && (
+        <div className="bg-white border border-gray-200 rounded-[10px] p-6 mb-6 shadow-sm">
+          <div className="flex items-center gap-2 mb-4">
+            <Sparkles size={20} className="text-purple-600" />
+            <h3 className="text-lg font-bold text-gray-900">Gerar Artigo com IA</h3>
           </div>
+          <p className="text-sm text-gray-500 mb-5">
+            Cole a URL de um artigo/receita de referência, ou descreva um tema. O Claude escreve um blog completo com SEO/GEO de alta qualidade.
+          </p>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1">Tema ou URL de Referência *</label>
+              <div className="relative">
+                <Link2 size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                <input type="text" value={iaInput} onChange={(e) => setIaInput(e.target.value)}
+                  placeholder="Ex: 'alimentos para introdução alimentar de 6 meses' ou https://site.com/artigo"
+                  className="w-full border border-gray-300 rounded-[10px] pl-9 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-purple-300" />
+              </div>
+            </div>
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1">
+                Palavras-chave SEO <span className="font-normal text-gray-400">(separadas por vírgula)</span>
+              </label>
+              <input type="text" value={iaKeywords} onChange={(e) => setIaKeywords(e.target.value)}
+                placeholder="introdução alimentar, bebê 6 meses, papinha, BLW"
+                className="w-full border border-gray-300 rounded-[10px] px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-purple-300" />
+            </div>
+            <button onClick={handleGenerate} disabled={generating || !iaInput.trim()}
+              className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 py-2.5 rounded-[10px] font-semibold hover:from-purple-700 hover:to-indigo-700 transition disabled:opacity-60">
+              <Sparkles size={16} />
+              {generating ? "Gerando com Claude..." : "Gerar Artigo"}
+            </button>
+            {generating && <p className="text-xs text-purple-600 animate-pulse">Claude está escrevendo com SEO máximo, links internos, links externos e FAQ...</p>}
+          </div>
+        </div>
+      )}
+
+      {/* FORMULÁRIO (manual ou pós-IA) */}
+      {creationMode === "manual" && (
+        <div className="bg-white border border-gray-200 rounded-[10px] p-6 mb-6 shadow-sm">
+          <h3 className="text-lg font-bold text-gray-900 mb-6">
+            {form.title ? `Editando: ${form.title.substring(0, 50)}...` : "Novo Post"}
+          </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             {/* Título */}
             <div className="md:col-span-2">
               <label className="block text-sm font-semibold text-gray-700 mb-1">
-                Título do Artigo *
+                Título (H1) * <span className="font-normal text-gray-400">máx 70 chars</span>
               </label>
-              <input
-                type="text"
-                value={form.title}
-                onChange={(e) => setField("title", e.target.value)}
-                placeholder="Ex: Introdução Alimentar aos 6 Meses: Guia Completo"
-                className="w-full border border-gray-300 rounded-[10px] px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30"
-              />
+              <input type="text" maxLength={70} value={form.title} onChange={(e) => setField("title", e.target.value)}
+                placeholder="Título com a palavra-chave principal"
+                className="w-full border border-gray-300 rounded-[10px] px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30" />
+              <p className="text-xs text-gray-400 mt-1">{form.title.length}/70</p>
+            </div>
+
+            {/* Slug */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1">
+                Slug <span className="font-normal text-gray-400">máx 70 chars, apenas letras e hifens</span>
+              </label>
+              <input type="text" maxLength={70} value={form.slug} onChange={(e) => setField("slug", e.target.value)}
+                placeholder="slug-com-keyword"
+                className="w-full border border-gray-300 rounded-[10px] px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30" />
             </div>
 
             {/* Categoria */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">
-                Categoria
-              </label>
-              <select
-                value={form.category}
-                onChange={(e) => setField("category", e.target.value)}
-                className="w-full border border-gray-300 rounded-[10px] px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30"
-              >
-                {CATEGORIAS.map((c) => (
-                  <option key={c} value={c}>{c}</option>
-                ))}
+              <label className="block text-sm font-semibold text-gray-700 mb-1">Categoria</label>
+              <select value={form.category} onChange={(e) => setField("category", e.target.value)}
+                className="w-full border border-gray-300 rounded-[10px] px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30">
+                {CATEGORIAS.map((c) => <option key={c} value={c}>{c}</option>)}
               </select>
-            </div>
-
-            {/* Autor */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1">
-                Autor
-              </label>
-              <input
-                type="text"
-                value={form.author}
-                onChange={(e) => setField("author", e.target.value)}
-                className="w-full border border-gray-300 rounded-[10px] px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30"
-              />
-            </div>
-
-            {/* Palavras-chave */}
-            <div className="md:col-span-2">
-              <label className="block text-sm font-semibold text-gray-700 mb-1">
-                Palavras-chave SEO{" "}
-                <span className="font-normal text-gray-400">(separadas por vírgula)</span>
-              </label>
-              <input
-                type="text"
-                value={form.keywords}
-                onChange={(e) => setField("keywords", e.target.value)}
-                placeholder="introdução alimentar, bebê 6 meses, papinha, BLW"
-                className="w-full border border-gray-300 rounded-[10px] px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30"
-              />
             </div>
 
             {/* Meta description */}
             <div className="md:col-span-2">
               <label className="block text-sm font-semibold text-gray-700 mb-1">
-                Meta Description{" "}
-                <span className="font-normal text-gray-400">(resumo para Google, max 160 chars)</span>
+                Meta Description * <span className="font-normal text-gray-400">máx 140 chars, inclua a palavra-chave</span>
               </label>
-              <textarea
-                rows={2}
-                maxLength={160}
-                value={form.description}
-                onChange={(e) => setField("description", e.target.value)}
-                placeholder="Guia completo sobre introdução alimentar aos 6 meses: quando começar, o que oferecer e como facilitar..."
-                className="w-full border border-gray-300 rounded-[10px] px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30 resize-none"
-              />
-              <p className="text-xs text-gray-400 mt-1">{form.description.length}/160</p>
+              <textarea rows={2} maxLength={140} value={form.description} onChange={(e) => setField("description", e.target.value)}
+                placeholder="Resumo com a palavra-chave para aparecer no Google..."
+                className="w-full border border-gray-300 rounded-[10px] px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30 resize-none" />
+              <p className="text-xs text-gray-400 mt-1">{form.description.length}/140</p>
             </div>
 
-            {/* Imagem */}
-            <div className="md:col-span-2">
+            {/* Keywords */}
+            <div>
               <label className="block text-sm font-semibold text-gray-700 mb-1">
-                URL da Imagem de Capa{" "}
-                <span className="font-normal text-gray-400">(opcional)</span>
+                Keywords SEO <span className="font-normal text-gray-400">(vírgula)</span>
               </label>
-              <input
-                type="url"
-                value={form.image}
-                onChange={(e) => setField("image", e.target.value)}
-                placeholder="https://images.unsplash.com/..."
-                className="w-full border border-gray-300 rounded-[10px] px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30"
-              />
+              <input type="text" value={form.keywords} onChange={(e) => setField("keywords", e.target.value)}
+                placeholder="keyword1, keyword2, keyword3"
+                className="w-full border border-gray-300 rounded-[10px] px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30" />
+            </div>
+
+            {/* Autor */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1">Autor</label>
+              <input type="text" value={form.author} onChange={(e) => setField("author", e.target.value)}
+                className="w-full border border-gray-300 rounded-[10px] px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30" />
+            </div>
+
+            {/* Imagens */}
+            <div>
+              <ImageUploadField label="Imagem de Capa" fieldKey="image" uploadFn={handleUploadCover}
+                uploading={uploadingCover} inputRef={coverRef}
+                note="(aparece no topo do post)" form={form} setField={setField} />
+            </div>
+            <div>
+              <ImageUploadField label="Imagem do Conteúdo" fieldKey="image2" uploadFn={handleUploadImg2}
+                uploading={uploadingImg2} inputRef={img2Ref}
+                note="(aparece após 2º parágrafo)" form={form} setField={setField} />
             </div>
           </div>
 
-          {/* Área de conteúdo com botão Claude */}
+          {/* Conteúdo */}
           <div className="mb-6">
-            <div className="flex items-center justify-between mb-1">
-              <label className="block text-sm font-semibold text-gray-700">
-                Conteúdo do Artigo (Markdown) *
-              </label>
-              <button
-                onClick={handleGenerate}
-                disabled={generating || !form.title.trim()}
-                className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2 rounded-[10px] text-sm font-semibold hover:from-purple-700 hover:to-indigo-700 transition disabled:opacity-60"
-              >
-                <Sparkles size={15} />
-                {generating ? "Gerando com Claude..." : "Gerar com Claude"}
-              </button>
-            </div>
-            {generating && (
-              <div className="mb-2 text-xs text-purple-600 font-medium animate-pulse">
-                Claude está escrevendo o artigo com SEO máximo...
-              </div>
-            )}
-            <textarea
-              rows={16}
-              value={form.content}
-              onChange={(e) => setField("content", e.target.value)}
-              placeholder="Cole ou escreva o conteúdo em Markdown aqui, ou clique em 'Gerar com Claude' para criar automaticamente."
-              className="w-full border border-gray-300 rounded-[10px] px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30 resize-y"
-            />
-            <p className="text-xs text-gray-400 mt-1">
-              Suporte a Markdown: **negrito**, ## Título, - lista, etc.
-            </p>
+            <label className="block text-sm font-semibold text-gray-700 mb-1">Conteúdo (Markdown) *</label>
+            <textarea rows={18} value={form.content} onChange={(e) => setField("content", e.target.value)}
+              placeholder="Escreva em Markdown. ## Título H2, ### Título H3, **negrito**, - lista..."
+              className="w-full border border-gray-300 rounded-[10px] px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30 resize-y" />
+            <p className="text-xs text-gray-400 mt-1">{form.content.split(/\s+/).filter(Boolean).length} palavras</p>
           </div>
-
-          {/* Preview do slug */}
-          {form.title && (
-            <p className="text-xs text-gray-400 mb-4">
-              URL: <code className="bg-gray-100 px-1 rounded">/blog/{slugify(form.title)}-...</code>
-            </p>
-          )}
 
           <div className="flex gap-3">
-            <button
-              onClick={handleSave}
-              disabled={saving}
-              className="flex items-center gap-2 bg-[#FF6B6B] text-white px-6 py-2.5 rounded-[10px] font-semibold hover:bg-[#ff5252] transition disabled:opacity-60"
-            >
+            <button onClick={handleSave} disabled={saving}
+              className="flex items-center gap-2 bg-[#FF6B6B] text-white px-6 py-2.5 rounded-[10px] font-semibold hover:bg-[#ff5252] transition disabled:opacity-60">
               <Save size={16} />
               {saving ? "Publicando..." : "Publicar Post"}
             </button>
-            <button
-              onClick={() => { setShowForm(false); setForm(EMPTY_FORM); }}
-              className="px-6 py-2.5 rounded-[10px] border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition"
-            >
+            <button onClick={() => { setCreationMode(null); setForm(EMPTY_FORM); }}
+              className="px-6 py-2.5 rounded-[10px] border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition">
               Cancelar
             </button>
           </div>
@@ -343,56 +354,77 @@ export default function AdminBlog() {
       )}
 
       {/* Lista de posts */}
-      {loading ? (
-        <div className="text-center py-12 text-gray-400">Carregando...</div>
-      ) : posts.length === 0 ? (
-        <div className="text-center py-12 text-gray-400 bg-gray-50 rounded-[10px]">
-          Nenhum post no Firestore ainda.
-          <br />
-          <span className="text-sm">Posts estáticos continuam no blog normalmente.</span>
-        </div>
-      ) : (
-        <div className="space-y-2">
-          {posts.map((p) => (
-            <div key={p.id} className="bg-white border border-gray-200 rounded-[10px] overflow-hidden">
-              <div className="flex items-center justify-between px-5 py-3">
-                <div className="flex items-center gap-3 flex-1 min-w-0">
-                  <span className="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-semibold shrink-0">
-                    {p.category}
-                  </span>
-                  <span className="font-medium text-gray-900 truncate">{p.title}</span>
-                  <span className="text-xs text-gray-400 shrink-0">{p.date}</span>
+      {!creationMode && (
+        loading ? (
+          <div className="text-center py-12 text-gray-400">Carregando...</div>
+        ) : posts.length === 0 ? (
+          <div className="text-center py-12 text-gray-400 bg-gray-50 rounded-[10px]">
+            Nenhum post publicado ainda.<br />
+            <span className="text-sm">Use "Gerar com IA" para criar o primeiro artigo automaticamente.</span>
+          </div>
+        ) : (
+          <div className="space-y-2">
+            {posts.map((p) => (
+              <div key={p.id} className="bg-white border border-gray-200 rounded-[10px] overflow-hidden">
+                <div className="flex items-center justify-between px-5 py-3">
+                  <div className="flex items-center gap-3 flex-1 min-w-0">
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-semibold shrink-0">{p.category}</span>
+                    <span className="font-medium text-gray-900 truncate">{p.title}</span>
+                    <span className="text-xs text-gray-400 shrink-0">{p.date}</span>
+                  </div>
+                  <div className="flex items-center gap-2 ml-2">
+                    <button onClick={() => setExpandedId(expandedId === p.id ? null : p.id)} className="text-gray-400 hover:text-gray-700 transition">
+                      {expandedId === p.id ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+                    </button>
+                    <button onClick={() => handleDelete(p.id, p.title)} className="text-gray-400 hover:text-red-500 transition">
+                      <Trash2 size={16} />
+                    </button>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 ml-2">
-                  <button
-                    onClick={() => setExpandedId(expandedId === p.id ? null : p.id)}
-                    className="text-gray-400 hover:text-gray-700 transition"
-                  >
-                    {expandedId === p.id ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-                  </button>
-                  <button
-                    onClick={() => handleDelete(p.id, p.title)}
-                    className="text-gray-400 hover:text-red-500 transition"
-                  >
-                    <Trash2 size={16} />
-                  </button>
-                </div>
+                {expandedId === p.id && (
+                  <div className="border-t border-gray-100 px-5 py-4 text-sm text-gray-600 space-y-1">
+                    <p><strong>Slug:</strong> /blog/{p.slug}</p>
+                    <p><strong>Autor:</strong> {p.author} | <strong>Leitura:</strong> {p.readingTime}</p>
+                    {p.description && <p><strong>Meta:</strong> {p.description}</p>}
+                    {p.image && <img src={p.image} alt="capa" className="h-16 rounded-[6px] mt-2" />}
+                  </div>
+                )}
               </div>
-              {expandedId === p.id && (
-                <div className="border-t border-gray-100 px-5 py-4 text-sm text-gray-600 space-y-2">
-                  <p><strong>Slug:</strong> /blog/{p.slug}</p>
-                  <p><strong>Autor:</strong> {p.author} | <strong>Leitura:</strong> {p.readingTime}</p>
-                  {p.description && <p><strong>Meta:</strong> {p.description}</p>}
-                  {p.keywords?.length > 0 && (
-                    <p><strong>Keywords:</strong> {Array.isArray(p.keywords) ? p.keywords.join(", ") : p.keywords}</p>
-                  )}
-                  <p className="line-clamp-2"><strong>Início:</strong> {p.content?.substring(0, 150)}...</p>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )
       )}
+    </div>
+  );
+}
+
+// Componente reutilizável de upload de imagem
+function ImageUploadField({ label, fieldKey, uploadFn, uploading, inputRef, note, form, setField }) {
+  return (
+    <div>
+      <label className="block text-sm font-semibold text-gray-700 mb-1">
+        {label} <span className="font-normal text-gray-400 text-xs">{note}</span>
+      </label>
+      <div onClick={() => inputRef.current?.click()}
+        className="border-2 border-dashed border-gray-300 rounded-[10px] p-4 cursor-pointer hover:border-[#FF6B6B] hover:bg-[#FFF5F5] transition min-h-[80px] flex items-center justify-center">
+        {uploading ? (
+          <p className="text-sm text-purple-600 animate-pulse">Enviando...</p>
+        ) : form[fieldKey] ? (
+          <div className="w-full">
+            <img src={form[fieldKey]} alt="preview" className="h-20 w-full object-cover rounded-[8px] mb-1" />
+            <p className="text-xs text-center text-green-600">Clique para trocar</p>
+          </div>
+        ) : (
+          <div className="flex flex-col items-center gap-1 text-gray-400">
+            <ImageIcon size={24} />
+            <p className="text-xs">Clique para fazer upload</p>
+          </div>
+        )}
+      </div>
+      <input ref={inputRef} type="file" accept="image/*" className="hidden" onChange={(e) => uploadFn(e.target.files?.[0])} />
+      <input type="url" value={form[fieldKey]} onChange={(e) => setField(fieldKey, e.target.value)}
+        placeholder="Ou cole uma URL..."
+        className="mt-2 w-full border border-gray-300 rounded-[10px] px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30" />
     </div>
   );
 }

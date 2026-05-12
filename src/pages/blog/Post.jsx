@@ -215,53 +215,18 @@ export default function BlogPost() {
 
                 // Inserir IMAGEM 1 após o 3º parágrafo
                 if (paragraphCount === 3) {
+                  const img2Src = post.image2 || "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=1200&h=600&fit=crop";
                   return (
                     <>
-                      <p
-                        className="text-lg text-gray-700 leading-[1.7] mb-6 font-corpo"
-                        {...props}
-                      >
+                      <p className="text-lg text-gray-700 leading-[1.7] mb-6 font-corpo" {...props}>
                         {children}
                       </p>
-
-                      {/* IMAGEM 1 - Bebê comendo */}
                       <figure className="my-12">
                         <img
-                          src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=1200&h=600&fit=crop"
-                          alt="Bebê de 6 meses fazendo introdução alimentar com alimentos saudáveis"
+                          src={img2Src}
+                          alt={post.title}
                           className="w-full h-[400px] object-cover rounded-medio shadow-media"
                         />
-                        <figcaption className="text-center text-sm text-gray-500 mt-4 font-corpo italic">
-                          Bebê explorando alimentos durante a introdução
-                          alimentar aos 6 meses
-                        </figcaption>
-                      </figure>
-                    </>
-                  );
-                }
-
-                // Inserir IMAGEM 2 após o 8º parágrafo
-                if (paragraphCount === 8) {
-                  return (
-                    <>
-                      <p
-                        className="text-lg text-gray-700 leading-[1.7] mb-6 font-corpo"
-                        {...props}
-                      >
-                        {children}
-                      </p>
-
-                      {/* IMAGEM 2 - Alimentos coloridos */}
-                      <figure className="my-12">
-                        <img
-                          src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=1200&h=600&fit=crop"
-                          alt="Papinha de bebê com legumes coloridos e alimentos nutritivos para introdução alimentar"
-                          className="w-full h-[400px] object-cover rounded-medio shadow-media"
-                        />
-                        <figcaption className="text-center text-sm text-gray-500 mt-4 font-corpo italic">
-                          Refeição balanceada para bebês: legumes variados e
-                          coloridos
-                        </figcaption>
                       </figure>
                     </>
                   );
