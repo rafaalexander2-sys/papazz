@@ -146,15 +146,17 @@ Obrigatório 1 link interno para outro conteúdo do Papazz. Use formato Markdown
 Ano atual: ${currentYear}. Se mencionar tendências ou recomendações, use "em ${currentYear}".
 
 ─── OUTPUT ───
-Retorne APENAS um JSON válido, sem markdown, sem texto antes ou depois, sem blocos de código. Estrutura obrigatória:
-{
-  "title": "Título com keyword (max 60 chars, sem travessão)",
-  "slug": "slug-3-4-palavras-sem-acento",
-  "description": "Meta description com keyword e gancho (max 150 chars)",
-  "category": "categoria adequada",
-  "keywords": ["keyword1", "keyword2", "keyword3", "keyword4"],
-  "content": "Conteúdo completo em Markdown. Sem H1. Começa com parágrafo direto ou H2. Links em formato Markdown."
-}`;
+Use EXATAMENTE este formato com delimitadores. Não use JSON. Não adicione texto fora dos delimitadores.
+
+<<TITLE>>Título com keyword (max 60 chars, sem travessão)<<END>>
+<<SLUG>>slug-3-4-palavras-sem-acento<<END>>
+<<DESCRIPTION>>Meta description com keyword e gancho (max 150 chars)<<END>>
+<<CATEGORY>>categoria adequada<<END>>
+<<KEYWORDS>>keyword1,keyword2,keyword3,keyword4<<END>>
+<<CONTENT>>
+Conteúdo completo em Markdown aqui. Sem H1. Começa com parágrafo ou H2.
+Links em formato Markdown. Pode usar qualquer caractere livremente.
+<<END>>`;
 
   try {
     const response = await fetch("https://api.anthropic.com/v1/messages", {
@@ -179,10 +181,29 @@ Retorne APENAS um JSON válido, sem markdown, sem texto antes ou depois, sem blo
     const data = await response.json();
     const raw = data.content?.[0]?.text || "";
 
-    const jsonMatch = raw.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) return res.status(500).json({ error: "Resposta inválida do Claude" });
+    const get = (key) => {
+      const match = raw.match(new RegExp(`<<${key}>>[\\s]?([\\s\\S]*?)<<END>>`));
+      return match ? match[1].trim() : "";
+    };
 
-    const result = JSON.parse(jsonMatch[0]);
+    const title = get("TITLE");
+    const slug = get("SLUG");
+    const description = get("DESCRIPTION");
+    const category = get("CATEGORY");
+    const keywordsRaw = get("KEYWORDS");
+    const content = get("CONTENT");
+
+    if (!title || !content) return res.status(500).json({ error: "Resposta incompleta do Claude" });
+
+    const result = {
+      title,
+      slug,
+      description,
+      category,
+      keywords: keywordsRaw.split(",").map((k) => k.trim()).filter(Boolean),
+      content,
+    };
+
     if (extractedImage) result.imageUrl = extractedImage;
     if (extractedImage2) result.imageUrl2 = extractedImage2;
     return res.status(200).json(result);
