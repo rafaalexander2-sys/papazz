@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /admin
 Disallow: /login
 
-Sitemap: https://papazz.vercel.app/sitemap.xml
+Sitemap: https://papazz.com.br/sitemap.xml
