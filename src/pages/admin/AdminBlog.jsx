@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { Plus, Trash2, ChevronDown, ChevronUp, Save, X, Sparkles, AlertCircle, PenLine, Link2, ImageIcon } from "lucide-react";
-import { getPostsFromFirestore, addPost, deletePost } from "../../services/firestoreService";
+import { Trash2, ChevronDown, ChevronUp, Save, X, Sparkles, AlertCircle, PenLine, Link2, ImageIcon, Pencil, ExternalLink } from "lucide-react";
+import { getPostsFromFirestore, addPost, updatePost, deletePost } from "../../services/firestoreService";
 import { uploadImage } from "../../services/storageService";
 
 const CATEGORIAS = ["Guias", "Nutrição", "BLW", "Dicas", "Receitas", "Desenvolvimento", "Saúde"];
@@ -27,6 +27,7 @@ export default function AdminBlog() {
   const [uploadingCover, setUploadingCover] = useState(false);
   const [uploadingImg2, setUploadingImg2] = useState(false);
   const [expandedId, setExpandedId] = useState(null);
+  const [editingId, setEditingId] = useState(null);
   const [msg, setMsg] = useState(null);
   const [claudeAvailable, setClaudeAvailable] = useState(true);
   const coverRef = useRef(null);
@@ -106,33 +107,56 @@ export default function AdminBlog() {
     setGenerating(false);
   }
 
+  function handleEdit(p) {
+    setEditingId(p.id);
+    setForm({
+      title: p.title || "",
+      slug: p.slug || "",
+      description: p.description || "",
+      category: p.category || "Guias",
+      keywords: Array.isArray(p.keywords) ? p.keywords.join(", ") : p.keywords || "",
+      author: p.author || "Equipe Papazz",
+      image: p.image || "",
+      image2: p.image2 || "",
+      content: p.content || "",
+    });
+    setCreationMode("manual");
+    setMsg(null);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
   async function handleSave() {
     if (!form.title.trim() || !form.content.trim()) { setMsg({ type: "error", text: "Título e conteúdo são obrigatórios." }); return; }
     setSaving(true);
     try {
       const slug = form.slug || (form.title.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9\s-]/g, "").trim().replace(/\s+/g, "-")) + "-" + Date.now();
-      await addPost({
+      const payload = {
         ...form,
         slug,
         keywords: form.keywords.split(",").map((s) => s.trim()).filter(Boolean),
-        date: new Date().toISOString().split("T")[0],
         readingTime: calcReadingTime(form.content),
-      });
+      };
 
-      // Tentar indexar no Google (silencioso se não configurado)
-      const siteUrl = typeof window !== "undefined" ? window.location.origin : "https://papazz.com.br";
-      fetch("/api/google-index", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url: `${siteUrl}/blog/${slug}` }),
-      }).catch(() => {});
+      if (editingId) {
+        await updatePost(editingId, payload);
+        setMsg({ type: "success", text: `"${form.title}" atualizado!`, link: `/blog/${slug}` });
+      } else {
+        await addPost({ ...payload, date: new Date().toISOString().split("T")[0] });
+        const siteUrl = typeof window !== "undefined" ? window.location.origin : "https://papazz.com.br";
+        fetch("/api/google-index", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url: `${siteUrl}/blog/${slug}` }),
+        }).catch(() => {});
+        setMsg({ type: "success", text: `"${form.title}" publicado!`, link: `/blog/${slug}` });
+      }
 
-      setMsg({ type: "success", text: `"${form.title}" publicado!`, link: `/blog/${slug}` });
       setForm(EMPTY_FORM);
       setCreationMode(null);
+      setEditingId(null);
       await load();
     } catch (e) {
-      setMsg({ type: "error", text: "Erro ao publicar: " + e.message });
+      setMsg({ type: "error", text: "Erro ao salvar: " + e.message });
     }
     setSaving(false);
   }
@@ -191,7 +215,7 @@ export default function AdminBlog() {
           </div>
         )}
         {creationMode && (
-          <button onClick={() => { setCreationMode(null); setForm(EMPTY_FORM); setMsg(null); }}
+          <button onClick={() => { setCreationMode(null); setForm(EMPTY_FORM); setEditingId(null); setMsg(null); }}
             className="flex items-center gap-2 text-gray-600 hover:text-gray-900 text-sm font-medium">
             <X size={16} /> Cancelar
           </button>
@@ -260,7 +284,7 @@ export default function AdminBlog() {
       {creationMode === "manual" && (
         <div className="bg-white border border-gray-200 rounded-[10px] p-6 mb-6 shadow-sm">
           <h3 className="text-lg font-bold text-gray-900 mb-6">
-            {form.title ? `Editando: ${form.title.substring(0, 50)}...` : "Novo Post"}
+            {editingId ? `Editando: ${form.title.substring(0, 50)}` : "Novo Post"}
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -348,9 +372,9 @@ export default function AdminBlog() {
             <button onClick={handleSave} disabled={saving}
               className="flex items-center gap-2 bg-[#FF6B6B] text-white px-6 py-2.5 rounded-[10px] font-semibold hover:bg-[#ff5252] transition disabled:opacity-60">
               <Save size={16} />
-              {saving ? "Publicando..." : "Publicar Post"}
+              {saving ? "Salvando..." : editingId ? "Salvar Alterações" : "Publicar Post"}
             </button>
-            <button onClick={() => { setCreationMode(null); setForm(EMPTY_FORM); }}
+            <button onClick={() => { setCreationMode(null); setForm(EMPTY_FORM); setEditingId(null); setMsg(null); }}
               className="px-6 py-2.5 rounded-[10px] border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition">
               Cancelar
             </button>
@@ -378,10 +402,16 @@ export default function AdminBlog() {
                     <span className="text-xs text-gray-400 shrink-0">{p.date}</span>
                   </div>
                   <div className="flex items-center gap-2 ml-2">
+                    <a href={`/blog/${p.slug}`} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-500 transition" title="Ver post">
+                      <ExternalLink size={16} />
+                    </a>
+                    <button onClick={() => handleEdit(p)} className="text-gray-400 hover:text-[#FF6B6B] transition" title="Editar">
+                      <Pencil size={16} />
+                    </button>
                     <button onClick={() => setExpandedId(expandedId === p.id ? null : p.id)} className="text-gray-400 hover:text-gray-700 transition">
                       {expandedId === p.id ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
                     </button>
-                    <button onClick={() => handleDelete(p.id, p.title)} className="text-gray-400 hover:text-red-500 transition">
+                    <button onClick={() => handleDelete(p.id, p.title)} className="text-gray-400 hover:text-red-500 transition" title="Excluir">
                       <Trash2 size={16} />
                     </button>
                   </div>

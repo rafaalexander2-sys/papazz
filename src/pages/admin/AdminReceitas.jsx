@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { Plus, Trash2, ChevronDown, ChevronUp, Save, X, Link2, Sparkles, Upload, ImageIcon } from "lucide-react";
-import { getReceitasFromFirestore, addReceita, deleteReceita } from "../../services/firestoreService";
+import { Trash2, ChevronDown, ChevronUp, Save, X, Link2, Sparkles, ImageIcon, Pencil } from "lucide-react";
+import { getReceitasFromFirestore, addReceita, updateReceita, deleteReceita } from "../../services/firestoreService";
 import { uploadImage } from "../../services/storageService";
 
 const FASES = ["6-8", "8-10", "10-12", "12+"];
@@ -30,6 +30,7 @@ export default function AdminReceitas() {
   const [importInput, setImportInput] = useState("");
   const [importFase, setImportFase] = useState("6-8");
   const [expandedId, setExpandedId] = useState(null);
+  const [editingId, setEditingId] = useState(null);
   const [faseFiltro, setFaseFiltro] = useState("Todas");
   const [tipoFiltro, setTipoFiltro] = useState("Todos");
   const [msg, setMsg] = useState(null);
@@ -101,19 +102,47 @@ export default function AdminReceitas() {
     setImporting(false);
   }
 
+  function handleEdit(r) {
+    setEditingId(r.id);
+    setForm({
+      nome: r.nome || "",
+      fase: r.fase || "6-8",
+      tipo: r.tipo || "Refeições Principais",
+      tempo: r.tempo || 20,
+      dificuldade: r.dificuldade || "Fácil",
+      premium: r.premium || false,
+      ingredientes: Array.isArray(r.ingredientes) ? r.ingredientes.join("\n") : r.ingredientes || "",
+      preparo: r.preparo || "",
+      dicas: r.dicas || "",
+      foto: r.foto || "",
+      tags: Array.isArray(r.tags) ? r.tags.join(", ") : r.tags || "",
+      restricoes: r.restricoes || [],
+      nutrientes: r.nutrientes || EMPTY_FORM.nutrientes,
+    });
+    setMode("manual");
+    setMsg(null);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
   async function handleSave() {
     if (!form.nome.trim() || !form.preparo.trim()) { setMsg({ type: "error", text: "Nome e preparo são obrigatórios." }); return; }
     setSaving(true);
     try {
-      await addReceita({
+      const payload = {
         ...form,
-        id: Date.now(),
         ingredientes: form.ingredientes.split("\n").map((s) => s.trim()).filter(Boolean),
         tags: form.tags.split(",").map((s) => s.trim()).filter(Boolean),
         tempo: parseInt(form.tempo) || 20,
-      });
-      setMsg({ type: "success", text: `"${form.nome}" publicada!`, link: `/receitas?fase=${encodeURIComponent(form.fase)}&tipo=${encodeURIComponent(form.tipo)}` });
+      };
+      if (editingId) {
+        await updateReceita(editingId, payload);
+        setMsg({ type: "success", text: `"${form.nome}" atualizada!`, link: `/receitas?fase=${encodeURIComponent(form.fase)}&tipo=${encodeURIComponent(form.tipo)}` });
+      } else {
+        await addReceita({ ...payload, id: Date.now() });
+        setMsg({ type: "success", text: `"${form.nome}" publicada!`, link: `/receitas?fase=${encodeURIComponent(form.fase)}&tipo=${encodeURIComponent(form.tipo)}` });
+      }
       setForm(EMPTY_FORM);
+      setEditingId(null);
       setMode("list");
       await load();
     } catch (e) {
@@ -149,9 +178,9 @@ export default function AdminReceitas() {
               className="flex items-center gap-2 bg-purple-600 text-white px-4 py-2.5 rounded-[10px] font-semibold hover:bg-purple-700 transition text-sm">
               <Link2 size={16} /> Importar via URL/Tema
             </button>
-            <button onClick={() => { setMode("manual"); setForm(EMPTY_FORM); setMsg(null); }}
+            <button onClick={() => { setMode("manual"); setForm(EMPTY_FORM); setEditingId(null); setMsg(null); }}
               className="flex items-center gap-2 bg-[#FF6B6B] text-white px-4 py-2.5 rounded-[10px] font-semibold hover:bg-[#ff5252] transition text-sm">
-              <Plus size={16} /> Nova Receita
+              Nova Receita
             </button>
           </div>
         )}
@@ -213,7 +242,7 @@ export default function AdminReceitas() {
       {mode === "manual" && (
         <div className="bg-white border border-gray-200 rounded-[10px] p-6 mb-6 shadow-sm">
           <h3 className="text-lg font-bold text-gray-900 mb-6">
-            {form.nome ? `Editando: ${form.nome}` : "Nova Receita"}
+            {editingId ? `Editando: ${form.nome}` : "Nova Receita"}
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -387,9 +416,9 @@ export default function AdminReceitas() {
             <button onClick={handleSave} disabled={saving}
               className="flex items-center gap-2 bg-[#FF6B6B] text-white px-6 py-2.5 rounded-[10px] font-semibold hover:bg-[#ff5252] transition disabled:opacity-60">
               <Save size={16} />
-              {saving ? "Publicando..." : "Publicar Receita"}
+              {saving ? "Salvando..." : editingId ? "Salvar Alterações" : "Publicar Receita"}
             </button>
-            <button onClick={() => { setMode("list"); setForm(EMPTY_FORM); }}
+            <button onClick={() => { setMode("list"); setForm(EMPTY_FORM); setEditingId(null); setMsg(null); }}
               className="px-6 py-2.5 rounded-[10px] border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition">
               Cancelar
             </button>
@@ -437,10 +466,13 @@ export default function AdminReceitas() {
                       <span className="font-medium text-gray-900 truncate">{r.nome}</span>
                     </div>
                     <div className="flex items-center gap-2 ml-2">
+                      <button onClick={() => handleEdit(r)} className="text-gray-400 hover:text-[#FF6B6B] transition" title="Editar">
+                        <Pencil size={16} />
+                      </button>
                       <button onClick={() => setExpandedId(expandedId === r.id ? null : r.id)} className="text-gray-400 hover:text-gray-700 transition">
                         {expandedId === r.id ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
                       </button>
-                      <button onClick={() => handleDelete(r.id, r.nome)} className="text-gray-400 hover:text-red-500 transition">
+                      <button onClick={() => handleDelete(r.id, r.nome)} className="text-gray-400 hover:text-red-500 transition" title="Excluir">
                         <Trash2 size={16} />
                       </button>
                     </div>
