@@ -97,7 +97,7 @@ export default function Receitas() {
       {/* Filtro de Fases */}
       <div className="bg-gray-50 border-b border-gray-200 sticky top-16 md:top-20 z-40">
         <div className="max-w-6xl mx-auto px-4 md:px-6 py-3">
-          <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
+          <div className="flex flex-wrap gap-2">
             {FASES.map((fase) => (
               <button
                 key={fase.id}
@@ -116,11 +116,11 @@ export default function Receitas() {
 
         {/* Chips de Tipo */}
         <div className="border-t border-gray-100 bg-white">
-          <div className="max-w-6xl mx-auto px-4 md:px-6 py-2">
-            <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
+          <div className="max-w-6xl mx-auto px-4 md:px-6 py-3">
+            <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => setTipoSelecionado("Todas")}
-                className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition ${
+                className={`px-3 py-1.5 rounded-full text-xs font-semibold transition ${
                   tipoSelecionado === "Todas"
                     ? "bg-[#FF6B6B] text-white"
                     : "bg-gray-100 text-gray-600 hover:bg-gray-200"
@@ -132,7 +132,7 @@ export default function Receitas() {
                 <button
                   key={tipo}
                   onClick={() => setTipoSelecionado(tipo)}
-                  className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition ${
+                  className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold transition ${
                     tipoSelecionado === tipo
                       ? "bg-[#FF6B6B] text-white"
                       : "bg-gray-100 text-gray-600 hover:bg-gray-200"
