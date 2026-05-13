@@ -96,11 +96,13 @@ export default function AdminBlog() {
         keywords: Array.isArray(data.keywords) ? data.keywords.join(", ") : data.keywords || iaKeywords,
         author: "Equipe Papazz",
         image: data.imageUrl || "",
-        image2: "",
+        image2: data.imageUrl2 || "",
         content: data.content || "",
       });
       setCreationMode("manual");
-      const imgMsg = data.imageUrl ? " Imagem de capa extraída automaticamente." : " Adicione uma imagem de capa.";
+      const imgMsg = data.imageUrl
+        ? ` Capa${data.imageUrl2 ? " e imagem de conteúdo extraídas" : " extraída"} automaticamente.`
+        : " Adicione as imagens.";
       setMsg({ type: "success", text: `Artigo gerado pelo Claude!${imgMsg} Revise antes de publicar.` });
     } catch (e) {
       setMsg({ type: "error", text: "Erro ao gerar: " + e.message });

@@ -9,6 +9,7 @@ export default async function handler(req, res) {
   const isUrl = sourceUrl && /^https?:\/\//i.test(sourceUrl.trim());
   let sourceContext = "";
   let extractedImage = "";
+  let extractedImage2 = "";
 
   if (isUrl) {
     try {
@@ -18,19 +19,35 @@ export default async function handler(req, res) {
       });
       const html = await response.text();
 
-      // Extrai og:image, twitter:image ou primeira <img> grande
+      // Capa: og:image ou twitter:image
       const ogImage = html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i)?.[1]
         || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i)?.[1]
         || html.match(/<meta[^>]+name=["']twitter:image["'][^>]+content=["']([^"']+)["']/i)?.[1]
         || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+name=["']twitter:image["']/i)?.[1];
 
       if (ogImage) {
-        // Resolve URL relativa
-        try {
-          extractedImage = new URL(ogImage, sourceUrl).href;
-        } catch {
-          extractedImage = ogImage.startsWith("http") ? ogImage : "";
-        }
+        try { extractedImage = new URL(ogImage, sourceUrl).href; } catch { extractedImage = ogImage.startsWith("http") ? ogImage : ""; }
+      }
+
+      // Imagem de conteúdo: segunda imagem grande no body (ignora ícones e logos pequenos)
+      const imgMatches = [...html.matchAll(/<img[^>]+src=["']([^"']+)["'][^>]*>/gi)];
+      const contentImgs = imgMatches
+        .map((m) => {
+          const src = m[1];
+          const tag = m[0];
+          // Ignora SVG, base64, ícones e imagens com dimensões pequenas declaradas
+          if (src.includes("data:") || src.endsWith(".svg")) return null;
+          const wMatch = tag.match(/width=["']?(\d+)/i);
+          const w = wMatch ? parseInt(wMatch[1]) : 999;
+          if (w < 200) return null;
+          return src;
+        })
+        .filter(Boolean);
+
+      // Pula a primeira (provavelmente logo/header) e pega a segunda imagem grande
+      const secondImg = contentImgs.find((src) => src !== ogImage && !src.includes("logo") && !src.includes("icon") && !src.includes("avatar"));
+      if (secondImg) {
+        try { extractedImage2 = new URL(secondImg, sourceUrl).href; } catch { extractedImage2 = secondImg.startsWith("http") ? secondImg : ""; }
       }
 
       sourceContext = html
@@ -167,6 +184,7 @@ Retorne APENAS um JSON válido, sem markdown, sem texto antes ou depois, sem blo
 
     const result = JSON.parse(jsonMatch[0]);
     if (extractedImage) result.imageUrl = extractedImage;
+    if (extractedImage2) result.imageUrl2 = extractedImage2;
     return res.status(200).json(result);
   } catch (e) {
     return res.status(500).json({ error: e.message });

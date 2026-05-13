@@ -48,9 +48,7 @@ export default function AdminPanel() {
       <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-gradient-to-br from-[#FF8B94] to-[#FFB5A7] rounded-[10px] flex items-center justify-center">
-              <span className="text-white font-bold text-sm">P</span>
-            </div>
+            <img src="/icon-app.png" alt="Papazz" className="w-8 h-8 rounded-[10px] object-cover" />
             <span className="font-bold text-gray-900">Papazz Admin</span>
             <span className="hidden sm:block text-xs bg-[#FF6B6B]/10 text-[#FF6B6B] px-2 py-0.5 rounded-full font-medium">
               Painel de Controle
