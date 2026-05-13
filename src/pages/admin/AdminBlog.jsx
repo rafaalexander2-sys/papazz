@@ -127,7 +127,7 @@ export default function AdminBlog() {
         body: JSON.stringify({ url: `${siteUrl}/blog/${slug}` }),
       }).catch(() => {});
 
-      setMsg({ type: "success", text: `"${form.title}" publicado no blog!` });
+      setMsg({ type: "success", text: `"${form.title}" publicado!`, link: `/blog/${slug}` });
       setForm(EMPTY_FORM);
       setCreationMode(null);
       await load();
@@ -208,8 +208,13 @@ export default function AdminBlog() {
 
       {/* Mensagem */}
       {msg && (
-        <div className={`mb-4 px-4 py-3 rounded-[10px] text-sm font-medium ${msg.type === "success" ? "bg-green-50 text-green-700 border border-green-200" : "bg-red-50 text-red-700 border border-red-200"}`}>
-          {msg.text}
+        <div className={`mb-4 px-4 py-3 rounded-[10px] text-sm font-medium flex items-center justify-between gap-4 ${msg.type === "success" ? "bg-green-50 text-green-700 border border-green-200" : "bg-red-50 text-red-700 border border-red-200"}`}>
+          <span>{msg.text}</span>
+          {msg.link && (
+            <a href={msg.link} target="_blank" rel="noopener noreferrer" className="underline font-bold shrink-0">
+              Ver publicação →
+            </a>
+          )}
         </div>
       )}
 

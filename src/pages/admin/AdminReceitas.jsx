@@ -112,7 +112,7 @@ export default function AdminReceitas() {
         tags: form.tags.split(",").map((s) => s.trim()).filter(Boolean),
         tempo: parseInt(form.tempo) || 20,
       });
-      setMsg({ type: "success", text: `"${form.nome}" publicada!` });
+      setMsg({ type: "success", text: `"${form.nome}" publicada!`, link: `/receitas?fase=${encodeURIComponent(form.fase)}&tipo=${encodeURIComponent(form.tipo)}` });
       setForm(EMPTY_FORM);
       setMode("list");
       await load();
@@ -165,8 +165,13 @@ export default function AdminReceitas() {
 
       {/* Mensagem */}
       {msg && (
-        <div className={`mb-4 px-4 py-3 rounded-[10px] text-sm font-medium ${msg.type === "success" ? "bg-green-50 text-green-700 border border-green-200" : "bg-red-50 text-red-700 border border-red-200"}`}>
-          {msg.text}
+        <div className={`mb-4 px-4 py-3 rounded-[10px] text-sm font-medium flex items-center justify-between gap-4 ${msg.type === "success" ? "bg-green-50 text-green-700 border border-green-200" : "bg-red-50 text-red-700 border border-red-200"}`}>
+          <span>{msg.text}</span>
+          {msg.link && (
+            <a href={msg.link} target="_blank" rel="noopener noreferrer" className="underline font-bold shrink-0">
+              Ver publicação →
+            </a>
+          )}
         </div>
       )}
 
