@@ -326,35 +326,73 @@ function ReceitaModal({ receita, isPremium, onClose }) {
 
   return (
     <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={onClose}>
-      <div className="bg-white rounded-[10px] max-w-2xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-        <div className="sticky top-0 bg-white border-b border-gray-200 p-6 flex items-start justify-between">
-          <div>
-            {receita.tipo && (
-              <span className="inline-flex items-center gap-1 text-xs bg-[#FFF5F5] text-[#FF6B6B] px-2 py-0.5 rounded-full font-semibold mb-2">
-                {TIPO_ICONS[receita.tipo]} {receita.tipo}
-              </span>
-            )}
-            <h2 className="text-2xl font-titulo font-bold text-gray-900 mb-2">{receita.nome}</h2>
-            <div className="flex items-center gap-4 text-sm text-gray-600 font-corpo">
-              <span>⏰ {receita.tempo} min</span>
-              <span>📊 {receita.dificuldade}</span>
-              <span>🍽️ {receita.fase} meses</span>
+      <div className="bg-white rounded-[16px] max-w-2xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+
+        {/* Imagem hero + botão fechar */}
+        <div className="relative">
+          {receita.foto ? (
+            <div className="h-56 md:h-72 w-full overflow-hidden rounded-t-[16px] bg-gray-100">
+              <img
+                src={receita.foto}
+                alt={receita.nome}
+                className="w-full h-full object-cover"
+              />
+              {/* gradiente para legibilidade do título */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent rounded-t-[16px]" />
             </div>
-            {restricoes.length > 0 && (
-              <div className="flex gap-1 mt-2">
-                {restricoes.map((r) => (
-                  <span key={r} className="text-xs bg-green-50 text-green-700 border border-green-200 px-2 py-0.5 rounded-full font-corpo">
-                    {r}
-                  </span>
-                ))}
-              </div>
-            )}
-          </div>
-          <button onClick={onClose} className="text-gray-400 hover:text-gray-600 ml-4">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          ) : (
+            <div className="h-40 w-full rounded-t-[16px] bg-gradient-to-br from-[#FFF5F5] to-[#FFE4E1] flex items-center justify-center text-6xl">
+              {TIPO_ICONS[receita.tipo] || "🍽️"}
+            </div>
+          )}
+
+          {/* Botão fechar flutuante */}
+          <button
+            onClick={onClose}
+            className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm text-gray-700 hover:text-gray-900 rounded-full w-9 h-9 flex items-center justify-center shadow-md transition"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
+
+          {/* Título sobre a imagem (só quando tem foto) */}
+          {receita.foto && (
+            <div className="absolute bottom-0 left-0 right-0 p-5">
+              {receita.tipo && (
+                <span className="inline-flex items-center gap-1 text-xs bg-white/20 backdrop-blur-sm text-white px-2 py-0.5 rounded-full font-semibold mb-2 border border-white/30">
+                  {TIPO_ICONS[receita.tipo]} {receita.tipo}
+                </span>
+              )}
+              <h2 className="text-2xl md:text-3xl font-titulo font-bold text-white leading-tight drop-shadow">
+                {receita.nome}
+              </h2>
+            </div>
+          )}
+        </div>
+
+        {/* Header de info (sticky ao rolar) */}
+        <div className="sticky top-0 bg-white border-b border-gray-100 px-5 py-3 z-10">
+          {!receita.foto && (
+            <>
+              {receita.tipo && (
+                <span className="inline-flex items-center gap-1 text-xs bg-[#FFF5F5] text-[#FF6B6B] px-2 py-0.5 rounded-full font-semibold mb-1">
+                  {TIPO_ICONS[receita.tipo]} {receita.tipo}
+                </span>
+              )}
+              <h2 className="text-xl font-titulo font-bold text-gray-900 mb-2">{receita.nome}</h2>
+            </>
+          )}
+          <div className="flex flex-wrap items-center gap-3 text-sm text-gray-600 font-corpo">
+            <span className="flex items-center gap-1">⏰ {receita.tempo} min</span>
+            <span className="flex items-center gap-1">📊 {receita.dificuldade}</span>
+            <span className="flex items-center gap-1">🍼 {receita.fase} meses</span>
+            {restricoes.map((r) => (
+              <span key={r} className="text-xs bg-green-50 text-green-700 border border-green-200 px-2 py-0.5 rounded-full font-corpo">
+                {r}
+              </span>
+            ))}
+          </div>
         </div>
 
         <div className="p-6 space-y-6">
