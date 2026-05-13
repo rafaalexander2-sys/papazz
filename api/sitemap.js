@@ -10,6 +10,20 @@ const STATIC_PAGES = [
   { url: "/faq",        priority: "0.7", changefreq: "monthly" },
 ];
 
+// Posts estáticos hardcoded de src/data/posts.js
+const STATIC_POSTS = [
+  "introducao-alimentar-12-dicas",
+  "blw-vs-papinha-qual-escolher",
+  "quando-comecar-introducao-alimentar",
+  "alimentos-proibidos-bebe-1-ano",
+  "primeira-papinha-bebe-guia",
+  "cronograma-6-meses-passo-a-passo",
+  "15-receitas-bebe-6-meses",
+  "como-fazer-papinha-nutritiva",
+  "quantidade-ideal-comida-bebe",
+  "bebe-nao-quer-comer-solucoes",
+];
+
 async function getFirestorePosts() {
   try {
     const projectId = "papazz-b82e0";
@@ -40,17 +54,26 @@ function urlEntry({ url, priority, changefreq, lastmod }) {
 }
 
 export default async function handler(req, res) {
-  const posts = await getFirestorePosts();
+  const firestorePosts = await getFirestorePosts();
 
-  const staticEntries = STATIC_PAGES.map((p) => urlEntry(p)).join("\n");
-  const postEntries = posts.map((p) =>
+  // Slugs do Firestore (posts novos criados pelo admin)
+  const firestoreSlugs = new Set(firestorePosts.map((p) => p.slug));
+
+  // Posts estáticos que ainda não estão no Firestore (evita duplicatas)
+  const staticPostEntries = STATIC_POSTS
+    .filter((slug) => !firestoreSlugs.has(slug))
+    .map((slug) => urlEntry({ url: `/blog/${slug}`, priority: "0.7", changefreq: "monthly" }));
+
+  // Posts do Firestore com data real
+  const firestorePostEntries = firestorePosts.map((p) =>
     urlEntry({ url: `/blog/${p.slug}`, priority: "0.7", changefreq: "monthly", lastmod: p.date })
-  ).join("\n");
+  );
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${staticEntries}
-${postEntries}
+${STATIC_PAGES.map((p) => urlEntry(p)).join("\n")}
+${firestorePostEntries.join("\n")}
+${staticPostEntries.join("\n")}
 </urlset>`;
 
   res.setHeader("Content-Type", "application/xml");
