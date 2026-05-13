@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Trash2, ChevronDown, ChevronUp, Save, X, Sparkles, AlertCircle, PenLine, Link2, ImageIcon, Pencil, ExternalLink } from "lucide-react";
+import { Trash2, ChevronDown, ChevronUp, Save, X, Sparkles, AlertCircle, PenLine, Link2, ImageIcon, Pencil, ExternalLink, Eye } from "lucide-react";
 import { getPostsFromFirestore, addPost, updatePost, deletePost } from "../../services/firestoreService";
 import { uploadImage } from "../../services/storageService";
 
@@ -395,18 +395,29 @@ export default function AdminBlog() {
           <div className="space-y-2">
             {posts.map((p) => (
               <div key={p.id} className="bg-white border border-gray-200 rounded-[10px] overflow-hidden">
-                <div className="flex items-center justify-between px-5 py-3">
+                <div className="flex items-center justify-between px-5 py-3 gap-2">
                   <div className="flex items-center gap-3 flex-1 min-w-0">
                     <span className="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-semibold shrink-0">{p.category}</span>
                     <span className="font-medium text-gray-900 truncate">{p.title}</span>
-                    <span className="text-xs text-gray-400 shrink-0">{p.date}</span>
+                    <span className="text-xs text-gray-400 shrink-0 hidden sm:inline">{p.date}</span>
                   </div>
-                  <div className="flex items-center gap-2 ml-2">
-                    <a href={`/blog/${p.slug}`} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-500 transition" title="Ver post">
-                      <ExternalLink size={16} />
+                  <div className="flex items-center gap-2 ml-2 shrink-0">
+                    {/* Acessos */}
+                    <span className="flex items-center gap-1 text-xs text-gray-400 shrink-0" title="Acessos">
+                      <Eye size={13} />
+                      {p.views ?? 0}
+                    </span>
+                    {/* Ver post */}
+                    <a href={`/blog/${p.slug}`} target="_blank" rel="noopener noreferrer"
+                      className="flex items-center gap-1 text-xs font-semibold text-blue-600 hover:text-blue-800 border border-blue-200 hover:border-blue-400 px-2.5 py-1 rounded-[8px] transition shrink-0">
+                      <ExternalLink size={13} />
+                      Ver
                     </a>
-                    <button onClick={() => handleEdit(p)} className="text-gray-400 hover:text-[#FF6B6B] transition" title="Editar">
-                      <Pencil size={16} />
+                    {/* Editar */}
+                    <button onClick={() => handleEdit(p)}
+                      className="flex items-center gap-1 text-xs font-semibold text-[#FF6B6B] hover:text-[#ff5252] border border-[#FFD6D6] hover:border-[#FF6B6B] px-2.5 py-1 rounded-[8px] transition shrink-0">
+                      <Pencil size={13} />
+                      Editar
                     </button>
                     <button onClick={() => setExpandedId(expandedId === p.id ? null : p.id)} className="text-gray-400 hover:text-gray-700 transition">
                       {expandedId === p.id ? <ChevronUp size={18} /> : <ChevronDown size={18} />}

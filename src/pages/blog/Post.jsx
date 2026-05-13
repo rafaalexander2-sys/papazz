@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { useEffect, useState, useMemo } from "react";
 import { ArrowLeft, Calendar, Clock, Share2 } from "lucide-react";
 import { getPostBySlug } from "../../utils/blog";
+import { incrementPostViews } from "../../services/firestoreService";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -164,6 +165,7 @@ export default function BlogPost() {
     getPostBySlug(slug).then((p) => {
       setPost(p || null);
       setLoading(false);
+      if (p?.id) incrementPostViews(p.id);
     });
   }, [slug]);
 

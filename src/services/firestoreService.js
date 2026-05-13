@@ -9,6 +9,7 @@ import {
   query,
   orderBy,
   serverTimestamp,
+  increment,
 } from "firebase/firestore";
 
 // ─── RECEITAS ───────────────────────────────────────────────────────────────
@@ -68,4 +69,13 @@ export async function updatePost(id, data) {
 
 export async function deletePost(id) {
   return deleteDoc(doc(db, "posts", id));
+}
+
+export async function incrementPostViews(id) {
+  if (!id) return;
+  try {
+    await updateDoc(doc(db, "posts", id), { views: increment(1) });
+  } catch {
+    // silencioso — não bloqueia a leitura do post
+  }
 }
