@@ -95,12 +95,13 @@ export default function AdminBlog() {
         category: data.category || "Guias",
         keywords: Array.isArray(data.keywords) ? data.keywords.join(", ") : data.keywords || iaKeywords,
         author: "Equipe Papazz",
-        image: "",
+        image: data.imageUrl || "",
         image2: "",
         content: data.content || "",
       });
       setCreationMode("manual");
-      setMsg({ type: "success", text: "Artigo gerado pelo Claude! Adicione as imagens e revise antes de publicar." });
+      const imgMsg = data.imageUrl ? " Imagem de capa extraída automaticamente." : " Adicione uma imagem de capa.";
+      setMsg({ type: "success", text: `Artigo gerado pelo Claude!${imgMsg} Revise antes de publicar.` });
     } catch (e) {
       setMsg({ type: "error", text: "Erro ao gerar: " + e.message });
     }

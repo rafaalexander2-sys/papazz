@@ -8,6 +8,7 @@ export default async function handler(req, res) {
 
   const isUrl = sourceUrl && /^https?:\/\//i.test(sourceUrl.trim());
   let sourceContext = "";
+  let extractedImage = "";
 
   if (isUrl) {
     try {
@@ -16,6 +17,22 @@ export default async function handler(req, res) {
         signal: AbortSignal.timeout(8000),
       });
       const html = await response.text();
+
+      // Extrai og:image, twitter:image ou primeira <img> grande
+      const ogImage = html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i)?.[1]
+        || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i)?.[1]
+        || html.match(/<meta[^>]+name=["']twitter:image["'][^>]+content=["']([^"']+)["']/i)?.[1]
+        || html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+name=["']twitter:image["']/i)?.[1];
+
+      if (ogImage) {
+        // Resolve URL relativa
+        try {
+          extractedImage = new URL(ogImage, sourceUrl).href;
+        } catch {
+          extractedImage = ogImage.startsWith("http") ? ogImage : "";
+        }
+      }
+
       sourceContext = html
         .replace(/<script[\s\S]*?<\/script>/gi, "")
         .replace(/<style[\s\S]*?<\/style>/gi, "")
@@ -149,6 +166,7 @@ Retorne APENAS um JSON válido, sem markdown, sem texto antes ou depois, sem blo
     if (!jsonMatch) return res.status(500).json({ error: "Resposta inválida do Claude" });
 
     const result = JSON.parse(jsonMatch[0]);
+    if (extractedImage) result.imageUrl = extractedImage;
     return res.status(200).json(result);
   } catch (e) {
     return res.status(500).json({ error: e.message });
