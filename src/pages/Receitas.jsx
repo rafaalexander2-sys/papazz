@@ -127,11 +127,11 @@ export default function Receitas() {
           <div className="flex-1 relative">
             <Search size={15} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[#FF6B6B] pointer-events-none" />
             <input
-              type="search"
+              type="text"
               value={busca}
               onChange={(e) => setBusca(e.target.value)}
               placeholder="Buscar receita..."
-              className="w-full pl-8 pr-3 py-2 border border-gray-200 rounded-[10px] text-sm font-corpo bg-white focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30"
+              className="w-full pl-8 pr-3 py-2 border border-gray-200 rounded-[10px] text-sm font-corpo bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30"
             />
           </div>
         </div>
@@ -184,7 +184,7 @@ export default function Receitas() {
             <div className="relative shrink-0 w-56">
               <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#FF6B6B] pointer-events-none" />
               <input
-                type="search"
+                type="text"
                 value={busca}
                 onChange={(e) => setBusca(e.target.value)}
                 placeholder="Buscar receita..."
