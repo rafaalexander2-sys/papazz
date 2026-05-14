@@ -13,10 +13,8 @@ export const TIPOS_RECEITA = [
   "Bebidas",
   "Sobremesas",
   "Lancheira Escolar",
-  "Receitas de 15 Minutos",
   "Menu Disfarce",
   "Festinhas Saudáveis",
-  "Ideias Extras",
 ];
 
 export const RESTRICOES_LIST = ["Sem Glúten", "Sem Lactose", "Sem Ovo"];
