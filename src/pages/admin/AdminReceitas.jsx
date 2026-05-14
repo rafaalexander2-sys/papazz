@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Trash2, ChevronDown, ChevronUp, Save, X, Link2, Sparkles, ImageIcon, Pencil } from "lucide-react";
+import { Trash2, ChevronDown, ChevronUp, Save, X, Link2, Sparkles, ImageIcon, Pencil, Search } from "lucide-react";
 import { getReceitasFromFirestore, addReceita, updateReceita, deleteReceita } from "../../services/firestoreService";
 import { uploadImage } from "../../services/storageService";
 
@@ -33,6 +33,7 @@ export default function AdminReceitas() {
   const [editingId, setEditingId] = useState(null);
   const [faseFiltro, setFaseFiltro] = useState("Todas");
   const [tipoFiltro, setTipoFiltro] = useState("Todos");
+  const [busca, setBusca] = useState("");
   const [msg, setMsg] = useState(null);
   const fileInputRef = useRef(null);
 
@@ -158,9 +159,14 @@ export default function AdminReceitas() {
     await load();
   }
 
+  const q = busca.trim().toLowerCase();
   const filtradas = receitas.filter((r) => {
-    if (faseFiltro !== "Todas" && r.fase !== faseFiltro) return false;
-    if (tipoFiltro !== "Todos" && r.tipo !== tipoFiltro) return false;
+    if (!q && faseFiltro !== "Todas" && r.fase !== faseFiltro) return false;
+    if (!q && tipoFiltro !== "Todos" && r.tipo !== tipoFiltro) return false;
+    if (q) {
+      const hay = [r.nome, r.tipo, ...(Array.isArray(r.tags) ? r.tags : [])].join(" ").toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
     return true;
   });
 
@@ -419,21 +425,24 @@ export default function AdminReceitas() {
       {mode === "list" && (
         <>
           {/* Filtros */}
-          <div className="flex gap-2 mb-3 flex-wrap">
-            {["Todas", ...FASES].map((f) => (
-              <button key={f} onClick={() => setFaseFiltro(f)}
-                className={`px-3 py-1.5 rounded-full text-xs font-semibold transition ${faseFiltro === f ? "bg-[#FF6B6B] text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}>
-                {f === "Todas" ? "Todas as fases" : `${f} meses`}
-              </button>
-            ))}
-          </div>
-          <div className="flex gap-2 mb-4 flex-wrap">
-            {["Todos", ...TIPOS].map((t) => (
-              <button key={t} onClick={() => setTipoFiltro(t)}
-                className={`px-3 py-1.5 rounded-full text-xs font-semibold transition ${tipoFiltro === t ? "bg-indigo-600 text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"}`}>
-                {t}
-              </button>
-            ))}
+          <div className="flex gap-3 mb-4 flex-wrap items-center">
+            <select value={faseFiltro} onChange={(e) => { setFaseFiltro(e.target.value); setBusca(""); }}
+              className="border border-gray-200 rounded-[10px] px-3 py-2 text-sm bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30">
+              <option value="Todas">Todas as fases</option>
+              {FASES.map((f) => <option key={f} value={f}>{f} meses</option>)}
+            </select>
+            <select value={tipoFiltro} onChange={(e) => { setTipoFiltro(e.target.value); setBusca(""); }}
+              className="border border-gray-200 rounded-[10px] px-3 py-2 text-sm bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30">
+              <option value="Todos">Todas as categorias</option>
+              {TIPOS.map((t) => <option key={t} value={t}>{t}</option>)}
+            </select>
+            <div className="relative flex-1 min-w-[200px]">
+              <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#FF6B6B] pointer-events-none" />
+              <input type="search" value={busca} onChange={(e) => setBusca(e.target.value)}
+                placeholder="Buscar receita..."
+                className="w-full pl-9 pr-3 py-2 border border-gray-200 rounded-[10px] text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30" />
+            </div>
+            <span className="text-xs text-gray-400 shrink-0">{filtradas.length} receita{filtradas.length !== 1 ? "s" : ""}</span>
           </div>
 
           {loading ? (
