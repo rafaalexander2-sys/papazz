@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Search } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { useListaCompras } from "../context/ListaComprasContext";
 import { usePlanejamento } from "../context/PlanejamentoContext";
@@ -45,6 +46,7 @@ export default function Receitas() {
   const [faseSelecionada, setFaseSelecionada] = useState("6-8");
   const [tipoSelecionado, setTipoSelecionado] = useState("Todas");
   const [restricoesFiltro, setRestricoesFiltro] = useState([]);
+  const [busca, setBusca] = useState("");
   const [receitaSelecionada, setReceitaSelecionada] = useState(null);
   const [mostrarUpgrade, setMostrarUpgrade] = useState(false);
   const [receitas, setReceitas] = useState([]);
@@ -62,12 +64,22 @@ export default function Receitas() {
       prev.includes(r) ? prev.filter((x) => x !== r) : [...prev, r]
     );
 
+  const q = busca.trim().toLowerCase();
   const receitasFiltradas = receitas.filter((r) => {
-    if (r.fase !== faseSelecionada) return false;
-    if (tipoSelecionado !== "Todas" && r.tipo !== tipoSelecionado) return false;
+    if (!q && r.fase !== faseSelecionada) return false;
+    if (!q && tipoSelecionado !== "Todas" && r.tipo !== tipoSelecionado) return false;
     if (restricoesFiltro.length > 0) {
-      const tags = Array.isArray(r.restricoes) ? r.restricoes : [];
-      if (!restricoesFiltro.every((res) => tags.includes(res))) return false;
+      const restr = Array.isArray(r.restricoes) ? r.restricoes : [];
+      if (!restricoesFiltro.every((res) => restr.includes(res))) return false;
+    }
+    if (q) {
+      const haystack = [
+        r.nome,
+        r.tipo,
+        ...(Array.isArray(r.tags) ? r.tags : []),
+        ...(Array.isArray(r.ingredientes) ? r.ingredientes : []),
+      ].join(" ").toLowerCase();
+      if (!haystack.includes(q)) return false;
     }
     return true;
   });
@@ -94,14 +106,45 @@ export default function Receitas() {
         </div>
       </div>
 
-      {/* Filtro de Fases */}
+      {/* Filtros */}
       <div className="bg-gray-50 border-b border-gray-200 sticky top-16 md:top-20 z-40">
-        <div className="max-w-6xl mx-auto px-4 md:px-6 py-3">
+
+        {/* MOBILE: dropdowns + busca na mesma linha */}
+        <div className="md:hidden px-4 py-3 flex gap-2 items-center">
+          <select
+            value={faseSelecionada}
+            onChange={(e) => { setFaseSelecionada(e.target.value); setTipoSelecionado("Todas"); setBusca(""); }}
+            className="border border-gray-200 rounded-[10px] px-2 py-2 text-sm font-corpo bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30"
+          >
+            {FASES.map((f) => <option key={f.id} value={f.id}>{f.nome}</option>)}
+          </select>
+          <select
+            value={tipoSelecionado}
+            onChange={(e) => setTipoSelecionado(e.target.value)}
+            className="border border-gray-200 rounded-[10px] px-2 py-2 text-sm font-corpo bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30"
+          >
+            <option value="Todas">Categoria</option>
+            {TIPOS_RECEITA.map((t) => <option key={t} value={t}>{t}</option>)}
+          </select>
+          <div className="flex-1 relative">
+            <Search size={15} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[#FF6B6B] pointer-events-none" />
+            <input
+              type="search"
+              value={busca}
+              onChange={(e) => setBusca(e.target.value)}
+              placeholder="Buscar receita..."
+              className="w-full pl-8 pr-3 py-2 border border-gray-200 rounded-[10px] text-sm font-corpo bg-white focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30"
+            />
+          </div>
+        </div>
+
+        {/* DESKTOP: chips de fase */}
+        <div className="hidden md:block max-w-6xl mx-auto px-6 py-3">
           <div className="flex flex-wrap gap-2">
             {FASES.map((fase) => (
               <button
                 key={fase.id}
-                onClick={() => { setFaseSelecionada(fase.id); setTipoSelecionado("Todas"); }}
+                onClick={() => { setFaseSelecionada(fase.id); setTipoSelecionado("Todas"); setBusca(""); }}
                 className={`flex items-center gap-1.5 px-4 py-2 rounded-full font-corpo font-semibold whitespace-nowrap transition text-sm ${
                   faseSelecionada === fase.id ? "text-white shadow-md" : "bg-white text-gray-700 hover:bg-gray-100"
                 }`}
@@ -114,16 +157,14 @@ export default function Receitas() {
           </div>
         </div>
 
-        {/* Chips de Tipo */}
-        <div className="border-t border-gray-100 bg-white">
-          <div className="max-w-6xl mx-auto px-4 md:px-6 py-3">
-            <div className="flex flex-wrap gap-2">
+        {/* DESKTOP: chips de tipo + busca */}
+        <div className="hidden md:block border-t border-gray-100 bg-white">
+          <div className="max-w-6xl mx-auto px-6 py-3 flex items-center gap-3">
+            <div className="flex flex-wrap gap-2 flex-1">
               <button
                 onClick={() => setTipoSelecionado("Todas")}
                 className={`px-3 py-1.5 rounded-full text-xs font-semibold transition ${
-                  tipoSelecionado === "Todas"
-                    ? "bg-[#FF6B6B] text-white"
-                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                  tipoSelecionado === "Todas" ? "bg-[#FF6B6B] text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                 }`}
               >
                 Todas
@@ -133,9 +174,7 @@ export default function Receitas() {
                   key={tipo}
                   onClick={() => setTipoSelecionado(tipo)}
                   className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold transition ${
-                    tipoSelecionado === tipo
-                      ? "bg-[#FF6B6B] text-white"
-                      : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                    tipoSelecionado === tipo ? "bg-[#FF6B6B] text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                   }`}
                 >
                   <span>{TIPO_ICONS[tipo]}</span>
@@ -143,10 +182,21 @@ export default function Receitas() {
                 </button>
               ))}
             </div>
+            {/* Busca desktop */}
+            <div className="relative shrink-0 w-56">
+              <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#FF6B6B] pointer-events-none" />
+              <input
+                type="search"
+                value={busca}
+                onChange={(e) => setBusca(e.target.value)}
+                placeholder="Buscar receita..."
+                className="w-full pl-9 pr-3 py-1.5 border border-gray-200 rounded-[10px] text-sm font-corpo focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30"
+              />
+            </div>
           </div>
         </div>
 
-        {/* Filtros de restrição */}
+        {/* Filtros de restrição (ambos) */}
         <div className="border-t border-gray-100 bg-gray-50">
           <div className="max-w-6xl mx-auto px-4 md:px-6 py-2 flex items-center gap-3 flex-wrap">
             <span className="text-xs text-gray-500 font-corpo font-medium">Filtrar por:</span>
