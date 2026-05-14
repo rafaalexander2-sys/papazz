@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { isAdminUser } from "../utils/adminUsers";
 
 export default function Login() {
-  const [isLogin, setIsLogin] = useState(true);
+  const [searchParams] = useSearchParams();
+  const [isLogin, setIsLogin] = useState(searchParams.get("modo") !== "cadastro");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -14,7 +15,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   const redirectAfterLogin = (userEmail) => {
-    navigate(isAdminUser(userEmail) ? "/admin" : "/");
+    navigate(isAdminUser(userEmail) ? "/admin" : "/receitas");
   };
 
   const handleSubmit = async (e) => {

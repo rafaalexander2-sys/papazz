@@ -18,6 +18,11 @@
 - Never guess APIs, versions, flags, package names. Verify first.
 - State bug → fix → done. No out-of-scope suggestions.
 
+## Copywriting Rules (site text, UI labels, descriptions)
+- Zero travessões (—) e traços longos em textos do site. Ponto final ou vírgula no lugar.
+- Zero emojis em textos do site, UI ou copy de marketing.
+- Botões sempre na cor brand: `bg-[#FF6B6B]` hover `bg-[#ff5252]`. Nunca preto ou cinza.
+
 ## React / Papazz Coding Rules
 - Code first. Prose after, only if non-obvious.
 - No comments unless logic is genuinely surprising.

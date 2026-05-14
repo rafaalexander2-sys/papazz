@@ -240,7 +240,7 @@ export default function AdminReceitas() {
 
       {/* FORMULÁRIO MANUAL */}
       {mode === "manual" && (
-        <div className="bg-white border border-gray-200 rounded-[10px] p-6 mb-6 shadow-sm">
+        <div className="bg-white border border-gray-200 rounded-[10px] p-4 md:p-6 mb-6 shadow-sm">
           <h3 className="text-lg font-bold text-gray-900 mb-6">
             {editingId ? `Editando: ${form.nome}` : "Nova Receita"}
           </h3>
@@ -317,43 +317,32 @@ export default function AdminReceitas() {
               <label className="block text-sm font-semibold text-gray-700 mb-2">Foto da Receita</label>
               <div className="flex gap-3 items-start">
                 <div className="flex-1">
-                  <div onClick={() => fileInputRef.current?.click()}
-                    className="border-2 border-dashed border-gray-300 rounded-[10px] p-6 text-center cursor-pointer hover:border-[#FF6B6B] hover:bg-[#FFF5F5] transition">
+                  <label htmlFor="receita-foto-upload"
+                    className="border-2 border-dashed border-gray-300 rounded-[10px] p-6 text-center cursor-pointer hover:border-[#FF6B6B] hover:bg-[#FFF5F5] transition block">
                     {uploadingImg ? (
                       <p className="text-sm text-purple-600 animate-pulse">Enviando imagem...</p>
                     ) : form.foto ? (
                       <div>
                         <img src={form.foto} alt="preview" className="h-24 w-full object-cover rounded-[8px] mb-2" />
-                        <p className="text-xs text-green-600 font-medium">Imagem carregada. Clique para trocar.</p>
+                        <p className="text-xs text-green-600 font-medium">Toque para trocar a foto.</p>
                       </div>
                     ) : (
                       <div className="flex flex-col items-center gap-2 text-gray-400">
                         <ImageIcon size={32} />
-                        <p className="text-sm">Clique para fazer upload da foto</p>
+                        <p className="text-sm">Toque para upload ou tirar foto</p>
                         <p className="text-xs">JPG, PNG ou WebP — máx 5MB</p>
                       </div>
                     )}
-                  </div>
-                  <input ref={fileInputRef} type="file" accept="image/*" className="hidden"
+                  </label>
+                  <input id="receita-foto-upload" ref={fileInputRef} type="file" accept="image/*" className="hidden"
                     onChange={(e) => handleImageUpload(e.target.files?.[0])} />
                 </div>
-                {form.foto && (
-                  <div className="flex flex-col gap-2">
-                    <p className="text-xs text-gray-500 font-semibold">Ou cole URL:</p>
-                    <input type="url" value={form.foto} onChange={(e) => setField("foto", e.target.value)}
-                      placeholder="https://..."
-                      className="w-48 border border-gray-300 rounded-[10px] px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30" />
-                  </div>
-                )}
               </div>
-              {!form.foto && (
-                <div className="mt-2">
-                  <p className="text-xs text-gray-500 mb-1">Ou cole uma URL de imagem:</p>
-                  <input type="url" value={form.foto} onChange={(e) => setField("foto", e.target.value)}
-                    placeholder="https://images.unsplash.com/..."
-                    className="w-full border border-gray-300 rounded-[10px] px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30" />
-                </div>
-              )}
+              <div className="mt-2">
+                <input type="url" value={form.foto} onChange={(e) => setField("foto", e.target.value)}
+                  placeholder="Ou cole uma URL de imagem..."
+                  className="w-full border border-gray-300 rounded-[10px] px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30" />
+              </div>
             </div>
 
             {/* Ingredientes */}
