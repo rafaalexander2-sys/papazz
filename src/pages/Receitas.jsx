@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { Search } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Search, X } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { useListaCompras } from "../context/ListaComprasContext";
 import { usePlanejamento } from "../context/PlanejamentoContext";
@@ -45,6 +45,8 @@ export default function Receitas() {
   const [tipoSelecionado, setTipoSelecionado] = useState("Todas");
   const [restricoesFiltro, setRestricoesFiltro] = useState([]);
   const [busca, setBusca] = useState("");
+  const [searchOpen, setSearchOpen] = useState(false);
+  const searchRef = useRef(null);
   const [receitaSelecionada, setReceitaSelecionada] = useState(null);
   const [mostrarUpgrade, setMostrarUpgrade] = useState(false);
   const [receitas, setReceitas] = useState([]);
@@ -107,33 +109,52 @@ export default function Receitas() {
       {/* Filtros */}
       <div className="bg-gray-50 border-b border-gray-200 sticky top-16 md:top-20 z-40">
 
-        {/* MOBILE: dropdowns + busca na mesma linha */}
-        <div className="md:hidden px-4 py-3 flex gap-2 items-center">
-          <select
-            value={faseSelecionada}
-            onChange={(e) => { setFaseSelecionada(e.target.value); setTipoSelecionado("Todas"); setBusca(""); }}
-            className="border border-gray-200 rounded-[10px] px-2 py-2 text-sm font-corpo bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30"
-          >
-            {FASES.map((f) => <option key={f.id} value={f.id}>{f.nome}</option>)}
-          </select>
-          <select
-            value={tipoSelecionado}
-            onChange={(e) => setTipoSelecionado(e.target.value)}
-            className="border border-gray-200 rounded-[10px] px-2 py-2 text-sm font-corpo bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30"
-          >
-            <option value="Todas">Categoria</option>
-            {TIPOS_RECEITA.map((t) => <option key={t} value={t}>{t}</option>)}
-          </select>
-          <div className="flex-1 relative">
-            <Search size={15} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[#FF6B6B] pointer-events-none" />
-            <input
-              type="text"
-              value={busca}
-              onChange={(e) => setBusca(e.target.value)}
-              placeholder="Buscar receita..."
-              className="w-full pl-8 pr-3 py-2 border border-gray-200 rounded-[10px] text-sm font-corpo bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30"
-            />
-          </div>
+        {/* MOBILE: dropdowns + ícone busca / input expandido */}
+        <div className="md:hidden px-4 py-3">
+          {searchOpen ? (
+            <div className="flex items-center gap-2">
+              <Search size={18} className="text-[#FF6B6B] shrink-0" />
+              <input
+                ref={searchRef}
+                type="text"
+                value={busca}
+                onChange={(e) => setBusca(e.target.value)}
+                placeholder="Buscar receita, ingrediente..."
+                autoFocus
+                className="flex-1 py-2 text-base font-corpo text-gray-900 placeholder-gray-400 bg-transparent border-b-2 border-[#FF6B6B] focus:outline-none"
+              />
+              <button
+                onClick={() => { setSearchOpen(false); setBusca(""); }}
+                className="shrink-0 text-gray-400 hover:text-gray-700 transition p-1"
+              >
+                <X size={20} />
+              </button>
+            </div>
+          ) : (
+            <div className="flex gap-2 items-center">
+              <select
+                value={faseSelecionada}
+                onChange={(e) => { setFaseSelecionada(e.target.value); setTipoSelecionado("Todas"); }}
+                className="flex-1 border border-gray-200 rounded-[10px] px-3 py-2 text-sm font-corpo bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30"
+              >
+                {FASES.map((f) => <option key={f.id} value={f.id}>{f.nome}</option>)}
+              </select>
+              <select
+                value={tipoSelecionado}
+                onChange={(e) => setTipoSelecionado(e.target.value)}
+                className="flex-1 border border-gray-200 rounded-[10px] px-3 py-2 text-sm font-corpo bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30"
+              >
+                <option value="Todas">Categoria</option>
+                {TIPOS_RECEITA.map((t) => <option key={t} value={t}>{t}</option>)}
+              </select>
+              <button
+                onClick={() => setSearchOpen(true)}
+                className="shrink-0 w-10 h-10 flex items-center justify-center rounded-[10px] border border-gray-200 bg-white text-[#FF6B6B] hover:bg-[#FFF5F5] transition"
+              >
+                <Search size={18} />
+              </button>
+            </div>
+          )}
         </div>
 
         {/* DESKTOP: chips de fase */}
