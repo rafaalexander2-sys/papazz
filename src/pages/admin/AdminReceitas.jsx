@@ -138,7 +138,7 @@ export default function AdminReceitas() {
         await updateReceita(editingId, payload);
         setMsg({ type: "success", text: `"${form.nome}" atualizada!`, link: `/receitas?fase=${encodeURIComponent(form.fase)}&tipo=${encodeURIComponent(form.tipo)}` });
       } else {
-        await addReceita({ ...payload, id: Date.now() });
+        await addReceita(payload);
         setMsg({ type: "success", text: `"${form.nome}" publicada!`, link: `/receitas?fase=${encodeURIComponent(form.fase)}&tipo=${encodeURIComponent(form.tipo)}` });
       }
       setForm(EMPTY_FORM);

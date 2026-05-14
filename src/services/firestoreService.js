@@ -18,7 +18,7 @@ export async function getReceitasFromFirestore() {
   try {
     const q = query(collection(db, "receitas"), orderBy("criadoEm", "desc"));
     const snap = await getDocs(q);
-    return snap.docs.map((d) => ({ id: d.id, ...d.data(), _fromFirestore: true }));
+    return snap.docs.map((d) => ({ ...d.data(), id: d.id, _fromFirestore: true }));
   } catch {
     return [];
   }
