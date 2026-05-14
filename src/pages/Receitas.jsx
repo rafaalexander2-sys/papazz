@@ -96,11 +96,11 @@ export default function Receitas() {
     <div className="min-h-screen bg-white">
       {/* Header */}
       <div className="bg-gradient-to-r from-[#FF8B94] to-[#FFB5A7] border-b border-gray-100">
-        <div className="max-w-6xl mx-auto px-4 md:px-6 py-12 md:py-16">
-          <h1 className="text-3xl md:text-4xl font-titulo font-bold text-white mb-4">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 py-4 md:py-6">
+          <h1 className="text-xl md:text-2xl font-titulo font-bold text-white mb-1">
             Receitas por Idade
           </h1>
-          <p className="text-lg text-white/90 font-corpo">
+          <p className="text-sm text-white/90 font-corpo">
             Receitas nutritivas e práticas para cada fase do seu bebê
           </p>
         </div>

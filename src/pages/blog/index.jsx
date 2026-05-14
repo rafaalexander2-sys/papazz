@@ -29,11 +29,11 @@ export default function Blog() {
     <div className="min-h-screen bg-white">
       {/* Hero Section - MENOR E MAIS CLEAN */}
       <div className="bg-gradient-to-r from-[#FF8B94] to-[#FFB5A7] border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-12">
-          <h1 className="text-3xl md:text-4xl font-titulo font-bold text-white mb-3">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-6">
+          <h1 className="text-xl md:text-2xl font-titulo font-bold text-white mb-1">
             Blog Papazz
           </h1>
-          <p className="text-base md:text-lg text-white/90 font-corpo mb-6">
+          <p className="text-sm text-white/90 font-corpo mb-4">
             Guias práticos sobre introdução alimentar
           </p>
 
