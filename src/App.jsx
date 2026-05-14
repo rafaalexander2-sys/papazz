@@ -9,6 +9,7 @@ import { DiarioProvider } from "./context/DiarioContext";
 import Layout from "./components/layout/Layout";
 
 // Pages
+import Landing from "./pages/Landing";
 import Home from "./pages/Home";
 import Receitas from "./pages/Receitas";
 import Cronograma from "./pages/Cronograma";
@@ -31,6 +32,9 @@ function App() {
       <DiarioProvider>
       <Router>
         <Routes>
+          {/* Landing pública */}
+          <Route path="/" element={<Landing />} />
+
           {/* Rota de login SEM Layout */}
           <Route path="/login" element={<Login />} />
 
@@ -39,7 +43,7 @@ function App() {
 
           {/* Rotas COM Layout */}
           <Route element={<Layout />}>
-            <Route path="/" element={<Home />} />
+            <Route path="/inicio" element={<Home />} />
             <Route path="/receitas" element={<Receitas />} />
             <Route path="/cronograma" element={<Cronograma />} />
             <Route path="/blog" element={<BlogIndex />} />

@@ -24,7 +24,7 @@ export default function Footer() {
             <ul className="space-y-2 font-corpo text-sm">
               <li>
                 <Link
-                  to="/"
+                  to="/receitas"
                   className="text-gray-400 hover:text-white transition"
                 >
                   Início

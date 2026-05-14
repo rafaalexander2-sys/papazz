@@ -171,31 +171,6 @@ export default function AdminBlog() {
     await load();
   }
 
-  const ImageUploadField = ({ label, fieldKey, uploadFn, uploading, inputRef, note }) => (
-    <div>
-      <label className="block text-sm font-semibold text-gray-700 mb-1">{label} <span className="font-normal text-gray-400 text-xs">{note}</span></label>
-      <div onClick={() => inputRef.current?.click()}
-        className="border-2 border-dashed border-gray-300 rounded-[10px] p-4 cursor-pointer hover:border-[#FF6B6B] hover:bg-[#FFF5F5] transition min-h-[80px] flex items-center justify-center">
-        {uploading ? (
-          <p className="text-sm text-purple-600 animate-pulse">Enviando...</p>
-        ) : form[fieldKey] ? (
-          <div className="w-full">
-            <img src={form[fieldKey]} alt="preview" className="h-20 w-full object-cover rounded-[8px] mb-1" />
-            <p className="text-xs text-center text-green-600">Clique para trocar</p>
-          </div>
-        ) : (
-          <div className="flex flex-col items-center gap-1 text-gray-400">
-            <ImageIcon size={24} />
-            <p className="text-xs">Clique para fazer upload</p>
-          </div>
-        )}
-      </div>
-      <input ref={inputRef} type="file" accept="image/*" className="hidden" onChange={(e) => uploadFn(e.target.files?.[0])} />
-      <input type="url" value={form[fieldKey]} onChange={(e) => setField(fieldKey, e.target.value)}
-        placeholder="Ou cole uma URL de imagem..."
-        className="mt-2 w-full border border-gray-300 rounded-[10px] px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30" />
-    </div>
-  );
 
   return (
     <div>
@@ -285,7 +260,7 @@ export default function AdminBlog() {
 
       {/* FORMULÁRIO (manual ou pós-IA) */}
       {creationMode === "manual" && (
-        <div className="bg-white border border-gray-200 rounded-[10px] p-6 mb-6 shadow-sm">
+        <div className="bg-white border border-gray-200 rounded-[10px] p-4 md:p-6 mb-6 shadow-sm">
           <h3 className="text-lg font-bold text-gray-900 mb-6">
             {editingId ? `Editando: ${form.title.substring(0, 50)}` : "Novo Post"}
           </h3>
@@ -365,7 +340,7 @@ export default function AdminBlog() {
           {/* Conteúdo */}
           <div className="mb-6">
             <label className="block text-sm font-semibold text-gray-700 mb-1">Conteúdo (Markdown) *</label>
-            <textarea rows={18} value={form.content} onChange={(e) => setField("content", e.target.value)}
+            <textarea rows={10} value={form.content} onChange={(e) => setField("content", e.target.value)}
               placeholder="Escreva em Markdown. ## Título H2, ### Título H3, **negrito**, - lista..."
               className="w-full border border-gray-300 rounded-[10px] px-4 py-2.5 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30 resize-y" />
             <p className="text-xs text-gray-400 mt-1">{form.content.split(/\s+/).filter(Boolean).length} palavras</p>
@@ -447,30 +422,31 @@ export default function AdminBlog() {
   );
 }
 
-// Componente reutilizável de upload de imagem
 function ImageUploadField({ label, fieldKey, uploadFn, uploading, inputRef, note, form, setField }) {
+  const inputId = `img-${fieldKey}`;
   return (
     <div>
       <label className="block text-sm font-semibold text-gray-700 mb-1">
         {label} <span className="font-normal text-gray-400 text-xs">{note}</span>
       </label>
-      <div onClick={() => inputRef.current?.click()}
-        className="border-2 border-dashed border-gray-300 rounded-[10px] p-4 cursor-pointer hover:border-[#FF6B6B] hover:bg-[#FFF5F5] transition min-h-[80px] flex items-center justify-center">
+      <label htmlFor={inputId}
+        className="border-2 border-dashed border-gray-300 rounded-[10px] p-4 cursor-pointer hover:border-[#FF6B6B] hover:bg-[#FFF5F5] transition min-h-[80px] flex items-center justify-center block">
         {uploading ? (
           <p className="text-sm text-purple-600 animate-pulse">Enviando...</p>
         ) : form[fieldKey] ? (
           <div className="w-full">
             <img src={form[fieldKey]} alt="preview" className="h-20 w-full object-cover rounded-[8px] mb-1" />
-            <p className="text-xs text-center text-green-600">Clique para trocar</p>
+            <p className="text-xs text-center text-green-600">Toque para trocar</p>
           </div>
         ) : (
           <div className="flex flex-col items-center gap-1 text-gray-400">
             <ImageIcon size={24} />
-            <p className="text-xs">Clique para fazer upload</p>
+            <p className="text-xs">Toque para fazer upload ou tirar foto</p>
           </div>
         )}
-      </div>
-      <input ref={inputRef} type="file" accept="image/*" className="hidden" onChange={(e) => uploadFn(e.target.files?.[0])} />
+      </label>
+      <input id={inputId} ref={inputRef} type="file" accept="image/*" className="hidden"
+        onChange={(e) => uploadFn(e.target.files?.[0])} />
       <input type="url" value={form[fieldKey]} onChange={(e) => setField(fieldKey, e.target.value)}
         placeholder="Ou cole uma URL..."
         className="mt-2 w-full border border-gray-300 rounded-[10px] px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30" />
