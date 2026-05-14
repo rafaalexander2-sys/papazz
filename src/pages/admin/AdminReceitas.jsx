@@ -6,7 +6,7 @@ import { uploadImage } from "../../services/storageService";
 const FASES = ["6-8", "8-10", "10-12", "12+"];
 const TIPOS = [
   "Refeições Principais", "Sopas e Caldos", "Lanches", "Bebidas", "Sobremesas",
-  "Lancheira Escolar", "Receitas de 15 Minutos", "Menu Disfarce", "Festinhas Saudáveis", "Ideias Extras",
+  "Lancheira Escolar", "Menu Disfarce", "Festinhas Saudáveis",
 ];
 const RESTRICOES_LIST = ["Sem Glúten", "Sem Lactose", "Sem Ovo"];
 const DIFICULDADES = ["Fácil", "Médio", "Difícil"];
