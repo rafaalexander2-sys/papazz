@@ -438,9 +438,9 @@ export default function AdminReceitas() {
             </select>
             <div className="relative flex-1 min-w-[200px]">
               <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#FF6B6B] pointer-events-none" />
-              <input type="search" value={busca} onChange={(e) => setBusca(e.target.value)}
+              <input type="text" value={busca} onChange={(e) => setBusca(e.target.value)}
                 placeholder="Buscar receita..."
-                className="w-full pl-9 pr-3 py-2 border border-gray-200 rounded-[10px] text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30" />
+                className="w-full pl-9 pr-3 py-2 border border-gray-200 rounded-[10px] text-sm text-gray-900 placeholder-gray-400 bg-white focus:outline-none focus:ring-2 focus:ring-[#FF6B6B]/30" />
             </div>
             <span className="text-xs text-gray-400 shrink-0">{filtradas.length} receita{filtradas.length !== 1 ? "s" : ""}</span>
           </div>
