@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
-import { Trash2, ChevronDown, ChevronUp, Save, X, Link2, Sparkles, ImageIcon, Pencil, Search, FileText, CheckCircle2, Circle } from "lucide-react";
+import { Trash2, ChevronDown, ChevronUp, Save, X, Link2, Sparkles, ImageIcon, Pencil, Search, FileText, CheckCircle2, Circle, Upload } from "lucide-react";
 import { getReceitasFromFirestore, addReceita, updateReceita, deleteReceita } from "../../services/firestoreService";
+import { PAPINHAS_6_8 } from "../../data/seed-papinhas-6-8";
 import { uploadImage } from "../../services/storageService";
 
 const FASES = ["6-8", "8-10", "10-12", "12+"];
@@ -29,6 +30,8 @@ export default function AdminReceitas() {
   const [uploadingImg, setUploadingImg] = useState(false);
   const [importInput, setImportInput] = useState("");
   const [importFase, setImportFase] = useState("6-8");
+  const [seedando, setSeedando] = useState(false);
+  const [showSeedConfirm, setShowSeedConfirm] = useState(false);
   const [textoDoc, setTextoDoc] = useState("");
   const [textoFase, setTextoFase] = useState("6-8");
   const [textoReceitas, setTextoReceitas] = useState([]);
@@ -107,6 +110,25 @@ export default function AdminReceitas() {
       setMsg({ type: "error", text: "Erro ao importar: " + e.message });
     }
     setImporting(false);
+  }
+
+  async function handleSeed() {
+    setSeedando(true);
+    setShowSeedConfirm(false);
+    setMsg(null);
+    let ok = 0;
+    for (const r of PAPINHAS_6_8) {
+      try {
+        await addReceita({
+          ...r,
+          tempo: parseInt(r.tempo) || 20,
+        });
+        ok++;
+      } catch { /* continua */ }
+    }
+    setSeedando(false);
+    setMsg({ type: "success", text: `${ok} receitas da fase 6-8 importadas com sucesso!` });
+    await load();
   }
 
   async function handleTextoProcessar() {
@@ -239,6 +261,10 @@ export default function AdminReceitas() {
         </div>
         {mode === "list" && (
           <div className="flex gap-2 flex-wrap">
+            <button onClick={() => setShowSeedConfirm(true)} disabled={seedando}
+              className="flex items-center gap-2 bg-orange-500 text-white px-4 py-2.5 rounded-[10px] font-semibold hover:bg-orange-600 transition text-sm disabled:opacity-60">
+              <Upload size={16} /> {seedando ? "Importando..." : "Papinhas 6-8m"}
+            </button>
             <button onClick={() => { setMode("texto"); setTextoReceitas([]); setTextoSelecionadas([]); setMsg(null); }}
               className="flex items-center gap-2 bg-teal-600 text-white px-4 py-2.5 rounded-[10px] font-semibold hover:bg-teal-700 transition text-sm">
               <FileText size={16} /> Colar Documento
@@ -260,6 +286,29 @@ export default function AdminReceitas() {
           </button>
         )}
       </div>
+
+      {/* Modal seed confirm */}
+      {showSeedConfirm && (
+        <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center px-4">
+          <div className="bg-white rounded-[10px] shadow-xl p-6 max-w-sm w-full">
+            <h3 className="text-lg font-bold text-gray-900 mb-2">Importar 28 papinhas 6-8m?</h3>
+            <p className="text-sm text-gray-500 mb-5">
+              Vai subir todas as receitas do documento: 16 salgadas e 12 doces, fase 6 a 8 meses.
+              Receitas duplicadas serao adicionadas novamente.
+            </p>
+            <div className="flex gap-3">
+              <button onClick={handleSeed}
+                className="flex-1 bg-[#FF6B6B] text-white py-2.5 rounded-[10px] font-semibold hover:bg-[#ff5252] transition text-sm">
+                Importar tudo
+              </button>
+              <button onClick={() => setShowSeedConfirm(false)}
+                className="flex-1 border border-gray-300 text-gray-700 py-2.5 rounded-[10px] font-medium hover:bg-gray-50 transition text-sm">
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Mensagem */}
       {msg && (
