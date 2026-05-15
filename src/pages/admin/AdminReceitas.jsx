@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
-import { Trash2, ChevronDown, ChevronUp, Save, X, Link2, Sparkles, ImageIcon, Pencil, Search } from "lucide-react";
+import { Trash2, ChevronDown, ChevronUp, Save, X, Link2, Sparkles, ImageIcon, Pencil, Search, FileText, CheckCircle2, Circle, Upload } from "lucide-react";
 import { getReceitasFromFirestore, addReceita, updateReceita, deleteReceita } from "../../services/firestoreService";
+import { PAPINHAS_6_8 } from "../../data/seed-papinhas-6-8";
 import { uploadImage } from "../../services/storageService";
 
 const FASES = ["6-8", "8-10", "10-12", "12+"];
@@ -22,13 +23,21 @@ const EMPTY_FORM = {
 export default function AdminReceitas() {
   const [receitas, setReceitas] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [mode, setMode] = useState("list"); // list | import | manual
+  const [mode, setMode] = useState("list"); // list | import | manual | texto
   const [form, setForm] = useState(EMPTY_FORM);
   const [saving, setSaving] = useState(false);
   const [importing, setImporting] = useState(false);
   const [uploadingImg, setUploadingImg] = useState(false);
   const [importInput, setImportInput] = useState("");
   const [importFase, setImportFase] = useState("6-8");
+  const [seedando, setSeedando] = useState(false);
+  const [showSeedConfirm, setShowSeedConfirm] = useState(false);
+  const [textoDoc, setTextoDoc] = useState("");
+  const [textoFase, setTextoFase] = useState("6-8");
+  const [textoReceitas, setTextoReceitas] = useState([]);
+  const [textoSelecionadas, setTextoSelecionadas] = useState([]);
+  const [textoProcessando, setTextoProcessando] = useState(false);
+  const [textoPublicando, setTextoPublicando] = useState(false);
   const [expandedId, setExpandedId] = useState(null);
   const [editingId, setEditingId] = useState(null);
   const [faseFiltro, setFaseFiltro] = useState("Todas");
@@ -101,6 +110,78 @@ export default function AdminReceitas() {
       setMsg({ type: "error", text: "Erro ao importar: " + e.message });
     }
     setImporting(false);
+  }
+
+  async function handleSeed() {
+    setSeedando(true);
+    setShowSeedConfirm(false);
+    setMsg(null);
+    let ok = 0;
+    for (const r of PAPINHAS_6_8) {
+      try {
+        await addReceita({
+          ...r,
+          tempo: parseInt(r.tempo) || 20,
+        });
+        ok++;
+      } catch { /* continua */ }
+    }
+    setSeedando(false);
+    setMsg({ type: "success", text: `${ok} receitas da fase 6-8 importadas com sucesso!` });
+    await load();
+  }
+
+  async function handleTextoProcessar() {
+    if (!textoDoc.trim()) { setMsg({ type: "error", text: "Cole o texto do documento primeiro." }); return; }
+    setTextoProcessando(true);
+    setTextoReceitas([]);
+    setTextoSelecionadas([]);
+    setMsg(null);
+    try {
+      const res = await fetch("/api/parse-text-recipes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: textoDoc, fase: textoFase }),
+      });
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+      setTextoReceitas(data.receitas);
+      setTextoSelecionadas(data.receitas.map((_, i) => i));
+      setMsg({ type: "success", text: `${data.receitas.length} receita${data.receitas.length !== 1 ? "s" : ""} encontrada${data.receitas.length !== 1 ? "s" : ""}. Revise e publique.` });
+    } catch (e) {
+      setMsg({ type: "error", text: "Erro ao processar: " + e.message });
+    }
+    setTextoProcessando(false);
+  }
+
+  function toggleTextoSelecionada(i) {
+    setTextoSelecionadas((prev) => prev.includes(i) ? prev.filter((x) => x !== i) : [...prev, i]);
+  }
+
+  async function handleTextoPublicar() {
+    const selecionadas = textoReceitas.filter((_, i) => textoSelecionadas.includes(i));
+    if (!selecionadas.length) { setMsg({ type: "error", text: "Selecione ao menos uma receita." }); return; }
+    setTextoPublicando(true);
+    setMsg(null);
+    let ok = 0;
+    for (const r of selecionadas) {
+      try {
+        await addReceita({
+          ...r,
+          ingredientes: Array.isArray(r.ingredientes) ? r.ingredientes : r.ingredientes.split("\n").map((s) => s.trim()).filter(Boolean),
+          tags: Array.isArray(r.tags) ? r.tags : r.tags.split(",").map((s) => s.trim()).filter(Boolean),
+          tempo: parseInt(r.tempo) || 20,
+        });
+        ok++;
+      } catch { /* continua */ }
+    }
+    setTextoPublicando(false);
+    setMsg({ type: "success", text: `${ok} receita${ok !== 1 ? "s" : ""} publicada${ok !== 1 ? "s" : ""}!` });
+    setTextoDoc("");
+    setTextoReceitas([]);
+    setTextoSelecionadas([]);
+    setMode("list");
+    await load();
   }
 
   function handleEdit(r) {
@@ -179,10 +260,18 @@ export default function AdminReceitas() {
           <p className="text-sm text-gray-500 mt-1">{receitas.length} receita{receitas.length !== 1 ? "s" : ""} no banco</p>
         </div>
         {mode === "list" && (
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
+            <button onClick={() => setShowSeedConfirm(true)} disabled={seedando}
+              className="flex items-center gap-2 bg-orange-500 text-white px-4 py-2.5 rounded-[10px] font-semibold hover:bg-orange-600 transition text-sm disabled:opacity-60">
+              <Upload size={16} /> {seedando ? "Importando..." : "Papinhas 6-8m"}
+            </button>
+            <button onClick={() => { setMode("texto"); setTextoReceitas([]); setTextoSelecionadas([]); setMsg(null); }}
+              className="flex items-center gap-2 bg-teal-600 text-white px-4 py-2.5 rounded-[10px] font-semibold hover:bg-teal-700 transition text-sm">
+              <FileText size={16} /> Colar Documento
+            </button>
             <button onClick={() => { setMode("import"); setMsg(null); }}
               className="flex items-center gap-2 bg-purple-600 text-white px-4 py-2.5 rounded-[10px] font-semibold hover:bg-purple-700 transition text-sm">
-              <Link2 size={16} /> Importar via URL/Tema
+              <Link2 size={16} /> URL/Tema
             </button>
             <button onClick={() => { setMode("manual"); setForm(EMPTY_FORM); setEditingId(null); setMsg(null); }}
               className="flex items-center gap-2 bg-[#FF6B6B] text-white px-4 py-2.5 rounded-[10px] font-semibold hover:bg-[#ff5252] transition text-sm">
@@ -198,6 +287,29 @@ export default function AdminReceitas() {
         )}
       </div>
 
+      {/* Modal seed confirm */}
+      {showSeedConfirm && (
+        <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center px-4">
+          <div className="bg-white rounded-[10px] shadow-xl p-6 max-w-sm w-full">
+            <h3 className="text-lg font-bold text-gray-900 mb-2">Importar 28 papinhas 6-8m?</h3>
+            <p className="text-sm text-gray-500 mb-5">
+              Vai subir todas as receitas do documento: 16 salgadas e 12 doces, fase 6 a 8 meses.
+              Receitas duplicadas serao adicionadas novamente.
+            </p>
+            <div className="flex gap-3">
+              <button onClick={handleSeed}
+                className="flex-1 bg-[#FF6B6B] text-white py-2.5 rounded-[10px] font-semibold hover:bg-[#ff5252] transition text-sm">
+                Importar tudo
+              </button>
+              <button onClick={() => setShowSeedConfirm(false)}
+                className="flex-1 border border-gray-300 text-gray-700 py-2.5 rounded-[10px] font-medium hover:bg-gray-50 transition text-sm">
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Mensagem */}
       {msg && (
         <div className={`mb-4 px-4 py-3 rounded-[10px] text-sm font-medium flex items-center justify-between gap-4 ${msg.type === "success" ? "bg-green-50 text-green-700 border border-green-200" : "bg-red-50 text-red-700 border border-red-200"}`}>
@@ -206,6 +318,97 @@ export default function AdminReceitas() {
             <a href={msg.link} target="_blank" rel="noopener noreferrer" className="underline font-bold shrink-0">
               Ver publicação →
             </a>
+          )}
+        </div>
+      )}
+
+      {/* MODO TEXTO */}
+      {mode === "texto" && (
+        <div className="bg-white border border-gray-200 rounded-[10px] p-6 mb-6 shadow-sm">
+          <div className="flex items-center gap-2 mb-4">
+            <FileText size={20} className="text-teal-600" />
+            <h3 className="text-lg font-bold text-gray-900">Importar do Documento</h3>
+          </div>
+          <p className="text-sm text-gray-500 mb-4">
+            Cole o texto do seu documento aqui. O Claude vai identificar todas as receitas automaticamente.
+          </p>
+
+          {textoReceitas.length === 0 && (
+            <>
+              <div className="grid md:grid-cols-4 gap-4 mb-4">
+                <div className="md:col-span-3">
+                  <label className="block text-sm font-semibold text-gray-700 mb-1">Texto do Documento</label>
+                  <textarea
+                    rows={10}
+                    value={textoDoc}
+                    onChange={(e) => setTextoDoc(e.target.value)}
+                    placeholder={"Cole aqui o conteudo do seu documento com as receitas..."}
+                    className="w-full border border-gray-300 rounded-[10px] px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-300 resize-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-1">Fase padrao</label>
+                  <select value={textoFase} onChange={(e) => setTextoFase(e.target.value)}
+                    className="w-full border border-gray-300 rounded-[10px] px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-teal-300">
+                    {FASES.map((f) => <option key={f} value={f}>{f} meses</option>)}
+                  </select>
+                  <p className="text-xs text-gray-400 mt-2">Usada quando o doc nao especifica a fase.</p>
+                </div>
+              </div>
+              <button onClick={handleTextoProcessar} disabled={textoProcessando || !textoDoc.trim()}
+                className="flex items-center gap-2 bg-teal-600 text-white px-6 py-2.5 rounded-[10px] font-semibold hover:bg-teal-700 transition disabled:opacity-60">
+                <Sparkles size={16} />
+                {textoProcessando ? "Processando com Claude..." : "Extrair Receitas"}
+              </button>
+              {textoProcessando && <p className="text-xs text-teal-600 mt-2 animate-pulse">Claude esta lendo e extraindo as receitas do texto...</p>}
+            </>
+          )}
+
+          {textoReceitas.length > 0 && (
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-sm font-semibold text-gray-700">
+                  {textoReceitas.length} receita{textoReceitas.length !== 1 ? "s" : ""} encontrada{textoReceitas.length !== 1 ? "s" : ""}.
+                  Selecione as que deseja publicar:
+                </p>
+                <button onClick={() => setTextoSelecionadas(
+                  textoSelecionadas.length === textoReceitas.length ? [] : textoReceitas.map((_, i) => i)
+                )} className="text-xs text-teal-600 font-medium underline">
+                  {textoSelecionadas.length === textoReceitas.length ? "Desmarcar todas" : "Selecionar todas"}
+                </button>
+              </div>
+              <div className="space-y-2 mb-5 max-h-96 overflow-y-auto pr-1">
+                {textoReceitas.map((r, i) => (
+                  <button key={i} type="button" onClick={() => toggleTextoSelecionada(i)}
+                    className={`w-full text-left flex items-start gap-3 p-3 rounded-[10px] border transition ${textoSelecionadas.includes(i) ? "border-teal-400 bg-teal-50" : "border-gray-200 bg-white hover:bg-gray-50"}`}>
+                    {textoSelecionadas.includes(i)
+                      ? <CheckCircle2 size={18} className="text-teal-600 shrink-0 mt-0.5" />
+                      : <Circle size={18} className="text-gray-300 shrink-0 mt-0.5" />}
+                    <div className="min-w-0">
+                      <p className="font-semibold text-gray-900 text-sm truncate">{r.nome}</p>
+                      <p className="text-xs text-gray-500 mt-0.5">
+                        {r.fase}m | {r.tipo} | {r.tempo}min | {r.dificuldade}
+                        {Array.isArray(r.restricoes) && r.restricoes.length > 0 && ` | ${r.restricoes.join(", ")}`}
+                      </p>
+                      {Array.isArray(r.ingredientes) && (
+                        <p className="text-xs text-gray-400 mt-1 line-clamp-1">{r.ingredientes.join(", ")}</p>
+                      )}
+                    </div>
+                  </button>
+                ))}
+              </div>
+              <div className="flex gap-3">
+                <button onClick={handleTextoPublicar} disabled={textoPublicando || textoSelecionadas.length === 0}
+                  className="flex items-center gap-2 bg-[#FF6B6B] text-white px-6 py-2.5 rounded-[10px] font-semibold hover:bg-[#ff5252] transition disabled:opacity-60">
+                  <Save size={16} />
+                  {textoPublicando ? "Publicando..." : `Publicar ${textoSelecionadas.length} receita${textoSelecionadas.length !== 1 ? "s" : ""}`}
+                </button>
+                <button onClick={() => { setTextoReceitas([]); setTextoSelecionadas([]); setMsg(null); }}
+                  className="px-5 py-2.5 rounded-[10px] border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition text-sm">
+                  Voltar ao texto
+                </button>
+              </div>
+            </div>
           )}
         </div>
       )}
