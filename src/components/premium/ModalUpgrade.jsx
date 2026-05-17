@@ -9,7 +9,7 @@ export default function ModalUpgrade({ onClose }) {
 
   async function assinar() {
     if (!user) {
-      window.location.href = "/login";
+      setErro("Faca login primeiro para assinar.");
       return;
     }
 
@@ -27,15 +27,20 @@ export default function ModalUpgrade({ onClose }) {
         }),
       });
 
-      const data = await res.json();
+      let data = {};
+      try {
+        data = await res.json();
+      } catch {
+        throw new Error("Resposta invalida do servidor");
+      }
 
       if (!res.ok || !data.init_point) {
-        throw new Error(data.error || "Erro ao iniciar pagamento");
+        throw new Error(data.error || `Erro ${res.status} ao iniciar pagamento`);
       }
 
       window.location.href = data.init_point;
     } catch (err) {
-      setErro(err.message);
+      setErro(err.message || "Erro desconhecido. Tente novamente.");
       setLoading(false);
     }
   }
@@ -108,7 +113,9 @@ export default function ModalUpgrade({ onClose }) {
           </div>
 
           {erro && (
-            <p className="text-red-500 font-corpo text-sm text-center mb-4">{erro}</p>
+            <div className="bg-red-50 border border-red-200 rounded-[10px] p-3 mb-4">
+              <p className="text-red-600 font-corpo text-sm text-center">{erro}</p>
+            </div>
           )}
 
           <button
