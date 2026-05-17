@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import ModalUpgrade from "../premium/ModalUpgrade";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showPremium, setShowPremium] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const { user, logout, isPremium } = useAuth();
@@ -20,6 +22,7 @@ export default function Header() {
   };
 
   return (
+    <>
     <header className="bg-white border-b border-gray-100 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between h-16 md:h-20">
@@ -125,6 +128,16 @@ export default function Header() {
             )}
           </nav>
 
+          {/* Seja Premium — mobile, só não-premium */}
+          {!isPremium && (
+            <button
+              onClick={() => setShowPremium(true)}
+              className="md:hidden bg-[#FF6B6B] hover:bg-[#ff5252] text-white font-corpo font-bold text-xs px-3 py-1.5 rounded-[10px] transition"
+            >
+              Seja Premium
+            </button>
+          )}
+
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -213,6 +226,15 @@ export default function Header() {
                 </>
               )}
 
+              {!isPremium && (
+                <button
+                  onClick={() => { setShowPremium(true); setIsMenuOpen(false); }}
+                  className="w-full bg-[#FF6B6B] hover:bg-[#ff5252] text-white font-corpo font-bold py-3 rounded-[10px] transition text-sm"
+                >
+                  Seja Premium
+                </button>
+              )}
+
               {user ? (
                 <>
                   <span className="text-sm text-gray-600 font-corpo border-t border-gray-200 pt-4">
@@ -242,5 +264,8 @@ export default function Header() {
         )}
       </div>
     </header>
+
+    {showPremium && <ModalUpgrade onClose={() => setShowPremium(false)} />}
+  </>
   );
 }
