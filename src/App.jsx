@@ -24,6 +24,9 @@ import Login from "./pages/Login";
 import Guia from "./pages/Guia";
 import FAQ from "./pages/FAQ";
 import AdminPanel from "./pages/admin/index";
+import PagamentoSucesso from "./pages/PagamentoSucesso";
+import PagamentoFalha from "./pages/PagamentoFalha";
+import PagamentoPendente from "./pages/PagamentoPendente";
 
 function App() {
   return (
@@ -42,6 +45,11 @@ function App() {
 
           {/* Painel Admin SEM Layout */}
           <Route path="/admin" element={<AdminPanel />} />
+
+          {/* Pagamento SEM Layout */}
+          <Route path="/pagamento/sucesso" element={<PagamentoSucesso />} />
+          <Route path="/pagamento/falha" element={<PagamentoFalha />} />
+          <Route path="/pagamento/pendente" element={<PagamentoPendente />} />
 
           {/* Rotas COM Layout */}
           <Route element={<Layout />}>

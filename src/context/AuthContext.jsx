@@ -7,7 +7,8 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
-import { auth } from "../services/firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { auth, db } from "../services/firebase";
 import { isPremiumUser } from "../utils/premiumUsers";
 import { isAdminUser } from "../utils/adminUsers";
 
@@ -20,10 +21,26 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setUser(user);
-      setIsPremium(user ? isPremiumUser(user.email) : false);
       setIsAdmin(user ? isAdminUser(user.email) : false);
+
+      if (user) {
+        const hardcoded = isPremiumUser(user.email);
+        if (hardcoded) {
+          setIsPremium(true);
+        } else {
+          try {
+            const snap = await getDoc(doc(db, "users", user.uid));
+            setIsPremium(snap.exists() && snap.data()?.premium === true);
+          } catch {
+            setIsPremium(false);
+          }
+        }
+      } else {
+        setIsPremium(false);
+      }
+
       setLoading(false);
     });
 
