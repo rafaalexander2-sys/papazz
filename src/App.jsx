@@ -6,6 +6,7 @@ import { AuthProvider } from "./context/AuthContext";
 import { ListaComprasProvider } from "./context/ListaComprasContext";
 import { PlanejamentoProvider } from "./context/PlanejamentoContext";
 import { DiarioProvider } from "./context/DiarioContext";
+import { PlatformProvider } from "./context/PlatformContext";
 import Layout from "./components/layout/Layout";
 
 // Pages
@@ -23,9 +24,13 @@ import Login from "./pages/Login";
 import Guia from "./pages/Guia";
 import FAQ from "./pages/FAQ";
 import AdminPanel from "./pages/admin/index";
+import PagamentoSucesso from "./pages/PagamentoSucesso";
+import PagamentoFalha from "./pages/PagamentoFalha";
+import PagamentoPendente from "./pages/PagamentoPendente";
 
 function App() {
   return (
+    <PlatformProvider>
     <AuthProvider>
       <ListaComprasProvider>
       <PlanejamentoProvider>
@@ -40,6 +45,11 @@ function App() {
 
           {/* Painel Admin SEM Layout */}
           <Route path="/admin" element={<AdminPanel />} />
+
+          {/* Pagamento SEM Layout */}
+          <Route path="/pagamento/sucesso" element={<PagamentoSucesso />} />
+          <Route path="/pagamento/falha" element={<PagamentoFalha />} />
+          <Route path="/pagamento/pendente" element={<PagamentoPendente />} />
 
           {/* Rotas COM Layout */}
           <Route element={<Layout />}>
@@ -64,6 +74,7 @@ function App() {
       </PlanejamentoProvider>
       </ListaComprasProvider>
     </AuthProvider>
+    </PlatformProvider>
   );
 }
 
