@@ -6,6 +6,7 @@ import { AuthProvider } from "./context/AuthContext";
 import { ListaComprasProvider } from "./context/ListaComprasContext";
 import { PlanejamentoProvider } from "./context/PlanejamentoContext";
 import { DiarioProvider } from "./context/DiarioContext";
+import { PlatformProvider } from "./context/PlatformContext";
 import Layout from "./components/layout/Layout";
 
 // Pages
@@ -26,6 +27,7 @@ import AdminPanel from "./pages/admin/index";
 
 function App() {
   return (
+    <PlatformProvider>
     <AuthProvider>
       <ListaComprasProvider>
       <PlanejamentoProvider>
@@ -64,6 +66,7 @@ function App() {
       </PlanejamentoProvider>
       </ListaComprasProvider>
     </AuthProvider>
+    </PlatformProvider>
   );
 }
 
