@@ -2107,4 +2107,1124 @@ Continue oferecendo sem pressão. Bebês precisam de múltiplas exposições.
 - [Receitas Nutritivas](/receitas)
     `,
   },
+  {
+    id: 11,
+    slug: "reflexo-de-gag-bebe-blw",
+    title: "Reflexo de Gag vs Engasgo no BLW: Como Diferenciar e Agir",
+    description: "Entenda a diferença entre reflexo de gag (ânsia de vômito) e engasgo real no BLW. Aprenda o que fazer em cada situação e pare de ter medo na hora das refeições.",
+    category: "BLW",
+    date: "2026-04-10",
+    readingTime: "9 min",
+    image: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=800&h=600&fit=crop",
+    author: "Equipe Papazz",
+    keywords: ["reflexo de gag", "engasgo bebê BLW", "gag reflex bebê", "bebê engasgando", "BLW seguro", "engasgo vs gag"],
+    content: `
+Se você já tentou o BLW e seu bebê ficou com aquela cara de que ia vomitar tudo, respira fundo. O que você provavelmente viu foi o **reflexo de gag** — e não um engasgo de verdade.
+
+Essa confusão é a principal razão que faz pais desistirem do BLW antes da hora. Vamos acabar com ela de uma vez.
+
+## O Que é o Reflexo de Gag (Ânsia de Vômito)?
+
+O reflexo de gag é um **mecanismo de segurança natural** do bebê. Ele existe para empurrar alimentos de volta para a frente da boca antes que cheguem à garganta — o oposto do que parece.
+
+Em bebês pequenos, esse reflexo é ativado bem na frente da língua. Aos 6 meses, o gatilho fica mais para trás. É por isso que bebês menores "engasgam" com mais facilidade e por isso o BLW só começa aos 6 meses.
+
+### Sinais do Reflexo de Gag:
+- Bebê faz barulho (tosse, pigarro, sons de ânsia)
+- Rosto fica vermelho
+- Bebê continua consciente e ativo
+- Pode ou não regurgitar um pouco de comida
+- Resolve sozinho em segundos
+
+## O Que é Engasgo de Verdade?
+
+Engasgo real é quando um alimento **bloqueia parcial ou totalmente a via aérea**. É uma emergência.
+
+### Sinais de Engasgo Real:
+- Bebê fica **silencioso** (sem choro, sem tosse)
+- Rosto fica azulado ou muito vermelho escuro
+- Bebê não consegue respirar ou fazer barulho
+- Movimentos de pânico com os braços
+- Perda de consciência (casos graves)
+
+**Regra de ouro: se o bebê está fazendo barulho, ele está respirando. Se está silencioso, é emergência.**
+
+## Por Que o BLW é Seguro?
+
+Estudos mostram que bebês que praticam BLW **não engasgam mais** do que bebês alimentados com colher. A pesquisadora neozelandesa Gill Rapley, que criou o método, analisou centenas de casos e chegou a essa conclusão.
+
+O motivo é simples: o BLW ensina o bebê a controlar o alimento na própria boca. Ele move, experimenta e aprende o limite antes de tentar engolir.
+
+Bebês alimentados só com colher, paradoxalmente, podem ter mais risco — porque o adulto coloca o alimento diretamente na garganta, sem deixar o bebê controlar.
+
+## Como Reduzir Ainda Mais o Risco no BLW
+
+### 1. Posição Correta
+Bebê deve estar **sentado completamente ereto**, sem reclinar. Nunca deitado ou semi-deitado.
+
+### 2. Tamanho Dos Alimentos
+- Dos 6 aos 8 meses: tamanho de dedo adulto (palito)
+- Dos 8 aos 10 meses: pedaços maiores que consegue segurar
+- Nunca: uva inteira, cereja, castanha inteira, cenoura crua em rodela
+
+### 3. Alimentos Redondos e Escorregadios
+São os mais perigosos. Sempre corte:
+- Uva: ao meio no sentido longitudinal
+- Tomate cereja: ao meio
+- Azeitona: retire o caroço e corte
+- Mirtilo: ao meio
+
+### 4. Nunca Deixe Sozinho
+Fique sempre ao alcance do braço durante as refeições.
+
+### 5. Aprenda Primeiros Socorros
+Faça um curso de RCP infantil. Não para ter medo — mas para se sentir preparado e confiante.
+
+## O Que Fazer Quando o Bebê Faz Reflexo de Gag
+
+**Não faça nada.** Sério.
+
+O instinto de pegar o bebê, colocar o dedo na boca ou virar de cabeça para baixo é errado e perigoso. O gag está funcionando. Deixe o bebê resolver.
+
+O que você pode fazer:
+- Manter expressão calma e neutra
+- Continuar comendo normalmente se estiver na mesa também
+- Dizer "está bom, você consegue" com voz tranquila se quiser
+
+Bebês leem o rosto dos pais. Se você entra em pânico, o bebê entra em pânico.
+
+## O Que Fazer se For Engasgo de Verdade
+
+Se o bebê está **silencioso e não consegue respirar**:
+
+1. Incline o bebê para frente, com a cabeça mais baixa que o peito
+2. Dê 5 tapas firmes com a palma da mão aberta entre as omoplatas
+3. Se não resolver: 5 compressões no peito (RCP infantil)
+4. Ligue 192 (SAMU) ou vá ao pronto-socorro imediatamente
+5. Continue alternando tapas e compressões até o alimento sair ou o socorro chegar
+
+**Aprenda essa sequência antes de começar o BLW. Vale para qualquer situação, não só o método.**
+
+## Quando o Gag Frequente Pode Ser Sinal de Algo
+
+O reflexo de gag diminui naturalmente com a prática. Se depois de semanas de BLW o bebê ainda tem gag muito frequente com alimentos fáceis, pode ser sinal de:
+
+- Hipersensibilidade oral (terapia fonoaudiológica pode ajudar)
+- Refluxo gastroesofágico
+- Aversão sensorial
+
+Consulte o pediatra se o gag for constante e intenso após o primeiro mês de introdução.
+
+## Resumo Rápido
+
+| | Reflexo de Gag | Engasgo Real |
+|---|---|---|
+| Barulho | Sim (tosse, ânsia) | Não (silencioso) |
+| Cor do rosto | Vermelho normal | Azulado |
+| Consciência | Presente | Pode perder |
+| Ação | Não fazer nada | Primeiros socorros imediatos |
+| Frequência | Comum no início do BLW | Raro |
+
+## Continue Lendo
+
+- [BLW vs Papinha Tradicional: Qual Escolher?](/blog/blw-vs-papinha-qual-escolher)
+- [15 Receitas para Bebê de 6 Meses](/blog/15-receitas-bebe-6-meses)
+    `,
+  },
+  {
+    id: 12,
+    slug: "cardapio-bebe-7-meses",
+    title: "Cardápio Bebê 7 Meses: Guia Completo com Exemplos Reais",
+    description: "Monte um cardápio completo para bebê de 7 meses com exemplos práticos de café da manhã, almoço, lanche e jantar. Texturas, quantidades e alimentos permitidos.",
+    category: "Cardápios",
+    date: "2026-04-15",
+    readingTime: "10 min",
+    image: "https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=800&h=600&fit=crop",
+    author: "Equipe Papazz",
+    keywords: ["cardápio bebê 7 meses", "alimentação bebê 7 meses", "o que dar para bebê de 7 meses", "papinha 7 meses", "refeições bebê 7 meses"],
+    content: `
+Aos 7 meses, o bebê já tem um mês de introdução alimentar no currículo. Ele conhece alguns sabores, a família entendeu mais ou menos o ritmo — e agora vem a pergunta: **o que dar pra esse menino todo dia?**
+
+Esse guia resolve isso com exemplos reais, sem enrolação.
+
+## O Que Muda aos 7 Meses
+
+Comparado aos 6 meses:
+- Pode receber **3 refeições por dia** (antes eram 1-2)
+- Textura um pouco **mais grossa** — purê menos líquido, amassado com garfo
+- **Mais variedade**: proteínas, grãos e leguminosas entram com mais regularidade
+- Leite materno ou fórmula continua sendo base da alimentação
+
+## Quantidade Esperada aos 7 Meses
+
+Não existe quantidade certa — existe oferta consistente. Como referência:
+- **2 a 5 colheres de sopa** por refeição é o esperado
+- Alguns bebês comem menos, outros mais
+- O apetite varia dia a dia — é normal
+
+O importante: **não force, não compare, ofereça.**
+
+## Alimentos Permitidos aos 7 Meses
+
+### Carboidratos
+Arroz, batata, batata-doce, mandioca, mandioquinha, inhame, macarrão, polenta, aveia
+
+### Proteínas
+Frango (filé desfiado ou picado), carne bovina (patinho, coxão mole), peixe de carne branca (tilápia, merluza), ovo inteiro, feijão, lentilha, grão-de-bico
+
+### Legumes e Verduras
+Cenoura, abobrinha, chuchu, beterraba, brócolis, couve-flor, espinafre, couve, tomate (sem casca e sem semente)
+
+### Frutas
+Banana, mamão, maçã, pera, melão, manga, morango, uva (cortada), ameixa
+
+### Gorduras boas
+Azeite de oliva extra virgem (1 fio por refeição), manteiga sem sal (pequena quantidade), abacate
+
+## Cardápio Exemplo — 7 Dias
+
+### Segunda-feira
+**Café da manhã:** Amassado de banana com aveia e um fio de azeite
+
+**Almoço:** Arroz amassado + feijão coado + purê de abóbora + frango desfiado
+
+**Jantar:** Sopa de mandioquinha com cenoura e frango
+
+---
+
+### Terça-feira
+**Café da manhã:** Purê de maçã cozida com canela (sem açúcar)
+
+**Almoço:** Batata-doce amassada + carne moída refogada + brócolis cozido amassado
+
+**Jantar:** Papa de arroz com abobrinha e ovo mexido
+
+---
+
+### Quarta-feira
+**Café da manhã:** Amassado de mamão com aveia
+
+**Almoço:** Arroz + lentilha + cenoura + tilápia desfiada + azeite
+
+**Jantar:** Sopa de legumes (batata, cenoura, chuchu) com frango
+
+---
+
+### Quinta-feira
+**Café da manhã:** Purê de banana com pera cozida
+
+**Almoço:** Polenta mole + feijão + espinafre refogado + frango
+
+**Jantar:** Batata-doce amassada + ovo cozido amassado + abobrinha
+
+---
+
+### Sexta-feira
+**Café da manhã:** Amassado de manga com aveia
+
+**Almoço:** Arroz + grão-de-bico amassado + beterraba cozida + carne bovina desfiada
+
+**Jantar:** Sopa de mandioca com legumes e frango
+
+---
+
+### Sábado
+**Café da manhã:** Mamão amassado com banana
+
+**Almoço:** Macarrão (no formato palito se BLW) + molho de tomate natural + carne moída
+
+**Jantar:** Purê de batata + frango desfiado + brócolis
+
+---
+
+### Domingo
+**Café da manhã:** Purê de pera com aveia
+
+**Almoço:** Arroz + feijão + abóbora + peixe desfiado + azeite
+
+**Jantar:** Papa de inhame com cenoura e ovo
+
+---
+
+## Textura Certa para 7 Meses
+
+### Se faz papinha:
+- Purê com garfo (não liquidificador)
+- Deve ter pequenos grumos — não precisa ser liso
+- Consistência de pasta: não cai da colher mas não é sólido
+
+### Se faz BLW:
+- Alimentos macios ao apertar entre os dedos
+- Tamanho de dedo adulto
+- Frango desfiado em tiras ou pedaços que o bebê consegue segurar
+
+### Se faz combinado (Baby-Led Introduction to Solids):
+- Mistura das duas abordagens
+- Oferece parte em colher e parte para o bebê explorar na mão
+
+## Erros Comuns aos 7 Meses
+
+**1. Não variar proteínas**
+Muita gente fica só no frango. Varie! Ovo, peixe e leguminosas são igualmente importantes.
+
+**2. Esquecer da gordura boa**
+O cérebro do bebê precisa de gordura. Um fio de azeite por refeição faz diferença.
+
+**3. Adicionar sal ou temperos industrializados**
+Proibido até 1 ano. Use alho, cebola, ervas frescas e cúrcuma sem restrição.
+
+**4. Pular refeições por preguiça de preparar**
+Às 7 meses, consistência é mais importante que perfeição. Um ovo mexido com banana amassada já é uma refeição válida.
+
+**5. Comparar com outros bebês**
+O bebê da vizinha que come prato cheio não é parâmetro. Cada bebê tem seu ritmo.
+
+## Quando Ligar para o Pediatra
+
+- Bebê recusa completamente qualquer alimento por mais de 2 semanas
+- Perda de peso
+- Sinais de alergia após novo alimento (urticária, inchaço, vômitos repetidos)
+- Engasgo frequente com alimentos que deveria conseguir manejar
+
+## Continue Lendo
+
+- [Introdução Alimentar: 12 Dicas Essenciais](/blog/introducao-alimentar-12-dicas)
+- [Primeira Papinha do Bebê: Guia Completo](/blog/primeira-papinha-bebe-guia)
+    `,
+  },
+  {
+    id: 13,
+    slug: "ferro-na-alimentacao-do-bebe",
+    title: "Ferro na Alimentação do Bebê: Por Que é Tão Importante e Como Oferecer",
+    description: "Anemia por deficiência de ferro é a carência nutricional mais comum em bebês. Saiba quais alimentos ricos em ferro oferecer e como aumentar a absorção.",
+    category: "Nutrição",
+    date: "2026-04-20",
+    readingTime: "8 min",
+    image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&h=600&fit=crop",
+    author: "Equipe Papazz",
+    keywords: ["ferro para bebês", "anemia infantil", "alimentos ricos em ferro bebê", "deficiência de ferro bebê", "ferro introdução alimentar"],
+    content: `
+A anemia por deficiência de ferro é a **carência nutricional mais comum em bebês no Brasil** — e ela pode acontecer mesmo com bebês que mamam no peito e comem bem. Por isso, o ferro precisa ser prioridade logo nos primeiros meses da introdução alimentar.
+
+## Por Que o Bebê Precisa de Ferro?
+
+O ferro é essencial para:
+- **Produção de hemoglobina** (transporta oxigênio no sangue)
+- **Desenvolvimento cerebral** — deficiência nos primeiros anos afeta cognição de forma permanente
+- **Sistema imunológico** saudável
+- **Crescimento** adequado
+
+Bebês nascem com uma reserva de ferro que dura aproximadamente **6 meses**. Depois disso, precisam obter ferro da alimentação.
+
+O leite materno tem ferro em quantidade pequena — mas com altíssima absorção. Mesmo assim, não é suficiente para suprir toda a demanda a partir dos 6 meses.
+
+## Quais Bebês Têm Mais Risco de Anemia?
+
+- Prematuros (reservas menores)
+- Bebês de baixo peso ao nascer
+- Gêmeos
+- Bebês cujo cordão foi cortado muito cedo (antes de parar de pulsar)
+- Bebês em aleitamento exclusivo sem introdução alimentar após 6 meses
+- Bebês com introdução alimentar pobre em ferro
+
+## Dois Tipos de Ferro nos Alimentos
+
+### Ferro Heme (origem animal)
+Presente em carnes, aves e peixes. **Absorção de 15 a 35%** — o mais eficiente.
+
+Exemplos:
+- Carne bovina (patinho, coxão mole) — 2,5mg por 100g
+- Fígado de frango — 8,5mg por 100g (rico, mas ofereça só 1-2x por semana)
+- Frango — 1mg por 100g
+- Peixe — 0,5 a 1mg por 100g
+- Ovo (gema) — 2,7mg por 100g
+
+### Ferro Não-Heme (origem vegetal)
+Presente em leguminosas, vegetais e cereais. **Absorção de apenas 2 a 8%** — mas pode ser aumentada com vitamina C.
+
+Exemplos:
+- Feijão — 2mg por 100g
+- Lentilha — 3,3mg por 100g
+- Grão-de-bico — 2,9mg por 100g
+- Tofu — 2,7mg por 100g
+- Espinafre — 2,7mg por 100g
+- Aveia — 3,9mg por 100g
+
+## O Segredo: Vitamina C Aumenta a Absorção do Ferro Vegetal
+
+Se combinar alimentos ricos em ferro não-heme com **vitamina C**, a absorção pode triplicar.
+
+### Combinações práticas:
+- Feijão + tomate picado
+- Lentilha + limão espremido no prato (após cozinhar)
+- Aveia + morango amassado
+- Espinafre + brócolis + limão
+- Grão-de-bico + suco de laranja natural no copo (após 6 meses, água é suficiente mas suco natural é ok)
+
+## O Que Atrapalha a Absorção do Ferro?
+
+Evite oferecer junto com refeições ricas em ferro:
+- **Leite de vaca** em grandes quantidades (bloqueia absorção)
+- **Chá e café** (taninos inibem absorção — proibidos antes de 1 ano de qualquer forma)
+- **Cálcio em excesso** compete com ferro
+
+## Cardápio Prático Rico em Ferro
+
+### Almoço ideal para maximizar ferro:
+- Arroz + **feijão** (ferro não-heme)
+- **Carne bovina** desfiada (ferro heme)
+- **Brócolis** cozido (ferro não-heme + vitamina C)
+- Fio de azeite
+
+Essa combinação clássica da culinária brasileira é, na verdade, uma das mais ricas em ferro que existe.
+
+### Café da manhã rico em ferro:
+- **Aveia** com banana e morango amassado
+- **Ovo** mexido com abobrinha
+
+### Jantar:
+- **Lentilha** com cenoura e frango
+- Ou **sopa de feijão** com legumes
+
+## Suplementação de Ferro — O Que a SBP Recomenda?
+
+A Sociedade Brasileira de Pediatria recomenda **suplementação preventiva de ferro** para todos os bebês:
+
+- Aleitamento materno exclusivo: **1mg/kg/dia a partir dos 6 meses** (até 1 ano)
+- Bebês prematuros: suplementação começa mais cedo e em dose maior
+
+Essa suplementação é preventiva — complementa a alimentação, não substitui.
+
+**Converse com o pediatra do seu bebê sobre a dose correta e o melhor momento para começar.**
+
+## Sinais de Alerta de Anemia em Bebês
+
+- Palidez (pálpebras, gengivas, unhas)
+- Cansaço excessivo
+- Irritabilidade
+- Falta de apetite
+- Desenvolvimento mais lento
+
+Se suspeitar, o pediatra pede um hemograma simples para confirmar.
+
+## Resumo: Prioridades na Prática
+
+1. Ofereça **carne bovina, ovo ou peixe todos os dias** (ferro heme é o mais eficiente)
+2. Inclua **feijão ou lentilha** diariamente
+3. Combine ferro vegetal com **vitamina C**
+4. Pergunte ao pediatra sobre **suplementação**
+5. Não ofereça **chá ou leite de vaca** para substituir refeições
+
+## Continue Lendo
+
+- [Cardápio Bebê 7 Meses](/blog/cardapio-bebe-7-meses)
+- [Alimentos Proibidos para Bebê Até 1 Ano](/blog/alimentos-proibidos-bebe-1-ano)
+    `,
+  },
+  {
+    id: 14,
+    slug: "alergia-alimentar-bebe-sintomas",
+    title: "Alergia Alimentar em Bebês: Sintomas, Alimentos e O Que Fazer",
+    description: "Como identificar reação alérgica em bebês na introdução alimentar. Sintomas de alergia, alimentos mais alergênicos e quando ir ao médico.",
+    category: "Saúde",
+    date: "2026-04-25",
+    readingTime: "9 min",
+    image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=600&fit=crop",
+    author: "Equipe Papazz",
+    keywords: ["alergia alimentar bebê", "alergia introdução alimentar", "APLV bebê", "alergia ao ovo bebê", "sintomas alergia bebê", "reação alérgica bebê"],
+    content: `
+Introduzir um alimento novo e ficar olhando o bebê com cara de investigador esperando aparecer mancha — quem nunca? O medo de alergia alimentar é real. Mas saber o que observar (e o que não é motivo de pânico) muda tudo.
+
+## Quais São os Alimentos Mais Alergênicos?
+
+Os **"Big 8"** — alimentos responsáveis por 90% das alergias alimentares:
+
+1. **Leite de vaca** (APLV — alergia à proteína do leite de vaca)
+2. **Ovo**
+3. **Amendoim**
+4. **Soja**
+5. **Trigo**
+6. **Peixes**
+7. **Frutos do mar**
+8. **Nozes e castanhas**
+
+No Brasil, o leite de vaca é a alergia mais comum em bebês — afeta cerca de 2% a 3% das crianças.
+
+## Sintomas de Alergia Alimentar
+
+### Reação Leve a Moderada (minutos a horas após o alimento):
+- Urticária (manchas vermelhas que coçam na pele)
+- Inchaço nos lábios, língua ou rosto
+- Vômitos repetidos
+- Diarreia
+- Coriza e espirros
+- Olhos vermelhos e lacrimejando
+
+### Reação Grave — Anafilaxia (emergência):
+- Dificuldade para respirar / chiado
+- Rosto muito inchado
+- Palidez ou azulado
+- Perda de consciência
+- Choro inconsolável com vômito intenso
+
+**Anafilaxia: ligue 192 (SAMU) imediatamente.**
+
+## Como Introduzir Alimentos Alergênicos com Segurança
+
+A recomendação atual da SBP é **não atrasar** a introdução de alimentos alergênicos. Introdução precoce (a partir dos 6 meses) **reduz** o risco de alergia — o oposto do que se pensava há 20 anos.
+
+### Protocolo prático para alimentos de risco:
+
+1. Introduza **em casa**, não em restaurante
+2. Ofereça pela **manhã ou almoço** — para observar durante o dia
+3. Aguarde **3 dias** antes de introduzir outro alimento novo
+4. Comece com **pequena quantidade** e aumente gradualmente
+5. Não introduza quando o bebê estiver doente ou com pele inflamada
+
+### Exemplo — Introduzindo Ovo:
+- Dia 1: 1 colher de chá de ovo cozido
+- Dia 3 (sem reação): 1 colher de sopa
+- Dia 6: metade de um ovo
+- Dia 10: ovo inteiro
+
+## APLV — Alergia ao Leite de Vaca
+
+A mais comum e às vezes a mais confundida. Muitos bebês têm APLV sem diagnóstico.
+
+### Sintomas que podem indicar APLV:
+- Sangue nas fezes (mesmo sem outros sintomas)
+- Cólica intensa e persistente
+- Refluxo severo
+- Eczema que não melhora
+- Diarreia crônica
+- Choro excessivo após mamar (se mãe consome leite e amamenta)
+
+**Atenção:** bebê em aleitamento materno pode ter APLV — as proteínas do leite de vaca passam pelo leite materno. Nesses casos, a mãe precisa excluir leite e derivados da própria dieta.
+
+### O que não é APLV:
+- Gases e cólica comum do bebê
+- Fezes amolecidas ocasionais
+- Cuspe de leite (refluxo fisiológico)
+
+## O Que Fazer Se Suspeitar de Alergia
+
+1. **Anote** o alimento, a quantidade e os sintomas com horário
+2. **Retire** o alimento suspeito
+3. **Consulte o pediatra ou alergologista** — não autodiagnostique
+4. **Não reintroduza** sem orientação médica se a reação foi significativa
+
+O diagnóstico de APLV, por exemplo, é feito por exclusão e reintrodução controlada — não por exame de sangue simples.
+
+## Mitos sobre Alergia Alimentar em Bebês
+
+**"Manchinha na pele depois de comer sempre é alergia."**
+Não necessariamente. Pode ser calor, saliva em excesso, ressecamento. Observe se desaparece em poucas horas.
+
+**"Se o pai tem alergia ao amendoim, não posso dar pro bebê."**
+Ter familiar com alergia aumenta o risco, mas não impede a introdução. Introdução precoce em bebês de risco deve ser discutida com alergologista.
+
+**"Devo esperar até 1 ano para dar ovo."**
+Recomendação desatualizada. Hoje a SBP indica introdução a partir dos 6 meses.
+
+**"Chá de camomila ajuda na reação alérgica."**
+Não tem evidência e pode piorar. Em reações, procure atendimento médico.
+
+## Quando Ir ao Médico
+
+**Imediatamente (pronto-socorro):**
+- Dificuldade para respirar
+- Inchaço em face, lábios ou língua
+- Vômitos intensos com palidez
+
+**Em consulta nas próximas 48h:**
+- Urticária que não desaparece em 24h
+- Suspeita de APLV
+- Reação mesmo leve, para orientação sobre reintrodução
+
+**Na próxima consulta de rotina:**
+- Eczema persistente
+- Gases e cólica após introdução de alimento específico
+
+## Continue Lendo
+
+- [Alimentos Proibidos para Bebê Até 1 Ano](/blog/alimentos-proibidos-bebe-1-ano)
+- [Introdução Alimentar: 12 Dicas](/blog/introducao-alimentar-12-dicas)
+    `,
+  },
+  {
+    id: 15,
+    slug: "cardapio-bebe-8-meses",
+    title: "Cardápio Bebê 8 Meses: O Que Oferecer e Como Evoluir a Textura",
+    description: "Guia completo de cardápio para bebê de 8 meses com evolução de textura, novos alimentos e exemplos de refeições para a semana toda.",
+    category: "Cardápios",
+    date: "2026-05-01",
+    readingTime: "9 min",
+    image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&h=600&fit=crop",
+    author: "Equipe Papazz",
+    keywords: ["cardápio bebê 8 meses", "alimentação bebê 8 meses", "textura bebê 8 meses", "o que dar bebê 8 meses", "refeições bebê 8 meses"],
+    content: `
+Aos 8 meses, o bebê está no ritmo da introdução alimentar. Já conhece vários sabores, provavelmente tem uma ou duas preferências, e o desafio agora é **evoluir a textura** sem perder a variedade.
+
+## O Que Muda aos 8 Meses?
+
+### Textura
+A grande diferença dos 8 meses é a textura. Se antes o purê era liso, agora:
+- **Amassado com garfo** (não liquidificador)
+- Pedaços pequenos e macios
+- Alimentos que se desmancham ao apertar com os dedos
+
+O bebê já tem um gesto de mastigação mais desenvolvido, mesmo sem dentes.
+
+### Quantidade
+- **3 a 6 colheres de sopa** por refeição
+- 3 refeições por dia + 1 a 2 lanches de fruta
+- Leite materno ou fórmula continua sendo base
+
+### Novidades aos 8 Meses
+- **Iogurte natural integral** (sem açúcar, sem aromatizante)
+- **Queijo branco** (fresco, sem sal em excesso)
+- **Massas** em pedaços pequenos
+- **Pão integral** (sem sal adicionado, em pedaços)
+- Mais variedade de peixes
+
+## Cardápio Semana Completa — 8 Meses
+
+### Segunda-feira
+
+**Café da manhã:**
+Aveia cozida com banana amassada + iogurte natural
+
+**Almoço:**
+Arroz amassado + feijão + cenoura cozida em pedacinhos + frango desfiado + azeite
+
+**Lanche da tarde:**
+Pera cozida amassada
+
+**Jantar:**
+Sopa de abóbora com batata e carne moída
+
+---
+
+### Terça-feira
+
+**Café da manhã:**
+Ovo mexido macio + fatia de mamão
+
+**Almoço:**
+Macarrão parafuso cozido + molho de tomate natural + carne bovina moída + brócolis
+
+**Lanche da tarde:**
+Manga amassada
+
+**Jantar:**
+Purê de batata-doce com frango desfiado e abobrinha
+
+---
+
+### Quarta-feira
+
+**Café da manhã:**
+Iogurte natural + morango amassado + aveia
+
+**Almoço:**
+Arroz + lentilha + chuchu + tilápia desfiada + limão (fio)
+
+**Lanche da tarde:**
+Banana amassada com aveia
+
+**Jantar:**
+Papa de mandioquinha com cenoura e ovo cozido
+
+---
+
+### Quinta-feira
+
+**Café da manhã:**
+Queijo branco fatiado + mamão em pedaços
+
+**Almoço:**
+Arroz + feijão + espinafre refogado + frango + tomate sem pele
+
+**Lanche da tarde:**
+Pera amassada
+
+**Jantar:**
+Sopa de legumes (chuchu, cenoura, batata) com carne bovina
+
+---
+
+### Sexta-feira
+
+**Café da manhã:**
+Aveia cozida com ameixa amassada
+
+**Almoço:**
+Polenta mole + feijão + beterraba cozida + frango desfiado
+
+**Lanche da tarde:**
+Melão em pedacinhos
+
+**Jantar:**
+Ovo mexido com tomate + batata cozida amassada
+
+---
+
+### Sábado
+
+**Café da manhã:**
+Iogurte natural + banana + granola sem açúcar (pequena quantidade)
+
+**Almoço:**
+Macarrão + atum (sem sal, natural) + abobrinha + tomate
+
+**Lanche da tarde:**
+Manga amassada
+
+**Jantar:**
+Arroz + lentilha + cenoura + frango
+
+---
+
+### Domingo
+
+**Café da manhã:**
+Pão integral sem sal + queijo branco + fatia de mamão
+
+**Almoço:**
+Arroz + feijão + carne bovina desfiada + brócolis + abobrinha
+
+**Lanche da tarde:**
+Banana com aveia
+
+**Jantar:**
+Sopa de abóbora com mandioca e frango
+
+---
+
+## Como Evoluir a Textura Progressivamente
+
+### Purê liso (6 meses)
+Liquidificador ou mixer — completamente liso
+
+### Purê grosso (7 meses)
+Garfo — alguns grumos, não precisa ser perfeito
+
+### Amassado (8 meses)
+Amassado com garfo — pedaços moles visíveis
+
+### Picado / Desfiado (9-10 meses)
+Pedaços pequenos que a criança consegue pegar
+
+### Pedaços maiores (10-12 meses)
+Próximo do que o adulto come, só mais macio
+
+## Sinal de Que Está na Hora de Evoluir a Textura
+
+- Bebê já não engole direto, faz movimento de mastigação
+- Come sem dificuldade a textura atual há pelo menos 2 semanas
+- Demonstra interesse em pegar a comida com as mãos
+
+## Erros Comuns aos 8 Meses
+
+**Ficar no purê liso por comodidade**
+Evoluir a textura é fundamental para o desenvolvimento motor oral. Bebês que ficam muito tempo em purê liso podem ter dificuldade para aceitar texturas depois.
+
+**Oferecer suco de frutas em vez de fruta**
+Fruta amassada ou em pedaços tem fibra e não causa pico glicêmico como o suco.
+
+**Pular o jantar**
+Três refeições por dia aos 8 meses são importantes. O jantar não precisa ser elaborado — ovos mexidos com legumes em 10 minutos já cumpre o papel.
+
+## Continue Lendo
+
+- [Cardápio Bebê 7 Meses](/blog/cardapio-bebe-7-meses)
+- [Como Fazer Papinha Nutritiva](/blog/como-fazer-papinha-nutritiva)
+    `,
+  },
+  {
+    id: 16,
+    slug: "bebe-recusa-comida-blw",
+    title: "Bebê Recusa Comida no BLW: 7 Estratégias Que Realmente Funcionam",
+    description: "Bebê não quer comer no BLW? Entenda por que isso acontece e veja 7 estratégias práticas testadas que ajudam bebês a aceitar novos alimentos.",
+    category: "BLW",
+    date: "2026-05-05",
+    readingTime: "8 min",
+    image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800&h=600&fit=crop",
+    author: "Equipe Papazz",
+    keywords: ["bebê recusa BLW", "bebê não quer comer BLW", "neofobia alimentar bebê", "bebê rejeita alimento", "BLW bebê difícil"],
+    content: `
+Você cortou a fruta no tamanho certo, cozinhou o brócolis no ponto, colocou na bandeja com carinho — e o bebê olhou, jogou no chão e ignorou completamente.
+
+Bem-vindo ao BLW. Isso é normal. Mas existem estratégias que mudam o jogo.
+
+## Por Que o Bebê Recusa Alimentos?
+
+Antes de estratégia, entenda o mecanismo:
+
+**Neofobia alimentar** é o medo natural de alimentos novos — existe em todos os mamíferos e é um mecanismo evolutivo de sobrevivência. Em bebês, ela surge entre 9 e 18 meses e pode durar anos.
+
+**Não é birra.** É biologia.
+
+Estudos mostram que bebês precisam de **8 a 15 exposições** a um alimento novo antes de aceitá-lo. Mas "exposição" não significa comer — ver, cheirar e tocar também contam.
+
+## Por Que o BLW Aumenta a Sensação de Recusa?
+
+No BLW, o bebê tem controle total. Ele escolhe o que leva à boca. Isso significa mais rejeição visível — mas não necessariamente mais recusa real do que na papinha.
+
+Na papinha, o adulto coloca na boca e o bebê engole. Parece que comeu mais. Mas o bebê não explorou, não aprendeu sobre o alimento.
+
+## 7 Estratégias Que Funcionam
+
+### 1. Coma Junto, Sempre
+
+Bebês aprendem por imitação. Ver você comendo o mesmo alimento é o maior incentivo que existe.
+
+Se puder, coloque o mesmo alimento no seu prato. Coma demonstrativamente. Hum, que bom. Sem forçar o bebê a olhar — mas estando presente.
+
+### 2. A Regra do Não Forçar + Não Tirar
+
+Quando o bebê recusa, não force. Mas também não tire o alimento. Deixe na bandeja. Ele pode voltar ao alimento depois de explorar outros.
+
+A simples presença do alimento é uma exposição.
+
+### 3. Mude a Apresentação, Não o Alimento
+
+Brócolis cru foi recusado? Tente cozido. Cozido foi recusado? Tente amassado misturado ao arroz. Amassado foi recusado? Tente em formato de palito.
+
+A mesma cenoura pode ser aceita de 4 jeitos diferentes.
+
+### 4. Combine com Alimento Favorito
+
+Se o bebê ama banana, sirva banana + cenoura na mesma refeição. O ambiente positivo que o favorito cria pode ajudar na abertura para o novo.
+
+Não misture tudo junto — mantenha separado para o bebê identificar o que é o quê.
+
+### 5. Contexto Positivo, Sem Pressão
+
+A ansiedade dos pais é captada pelo bebê. Refeições tensas = mais recusas.
+
+Dicas para contexto positivo:
+- Mesa organizada, sem TV
+- Você comendo junto
+- Sem comentários sobre o que o bebê come ou não
+- Elogios ao processo, não à quantidade ("que legal você explorar isso!")
+
+### 6. Envolva o Bebê na Preparação
+
+A partir dos 8-9 meses, deixe o bebê observar enquanto você cozinha. Mostrar o alimento cru, deixar ele tocar a textura diferente — tudo isso são exposições.
+
+### 7. Respeite Fases de Regressão
+
+Bebê que comia tudo e de repente recusou? Pode ser dentição, fase de desenvolvimento, doença recente ou simplesmente preferência momentânea.
+
+Não mude toda a estratégia por causa de uma semana ruim.
+
+## O Que Não Fazer
+
+**Não ofereça biscoito ou fruta depois que recusou o almoço.**
+Isso ensina que recusar a refeição tem recompensa.
+
+**Não faça avião, TV ou distração.**
+Comer distraído cria relação ruim com comida e impede o bebê de reconhecer saciedade.
+
+**Não elogie quantidade.**
+"Que bom, comeu tudo!" cria pressão. Elogie a exploração, não a quantidade.
+
+**Não desista depois de 3 tentativas.**
+Lembra dos 8 a 15? Continue.
+
+## Quando Buscar Ajuda Profissional
+
+Se após meses de tentativas o bebê:
+- Aceita menos de 20 alimentos diferentes
+- Tem reações de pânico com alimentos novos
+- Tem dificuldade para mastigar ou engolir
+- Perdeu peso
+
+Fonoaudióloga especializada em alimentação infantil e terapeuta ocupacional podem ajudar.
+
+## O Que Esperar no BLW com Realismo
+
+**Mês 1-2:** Muito jogar, pouco comer. Normal.
+
+**Mês 3-4:** Começa a explorar mais, come algumas coisas regularmente.
+
+**6 meses de BLW:** Tem alimentos favoritos estabelecidos, come quantidade significativa.
+
+**1 ano:** A maioria dos bebês que praticaram BLW come variedade real e tem boa relação com comida.
+
+O BLW é lento no começo e recompensador no longo prazo.
+
+## Continue Lendo
+
+- [Bebê Não Quer Comer: Soluções](/blog/bebe-nao-quer-comer-solucoes)
+- [BLW vs Papinha: Qual Escolher?](/blog/blw-vs-papinha-qual-escolher)
+    `,
+  },
+  {
+    id: 17,
+    slug: "proteinas-introducao-alimentar",
+    title: "Proteínas na Introdução Alimentar: Quais Oferecer e Com Qual Frequência",
+    description: "Guia completo sobre proteínas para bebês na introdução alimentar. Carnes, ovos, leguminosas e peixes: como oferecer, quantidade certa e combinações ideais.",
+    category: "Nutrição",
+    date: "2026-05-08",
+    readingTime: "8 min",
+    image: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&h=600&fit=crop",
+    author: "Equipe Papazz",
+    keywords: ["proteínas bebê introdução alimentar", "carne bebê 6 meses", "ovo bebê", "leguminosas bebê", "feijão bebê 6 meses", "quanto proteína bebê"],
+    content: `
+Proteína é um dos nutrientes mais importantes nos primeiros anos de vida — e também um dos mais subestimados na introdução alimentar. Enquanto todo mundo pensa na papinha de fruta, o bebê precisa de proteína desde o início.
+
+## Por Que Proteína é Fundamental?
+
+Proteínas são os tijolos do corpo. Elas são necessárias para:
+- **Crescimento muscular e celular**
+- **Desenvolvimento do sistema imunológico**
+- **Produção de enzimas e hormônios**
+- **Desenvolvimento cerebral**
+
+Bebês têm demanda proporcional de proteína maior que adultos — por kg de peso, precisam de mais.
+
+## Quando Introduzir Proteínas?
+
+**Desde o primeiro dia da introdução alimentar** — ou seja, a partir dos 6 meses.
+
+A recomendação antiga de esperar para introduzir carnes é desatualizada. A SBP (Sociedade Brasileira de Pediatria) orienta que carnes, aves, peixes, ovo e leguminosas façam parte das refeições desde o início.
+
+## Fontes de Proteína por Tipo
+
+### Carnes Vermelhas
+**Frequência recomendada:** 3 a 4 vezes por semana
+
+Melhores opções:
+- **Patinho** — magro, fácil de desfiar
+- **Coxão mole** — macio quando bem cozido
+- **Músculo** — rico em colágeno, fica desfiável na panela de pressão
+- **Fígado de frango** — rico em ferro, máximo 1-2 vezes por semana
+
+Como preparar: cozinhe bem, desfie ou pique fino. Para BLW, tiras macias.
+
+### Frango
+**Frequência:** Pode ser diário, mas varie com outras proteínas
+
+Melhores cortes:
+- Filé de peito (mais seco — umedeça no caldo)
+- Coxa e sobrecoxa sem pele (mais macia e saborosa)
+- Frango inteiro cozido no caldo — ideal para desfiar
+
+### Peixes
+**Frequência:** 2 a 3 vezes por semana
+
+Melhores opções:
+- **Tilápia** — sem espinha, sabor suave
+- **Merluza** — mesma característica
+- **Bacalhau** — dessalgar muito bem antes
+- **Atum** (natural, sem sal, em lata) — praticidade para dias corridos
+
+Evite: cação, tubarão, peixe-espada (alto teor de mercúrio).
+
+### Ovo
+**Frequência:** Pode ser diário
+
+Ovo inteiro (clara + gema) a partir dos 6 meses. Rico em:
+- Proteína de alta qualidade
+- Colina (desenvolvimento cerebral)
+- Ferro (na gema)
+- Vitamina D
+
+Como oferecer:
+- Mexido macio
+- Cozido e amassado
+- Omelete simples sem sal
+
+### Leguminosas (feijão, lentilha, grão-de-bico)
+**Frequência:** Diária ou quase diária
+
+Proteína vegetal de excelente qualidade. Combine sempre com arroz ou cereal para proteína completa.
+
+- **Feijão carioca ou preto** — tradicional, rico em ferro
+- **Lentilha** — cozinha rápido, sem precisar deixar de molho
+- **Grão-de-bico** — versátil, ótimo amassado
+
+## Quantidade de Proteína por Idade
+
+Não precisa pesar. Como referência prática:
+
+| Idade | Porção de proteína por refeição |
+|---|---|
+| 6-7 meses | 1-2 colheres de sopa de carne desfiada / ½ ovo |
+| 8-9 meses | 2-3 colheres / 1 ovo |
+| 10-12 meses | 3-4 colheres / 1 ovo |
+
+Leguminosas: 2-4 colheres de sopa por refeição.
+
+## Combinações Inteligentes
+
+### Proteína completa com leguminosas:
+- Arroz + feijão (clássico e perfeito)
+- Milho + feijão
+- Arroz + lentilha
+
+### Aumento de absorção de ferro:
+- Carne + brócolis
+- Feijão + tomate
+- Lentilha + limão
+
+### Praticidade nos dias corridos:
+- Ovo + vegetais (5 minutos)
+- Atum natural + batata cozida
+- Feijão pronto + arroz + frango desfiado congelado da semana
+
+## Erros Comuns
+
+**1. Oferecer só frango todos os dias**
+Varie! Cada proteína tem perfil nutricional diferente.
+
+**2. Retirar a gema do ovo**
+A gema é a parte mais nutritiva. Ovo inteiro desde os 6 meses.
+
+**3. Cozinhar demais a carne até ficar dura**
+Carne seca e fibrosa é difícil para o bebê. Cozinhe em caldo, desfie.
+
+**4. Não oferecer leguminosas por medo de gases**
+Gases são temporários e diminuem com o costume. Os benefícios superam.
+
+**5. Achar que proteína vegetal não é suficiente**
+É suficiente — desde que bem combinada e em quantidade adequada.
+
+## Proteína Processada — O Que Evitar
+
+Até 1 ano (e idealmente além):
+- Linguiça, salsicha, presunto
+- Nuggets industrializados
+- Hambúrguer industrializado
+- Mortadela, peito de peru industrializado
+
+Esses produtos têm sódio, conservantes e aditivos incompatíveis com o sistema digestivo do bebê.
+
+## Continue Lendo
+
+- [Ferro na Alimentação do Bebê](/blog/ferro-na-alimentacao-do-bebe)
+- [Cardápio Bebê 7 Meses](/blog/cardapio-bebe-7-meses)
+    `,
+  },
+  {
+    id: 18,
+    slug: "diversidade-alimentar-precoce",
+    title: "Diversidade Alimentar Precoce: Por Que Variar Desde o Início Faz Diferença",
+    description: "A diversidade alimentar nos primeiros 1000 dias de vida impacta saúde, imunidade e relação com comida para sempre. Saiba como praticar na introdução alimentar.",
+    category: "Nutrição",
+    date: "2026-05-12",
+    readingTime: "7 min",
+    image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&h=600&fit=crop",
+    author: "Equipe Papazz",
+    keywords: ["diversidade alimentar bebê", "variedade introdução alimentar", "primeiros 1000 dias alimentação", "microbiota intestinal bebê", "alimentação complementar variada"],
+    content: `
+Existe uma janela de oportunidade única nos primeiros anos de vida que determina o quanto seu filho vai gostar de comer bem. Essa janela se chama **introdução alimentar** — e a diversidade é a chave.
+
+## O Que é Diversidade Alimentar?
+
+É oferecer **variedade real** de grupos alimentares, cores, texturas e sabores desde os 6 meses.
+
+A OMS recomenda que bebês a partir de 6 meses consumam alimentos de pelo menos **5 dos 8 grupos alimentares** diariamente:
+
+1. Grãos, raízes e tubérculos
+2. Leguminosas e nozes
+3. Laticínios
+4. Carnes, aves e peixes
+5. Ovos
+6. Frutas e vegetais ricos em vitamina A
+7. Outros frutas e vegetais
+8. Gorduras e óleos
+
+Poucos bebês no Brasil atingem essa meta. E as consequências aparecem anos depois.
+
+## Por Que Diversidade Importa Tanto?
+
+### 1. Microbiota Intestinal
+O intestino do bebê está sendo colonizado agora. A diversidade de alimentos = diversidade de bactérias benéficas = imunidade mais forte.
+
+Estudos mostram que crianças com microbiota mais diversa têm:
+- Menos alergias
+- Menos obesidade na adolescência
+- Melhor função imunológica
+
+### 2. Neofobia Alimentar Reduzida
+Bebês expostos a muitos sabores nos primeiros meses desenvolvem **menor medo de alimentos novos** depois.
+
+É o oposto do que acontece com bebês criados com poucos sabores: quando chegam na fase da neofobia (1-3 anos), têm muito mais resistência.
+
+### 3. Nutrição Completa
+Nenhum alimento tem todos os nutrientes. Só a variedade garante cobertura completa de:
+- Ferro (carnes, feijão, vegetais verdes)
+- Zinco (carnes, sementes)
+- Vitamina A (laranja, vermelho, verde escuro)
+- Vitamina C (frutas cítricas, brócolis, pimentão)
+- Ômega-3 (peixe, chia, linhaça)
+- Probióticos naturais (iogurte)
+
+## Como Praticar Diversidade na Prática
+
+### Regra das Cores
+Tente incluir 3 cores diferentes por dia. Funciona como guia visual simples:
+
+- **Laranja/Amarelo:** cenoura, abóbora, manga, batata-doce
+- **Verde:** brócolis, espinafre, abobrinha, couve
+- **Vermelho:** tomate, morango, beterraba, pimentão vermelho
+- **Branco/Bege:** batata, arroz, mandioca, banana
+- **Roxo:** beterraba, ameixa, uva
+
+### Regra da Rotatividade Semanal
+- Não repita a mesma proteína mais de 2 dias seguidos
+- Alterne feijão, lentilha e grão-de-bico
+- Mude a fruta do café da manhã todos os dias
+
+### Aproveite Sobras com Inteligência
+- Arroz do almoço vira base do jantar com nova proteína
+- Legumes cozidos de ontem entram na sopa de hoje
+- Frango desfiado congelado em porções pequenas para dias corridos
+
+## Alimentos que a Maioria Subestima
+
+**Beterraba:** Rica em folato, ferro e antioxidantes. Cozida e amassada, sabor suave.
+
+**Couve:** Uma das verduras mais nutritivas. Refogada no alho, bebês aceitam bem.
+
+**Sardinha:** Rica em ômega-3, cálcio e ferro. Sem espinhas (filé), é prática e barata.
+
+**Abóbora:** Vitamina A em abundância. Cozida vira purê cremoso.
+
+**Aveia:** Fibra solúvel, ferro e zinco. No café da manhã com fruta.
+
+**Inhame:** Prebiótico natural — alimenta bactérias boas do intestino.
+
+## Diversidade Não É Complicado
+
+Um erro comum é achar que diversidade = mais trabalho. Não precisa ser assim.
+
+**Exemplo de dia simples e diversificado:**
+
+- Café: aveia (grão) + banana (fruta) + ovo mexido (proteína)
+- Almoço: arroz (grão) + feijão (leguminosa) + cenoura (vegetal laranja) + frango (proteína animal) + azeite (gordura boa)
+- Lanche: mamão (fruta)
+- Jantar: sopa de abóbora (vegetal amarelo) + macarrão (grão) + carne (proteína)
+
+Isso são 7 grupos alimentares em um dia. E é simples.
+
+## Meta Realista para Cada Semana
+
+Não precisa acertar tudo todos os dias. Pense na semana como unidade:
+
+- 4 proteínas animais diferentes (frango, carne, ovo, peixe)
+- 3 leguminosas diferentes (feijão, lentilha, grão-de-bico)
+- 5 vegetais diferentes
+- 5 frutas diferentes
+- Variedade de grãos (arroz, aveia, macarrão, polenta)
+
+## Continue Lendo
+
+- [Ferro na Alimentação do Bebê](/blog/ferro-na-alimentacao-do-bebe)
+- [Cardápio Bebê 7 Meses](/blog/cardapio-bebe-7-meses)
+    `,
+  },
 ];

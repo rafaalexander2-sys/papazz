@@ -22,6 +22,14 @@ const STATIC_POSTS = [
   "como-fazer-papinha-nutritiva",
   "quantidade-ideal-comida-bebe",
   "bebe-nao-quer-comer-solucoes",
+  "reflexo-de-gag-bebe-blw",
+  "cardapio-bebe-7-meses",
+  "ferro-na-alimentacao-do-bebe",
+  "alergia-alimentar-bebe-sintomas",
+  "cardapio-bebe-8-meses",
+  "bebe-recusa-comida-blw",
+  "proteinas-introducao-alimentar",
+  "diversidade-alimentar-precoce",
 ];
 
 async function getFirestorePosts() {

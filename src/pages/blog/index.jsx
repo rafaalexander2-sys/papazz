@@ -3,6 +3,35 @@ import { Link } from "react-router-dom";
 import { Calendar, Clock, Search } from "lucide-react";
 import { getAllPosts } from "../../utils/blog";
 
+const SITE_URL = "https://papazz.com.br";
+
+function setBlogMeta() {
+  document.title = "Blog Papazz — Introdução Alimentar para Bebês";
+
+  const setMeta = (name, content, prop = false) => {
+    const attr = prop ? "property" : "name";
+    let el = document.querySelector(`meta[${attr}="${name}"]`);
+    if (!el) { el = document.createElement("meta"); el.setAttribute(attr, name); document.head.appendChild(el); }
+    el.setAttribute("content", content);
+  };
+
+  const setLink = (rel, href) => {
+    let el = document.querySelector(`link[rel="${rel}"]`);
+    if (!el) { el = document.createElement("link"); el.setAttribute("rel", rel); document.head.appendChild(el); }
+    el.setAttribute("href", href);
+  };
+
+  setMeta("description", "Guias práticos e confiáveis sobre introdução alimentar, BLW, papinhas, cardápios e desenvolvimento alimentar do bebê dos 6 aos 12 meses.");
+  setMeta("keywords", "introdução alimentar, BLW, papinha, bebê 6 meses, cardápio bebê, alimentação bebê");
+  setMeta("robots", "index, follow");
+  setMeta("og:title", "Blog Papazz — Introdução Alimentar para Bebês", true);
+  setMeta("og:description", "Guias práticos sobre introdução alimentar, BLW, papinhas e cardápios.", true);
+  setMeta("og:url", `${SITE_URL}/blog`, true);
+  setMeta("og:type", "website", true);
+  setMeta("og:site_name", "Papazz", true);
+  setLink("canonical", `${SITE_URL}/blog`);
+}
+
 export default function Blog() {
   const [posts, setPosts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("Todos");
@@ -10,6 +39,8 @@ export default function Blog() {
 
   useEffect(() => {
     getAllPosts().then(setPosts);
+    setBlogMeta();
+    return () => { document.title = "Papazz"; };
   }, []);
 
   const categories = ["Todos", ...new Set(posts.map((p) => p.category))];

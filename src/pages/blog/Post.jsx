@@ -29,6 +29,14 @@ function SEOMeta({ post }) {
     setMeta("keywords", Array.isArray(post.keywords) ? post.keywords.join(", ") : post.keywords || "");
     setMeta("author", post.author || "Equipe Papazz");
     setMeta("robots", "index, follow");
+    if (post.date) {
+      setMeta("article:published_time", new Date(post.date).toISOString(), true);
+      setMeta("article:modified_time", new Date(post.date).toISOString(), true);
+    }
+
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) { canonical = document.createElement("link"); canonical.setAttribute("rel", "canonical"); document.head.appendChild(canonical); }
+    canonical.setAttribute("href", `${SITE_URL}/blog/${post.slug}`);
 
     setMeta("og:title", post.title, true);
     setMeta("og:description", post.description || post.title, true);
