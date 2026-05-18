@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Trash2, ChevronDown, ChevronUp, Save, X, Link2, Sparkles, ImageIcon, Pencil, Search, FileText, CheckCircle2, Circle, Upload } from "lucide-react";
+import { Trash2, ChevronDown, ChevronUp, Save, X, Link2, Sparkles, ImageIcon, Pencil, Search, FileText, CheckCircle2, Circle, Upload, FileUp } from "lucide-react";
 import { getReceitasFromFirestore, addReceita, updateReceita, deleteReceita } from "../../services/firestoreService";
 import { PAPINHAS_6_8 } from "../../data/seed-papinhas-6-8";
 import { uploadImage } from "../../services/storageService";
@@ -23,7 +23,7 @@ const EMPTY_FORM = {
 export default function AdminReceitas() {
   const [receitas, setReceitas] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [mode, setMode] = useState("list"); // list | import | manual | texto
+  const [mode, setMode] = useState("list"); // list | import | manual | texto | pdf
   const [form, setForm] = useState(EMPTY_FORM);
   const [saving, setSaving] = useState(false);
   const [importing, setImporting] = useState(false);
@@ -38,6 +38,13 @@ export default function AdminReceitas() {
   const [textoSelecionadas, setTextoSelecionadas] = useState([]);
   const [textoProcessando, setTextoProcessando] = useState(false);
   const [textoPublicando, setTextoPublicando] = useState(false);
+  const [pdfReceitas, setPdfReceitas] = useState([]);
+  const [pdfSelecionadas, setPdfSelecionadas] = useState([]);
+  const [pdfProcessando, setPdfProcessando] = useState(false);
+  const [pdfPublicando, setPdfPublicando] = useState(false);
+  const [pdfProgresso, setPdfProgresso] = useState("");
+  const pdfInputRef = useRef(null);
+
   const [expandedId, setExpandedId] = useState(null);
   const [editingId, setEditingId] = useState(null);
   const [faseFiltro, setFaseFiltro] = useState("Todas");
@@ -206,6 +213,82 @@ export default function AdminReceitas() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result.split(",")[1]);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  async function handlePdfUpload(files) {
+    if (!files?.length) return;
+    const fileArr = Array.from(files);
+    const MAX_MB = 3.2;
+    const oversized = fileArr.filter((f) => f.size > MAX_MB * 1024 * 1024);
+    if (oversized.length) {
+      setMsg({ type: "error", text: `Arquivo(s) muito grande(s) (máx ${MAX_MB}MB): ${oversized.map((f) => f.name).join(", ")}` });
+      return;
+    }
+    setPdfProcessando(true);
+    setPdfReceitas([]);
+    setPdfSelecionadas([]);
+    setMsg(null);
+    const todasReceitas = [];
+    for (let i = 0; i < fileArr.length; i++) {
+      const file = fileArr[i];
+      setPdfProgresso(`Processando ${file.name} (${i + 1}/${fileArr.length})...`);
+      try {
+        const pdfBase64 = await fileToBase64(file);
+        const res = await fetch("/api/upload-pdf-recipes", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ pdfBase64, fileName: file.name }),
+        });
+        const data = await res.json();
+        if (data.error) throw new Error(data.error);
+        todasReceitas.push(...data.receitas);
+      } catch (e) {
+        setMsg({ type: "error", text: `Erro em "${file.name}": ${e.message}` });
+      }
+    }
+    setPdfProcessando(false);
+    setPdfProgresso("");
+    if (todasReceitas.length) {
+      setPdfReceitas(todasReceitas);
+      setPdfSelecionadas(todasReceitas.map((_, i) => i));
+      setMsg({ type: "success", text: `${todasReceitas.length} receita${todasReceitas.length !== 1 ? "s" : ""} extraída${todasReceitas.length !== 1 ? "s" : ""}. Revise e publique.` });
+    } else {
+      setMsg({ type: "error", text: "Nenhuma receita encontrada nos PDFs enviados." });
+    }
+  }
+
+  async function handlePdfPublicar() {
+    const selecionadas = pdfReceitas.filter((_, i) => pdfSelecionadas.includes(i));
+    if (!selecionadas.length) { setMsg({ type: "error", text: "Selecione ao menos uma receita." }); return; }
+    setPdfPublicando(true);
+    setMsg(null);
+    let ok = 0;
+    for (const r of selecionadas) {
+      try {
+        await addReceita({
+          ...r,
+          ingredientes: Array.isArray(r.ingredientes) ? r.ingredientes : r.ingredientes.split("\n").map((s) => s.trim()).filter(Boolean),
+          tags: Array.isArray(r.tags) ? r.tags : r.tags.split(",").map((s) => s.trim()).filter(Boolean),
+          tempo: parseInt(r.tempo) || 20,
+        });
+        ok++;
+      } catch { /* continua */ }
+    }
+    setPdfPublicando(false);
+    setMsg({ type: "success", text: `${ok} receita${ok !== 1 ? "s" : ""} publicada${ok !== 1 ? "s" : ""}!` });
+    setPdfReceitas([]);
+    setPdfSelecionadas([]);
+    setMode("list");
+    await load();
+  }
+
   async function handleSave() {
     if (!form.nome.trim() || !form.preparo.trim()) { setMsg({ type: "error", text: "Nome e preparo são obrigatórios." }); return; }
     setSaving(true);
@@ -265,6 +348,10 @@ export default function AdminReceitas() {
               className="flex items-center gap-2 bg-orange-500 text-white px-4 py-2.5 rounded-[10px] font-semibold hover:bg-orange-600 transition text-sm disabled:opacity-60">
               <Upload size={16} /> {seedando ? "Importando..." : "Papinhas 6-8m"}
             </button>
+            <button onClick={() => { setMode("pdf"); setPdfReceitas([]); setPdfSelecionadas([]); setMsg(null); }}
+              className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2.5 rounded-[10px] font-semibold hover:bg-blue-700 transition text-sm">
+              <FileUp size={16} /> Upload PDF
+            </button>
             <button onClick={() => { setMode("texto"); setTextoReceitas([]); setTextoSelecionadas([]); setMsg(null); }}
               className="flex items-center gap-2 bg-teal-600 text-white px-4 py-2.5 rounded-[10px] font-semibold hover:bg-teal-700 transition text-sm">
               <FileText size={16} /> Colar Documento
@@ -318,6 +405,107 @@ export default function AdminReceitas() {
             <a href={msg.link} target="_blank" rel="noopener noreferrer" className="underline font-bold shrink-0">
               Ver publicação →
             </a>
+          )}
+        </div>
+      )}
+
+      {/* MODO PDF */}
+      {mode === "pdf" && (
+        <div className="bg-white border border-gray-200 rounded-[10px] p-6 mb-6 shadow-sm">
+          <div className="flex items-center gap-2 mb-4">
+            <FileUp size={20} className="text-blue-600" />
+            <h3 className="text-lg font-bold text-gray-900">Upload de PDFs em Massa</h3>
+          </div>
+          <p className="text-sm text-gray-500 mb-1">
+            Envie um ou mais PDFs com receitas. O Claude extrai todas as receitas fielmente, sem alterar ingredientes ou modo de preparo, e detecta automaticamente a fase de idade e categoria.
+          </p>
+          <p className="text-xs text-gray-400 mb-5">Limite: 3,2 MB por arquivo. Imagens do PDF, quando presentes, sao reconhecidas mas devem ser adicionadas manualmente pelo campo de foto.</p>
+
+          {pdfReceitas.length === 0 && (
+            <>
+              <label htmlFor="pdf-upload-input"
+                className={`border-2 border-dashed rounded-[10px] p-10 text-center cursor-pointer transition block mb-4 ${pdfProcessando ? "border-blue-300 bg-blue-50" : "border-gray-300 hover:border-blue-400 hover:bg-blue-50"}`}>
+                {pdfProcessando ? (
+                  <div>
+                    <p className="text-sm text-blue-600 font-semibold animate-pulse">{pdfProgresso || "Processando..."}</p>
+                    <p className="text-xs text-blue-400 mt-1">Claude esta lendo os PDFs e extraindo as receitas...</p>
+                  </div>
+                ) : (
+                  <div className="flex flex-col items-center gap-2 text-gray-400">
+                    <FileUp size={36} />
+                    <p className="text-sm font-semibold text-gray-600">Clique para selecionar PDFs</p>
+                    <p className="text-xs">Selecione um ou varios arquivos PDF</p>
+                  </div>
+                )}
+              </label>
+              <input
+                id="pdf-upload-input"
+                ref={pdfInputRef}
+                type="file"
+                accept=".pdf,application/pdf"
+                multiple
+                className="hidden"
+                disabled={pdfProcessando}
+                onChange={(e) => handlePdfUpload(e.target.files)}
+              />
+              {!pdfProcessando && (
+                <button
+                  onClick={() => pdfInputRef.current?.click()}
+                  className="flex items-center gap-2 bg-blue-600 text-white px-6 py-2.5 rounded-[10px] font-semibold hover:bg-blue-700 transition">
+                  <FileUp size={16} /> Selecionar PDFs
+                </button>
+              )}
+            </>
+          )}
+
+          {pdfReceitas.length > 0 && (
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-sm font-semibold text-gray-700">
+                  {pdfReceitas.length} receita{pdfReceitas.length !== 1 ? "s" : ""} extraida{pdfReceitas.length !== 1 ? "s" : ""}.
+                  Selecione as que deseja publicar:
+                </p>
+                <button onClick={() => setPdfSelecionadas(
+                  pdfSelecionadas.length === pdfReceitas.length ? [] : pdfReceitas.map((_, i) => i)
+                )} className="text-xs text-blue-600 font-medium underline">
+                  {pdfSelecionadas.length === pdfReceitas.length ? "Desmarcar todas" : "Selecionar todas"}
+                </button>
+              </div>
+              <div className="space-y-2 mb-5 max-h-96 overflow-y-auto pr-1">
+                {pdfReceitas.map((r, i) => (
+                  <button key={i} type="button" onClick={() => setPdfSelecionadas((prev) => prev.includes(i) ? prev.filter((x) => x !== i) : [...prev, i])}
+                    className={`w-full text-left flex items-start gap-3 p-3 rounded-[10px] border transition ${pdfSelecionadas.includes(i) ? "border-blue-400 bg-blue-50" : "border-gray-200 bg-white hover:bg-gray-50"}`}>
+                    {pdfSelecionadas.includes(i)
+                      ? <CheckCircle2 size={18} className="text-blue-600 shrink-0 mt-0.5" />
+                      : <Circle size={18} className="text-gray-300 shrink-0 mt-0.5" />}
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <p className="font-semibold text-gray-900 text-sm truncate">{r.nome}</p>
+                        {r.temImagem && <span className="text-xs px-1.5 py-0.5 bg-amber-100 text-amber-700 rounded font-medium shrink-0">tem imagem no PDF</span>}
+                      </div>
+                      <p className="text-xs text-gray-500 mt-0.5">
+                        {r.fase}m | {r.tipo} | {r.tempo}min | {r.dificuldade}
+                        {Array.isArray(r.restricoes) && r.restricoes.length > 0 && ` | ${r.restricoes.join(", ")}`}
+                      </p>
+                      {Array.isArray(r.ingredientes) && (
+                        <p className="text-xs text-gray-400 mt-1 line-clamp-1">{r.ingredientes.join(", ")}</p>
+                      )}
+                    </div>
+                  </button>
+                ))}
+              </div>
+              <div className="flex gap-3 flex-wrap">
+                <button onClick={handlePdfPublicar} disabled={pdfPublicando || pdfSelecionadas.length === 0}
+                  className="flex items-center gap-2 bg-[#FF6B6B] text-white px-6 py-2.5 rounded-[10px] font-semibold hover:bg-[#ff5252] transition disabled:opacity-60">
+                  <Save size={16} />
+                  {pdfPublicando ? "Publicando..." : `Publicar ${pdfSelecionadas.length} receita${pdfSelecionadas.length !== 1 ? "s" : ""}`}
+                </button>
+                <button onClick={() => { setPdfReceitas([]); setPdfSelecionadas([]); setMsg(null); if (pdfInputRef.current) pdfInputRef.current.value = ""; }}
+                  className="px-5 py-2.5 rounded-[10px] border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition text-sm">
+                  Enviar outros PDFs
+                </button>
+              </div>
+            </div>
           )}
         </div>
       )}
