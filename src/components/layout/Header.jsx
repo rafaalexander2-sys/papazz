@@ -227,12 +227,52 @@ export default function Header() {
               )}
 
               {!isPremium && (
-                <button
-                  onClick={() => { setShowPremium(true); setIsMenuOpen(false); }}
-                  className="w-full bg-[#FF6B6B] hover:bg-[#ff5252] text-white font-corpo font-bold py-3 rounded-[10px] transition text-sm"
-                >
-                  Seja Premium
-                </button>
+                <div className="border border-[#FFD700] rounded-[10px] overflow-hidden">
+                  <div className="bg-gradient-to-r from-[#FFD700] to-[#FFA500] px-4 py-3 text-center">
+                    <p className="text-white font-titulo font-bold text-sm">Conteudo Premium</p>
+                    <p className="text-white/90 font-corpo text-xs mt-0.5">Ajude seu bebe a comer melhor</p>
+                  </div>
+                  <div className="px-4 py-3 space-y-2.5 bg-yellow-50">
+                    {[
+                      { titulo: "60+ Receitas Premium", desc: "Com fotos e valor nutricional" },
+                      { titulo: "Planejamento Semanal", desc: "Cardapio da semana em minutos" },
+                      { titulo: "Lista de Compras Inteligente", desc: "Automatica pelo planejamento" },
+                      { titulo: "Diario Alimentar", desc: "Acompanhe a evolucao do bebe" },
+                      { titulo: "Sem Anuncios", desc: "Experiencia limpa e focada" },
+                    ].map((b) => (
+                      <div key={b.titulo} className="flex items-start gap-2">
+                        <div className="w-2 h-2 mt-1.5 rounded-full bg-[#FF6B6B] shrink-0" />
+                        <div>
+                          <p className="font-corpo font-bold text-gray-900 text-xs">{b.titulo}</p>
+                          <p className="font-corpo text-gray-500 text-xs">{b.desc}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="px-4 pt-1 pb-3 grid grid-cols-2 gap-2 bg-yellow-50">
+                    <div className="border-2 border-gray-200 rounded-[10px] p-2 text-center bg-white">
+                      <p className="text-xs text-gray-500 font-corpo">Mensal</p>
+                      <p className="text-xl font-titulo font-bold text-gray-900">R$ 19,90</p>
+                      <p className="text-xs text-gray-400 font-corpo">por mes</p>
+                    </div>
+                    <div className="border-2 border-[#FFD700] rounded-[10px] p-2 text-center relative bg-white">
+                      <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-[#FFD700] text-white font-bold px-2 py-0.5 rounded-full whitespace-nowrap" style={{fontSize: "10px"}}>
+                        Economize 37%
+                      </div>
+                      <p className="text-xs text-gray-500 font-corpo">Anual</p>
+                      <p className="text-xl font-titulo font-bold text-gray-900">R$ 149</p>
+                      <p className="text-xs text-gray-400 font-corpo">R$ 12,42/mes</p>
+                    </div>
+                  </div>
+                  <div className="px-4 pb-4 bg-yellow-50">
+                    <button
+                      onClick={() => { setShowPremium(true); setIsMenuOpen(false); }}
+                      className="w-full bg-[#FF6B6B] hover:bg-[#ff5252] text-white font-corpo font-bold py-3 rounded-[10px] transition text-sm"
+                    >
+                      Assinar Premium Agora
+                    </button>
+                  </div>
+                </div>
               )}
 
               {user ? (
