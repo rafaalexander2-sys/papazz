@@ -72,7 +72,7 @@ jobs:
         run: |
           set -x
           echo "sdk.dir=$ANDROID_HOME" > twa/android/local.properties
-          gradle -p twa/android bundleRelease --no-daemon
+          gradle -p twa/android :app:bundleRelease --no-daemon --stacktrace 2>&1 | tee /tmp/gradle-output.txt; exit ${PIPESTATUS[0]}
         env:
           KEYSTORE_PATH: ${{ github.workspace }}/twa/papazz-release-key.keystore
           KEYSTORE_STORE_PASSWORD: papazz123
