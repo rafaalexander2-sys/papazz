@@ -50,15 +50,22 @@ jobs:
             cp "twa/android/app/src/main/res/$dir/ic_launcher.png" "twa/android/app/src/main/res/$dir/ic_launcher_round.png"
           done
 
-      - name: Generate keystore
+      - name: Restore or generate keystore
+        env:
+          KEYSTORE_B64: ${{ secrets.KEYSTORE_BASE64 }}
         run: |
-          set -x
-          keytool -genkeypair -v \
-            -keystore twa/papazz-release-key.keystore \
-            -alias papazz \
-            -keyalg RSA -keysize 2048 -validity 10000 \
-            -storepass papazz123 -keypass papazz123 \
-            -dname "CN=Papazz, OU=Dev, O=Papazz, L=Brasil, ST=Brasil, C=BR"
+          if [ -n "$KEYSTORE_B64" ]; then
+            echo "Restaurando keystore do secret..."
+            printf '%s' "$KEYSTORE_B64" | base64 --decode > twa/papazz-release-key.keystore
+          else
+            echo "Secret nao encontrado, gerando novo keystore..."
+            keytool -genkeypair -v \
+              -keystore twa/papazz-release-key.keystore \
+              -alias papazz \
+              -keyalg RSA -keysize 2048 -validity 10000 \
+              -storepass papazz123 -keypass papazz123 \
+              -dname "CN=Papazz, OU=Dev, O=Papazz, L=Brasil, ST=Brasil, C=BR"
+          fi
 
       - name: Print SHA-256 fingerprint
         run: |
