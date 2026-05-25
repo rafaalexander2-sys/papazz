@@ -5,6 +5,7 @@ on:
   push:
     paths:
       - 'twa/android/**'
+      - '.github/workflows/build-twa.yml'
 
 jobs:
   build:
