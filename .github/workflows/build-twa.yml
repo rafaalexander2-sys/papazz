@@ -56,7 +56,11 @@ jobs:
         run: |
           if [ -n "$KEYSTORE_B64" ]; then
             echo "Restaurando keystore do secret..."
-            printf '%s' "$KEYSTORE_B64" | base64 --decode > twa/papazz-release-key.keystore
+            printf '%s' "$KEYSTORE_B64" | tr -d '\r\n ' | base64 --decode > twa/papazz-release-key.keystore
+            if [ ! -s twa/papazz-release-key.keystore ]; then
+              echo "ERRO: keystore vazio apos decode. O secret KEYSTORE_BASE64 esta corrompido."
+              exit 1
+            fi
           else
             echo "Secret nao encontrado, gerando novo keystore..."
             keytool -genkeypair -v \
@@ -67,13 +71,22 @@ jobs:
               -dname "CN=Papazz, OU=Dev, O=Papazz, L=Brasil, ST=Brasil, C=BR"
           fi
 
-      - name: Print SHA-256 fingerprint
+      - name: Verify keystore fingerprint
         run: |
-          echo "=== SHA-256 para o assetlinks.json ==="
-          keytool -list -v \
-            -keystore twa/papazz-release-key.keystore \
-            -alias papazz -storepass papazz123 \
-            | grep "SHA256:"
+          EXPECTED_SHA1="E9:24:54:1B:71:08:2B:D8:E6:42:BE:6A:EE:09:E8:04:B0:5E:4C:E7"
+          echo "=== Fingerprints do keystore ==="
+          keytool -list -v -keystore twa/papazz-release-key.keystore -alias papazz -storepass papazz123 | grep -E "SHA1:|SHA256:"
+          ACTUAL_SHA1=$(keytool -list -v -keystore twa/papazz-release-key.keystore -alias papazz -storepass papazz123 | grep "SHA1:" | sed 's/.*SHA1: //' | tr -d ' \r\n')
+          EXPECTED_CLEAN=$(echo "$EXPECTED_SHA1" | tr -d ' \r\n')
+          if [ "$ACTUAL_SHA1" = "$EXPECTED_CLEAN" ]; then
+            echo "OK: SHA1 bate com o esperado pelo Play Console. Upload vai funcionar."
+          else
+            echo "ERRO: SHA1 NAO bate com o esperado pelo Play Console."
+            echo "Esperado: $EXPECTED_CLEAN"
+            echo "Atual:    $ACTUAL_SHA1"
+            echo "O secret KEYSTORE_BASE64 nao corresponde ao keystore do primeiro upload."
+            exit 1
+          fi
 
       - name: Build AAB
         run: |
