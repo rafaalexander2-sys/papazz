@@ -3,6 +3,8 @@
   "target": {
     "namespace": "android_app",
     "package_name": "br.com.papazz",
-    "sha256_cert_fingerprints": ["SUBSTITUIR_PELO_SHA256_DO_PLAY_CONSOLE"]
+    "sha256_cert_fingerprints": [
+      "4B:0A:23:7A:20:96:E2:4E:4D:7F:6C:91:5D:74:13:5C:24:DC:D6:E2:63:54:41:92:69:A3:19:62:44:08:BA:B0"
+    ]
   }
 }]
