@@ -1,6 +1,7 @@
 # Decisões Técnicas — Papazz
 
 Registro de decisões arquiteturais tomadas. Data: 2026-05-17.
+Atualizado: 2026-05-25.
 
 ---
 
@@ -21,10 +22,25 @@ AdSense dentro de WebView/TWA viola as políticas do Google e pode banir a conta
 - Firebase Auth e Firestore unificados: login e dados sincronizados entre web e app
 - AdSense visível só no `www`, slots de AdMob futuros só no `app`
 
-### O que precisa ser feito
-- **Código:** utilitário `isAppVersion()` + context global + slots de AdSense condicionais + banner "Baixe o app" no www
-- **Vercel dashboard:** adicionar `app.papazz.com.br` como custom domain no mesmo deployment
-- **DNS:** CNAME `app` apontando para o mesmo destino do `www`
+### Status de implementação
+
+| Item | Status |
+|---|---|
+| `isAppVersion()` + `PlatformContext` | Feito |
+| Banner "Baixe o app" no `www` | Feito |
+| `app.papazz.com.br` no Vercel | Feito |
+| DNS CNAME `app` | Feito |
+| `manifest.json` (obrigatório TWA) | Feito |
+| `/.well-known/assetlinks.json` | Criado — falta SHA-256 real |
+| SHA-256 do Play Console | Pendente |
+| Build APK com Bubblewrap | Pendente |
+| Upload na Play Store | Pendente |
+
+### Próximos passos TWA
+1. Play Console > Versoes > Configuracoes > Assinatura de app > copiar SHA-256
+2. Atualizar `public/.well-known/assetlinks.json` com o SHA real
+3. `npm i -g @bubblewrap/cli` → `bubblewrap init --manifest https://app.papazz.com.br/manifest.json`
+4. `bubblewrap build` → gera o AAB para upload
 
 ---
 
