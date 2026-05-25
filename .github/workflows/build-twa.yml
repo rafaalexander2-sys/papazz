@@ -24,20 +24,35 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android build tools
+        run: sdkmanager "platforms;android-34" "build-tools;34.0.0"
+
       - name: Install Bubblewrap
         run: npm install -g @bubblewrap/cli
 
-      - name: Generate keystore (if not cached)
+      - name: Configure Bubblewrap (non-interactive)
+        run: |
+          mkdir -p ~/.bubblewrap
+          cat > ~/.bubblewrap/config.json << EOF
+          {
+            "jdkPath": "$JAVA_HOME",
+            "androidSdkPath": "$ANDROID_SDK_ROOT"
+          }
+          EOF
+
+      - name: Generate keystore
         id: keystore
         run: |
-          cd twa
           if [ -n "${{ secrets.KEYSTORE_BASE64 }}" ]; then
-            echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > papazz-release-key.keystore
+            echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > twa/papazz-release-key.keystore
             echo "using_existing=true" >> $GITHUB_OUTPUT
           else
             keytool -genkeypair \
               -v \
-              -keystore papazz-release-key.keystore \
+              -keystore twa/papazz-release-key.keystore \
               -alias papazz \
               -keyalg RSA \
               -keysize 2048 \
@@ -50,30 +65,17 @@ jobs:
 
       - name: Print SHA-256 fingerprint
         run: |
-          cd twa
           echo "=== SHA-256 para o assetlinks.json ==="
           keytool -list -v \
-            -keystore papazz-release-key.keystore \
+            -keystore twa/papazz-release-key.keystore \
             -alias papazz \
             -storepass papazz123 \
             | grep "SHA256:"
 
-      - name: Init Bubblewrap project
+      - name: Build AAB with Bubblewrap
         run: |
           cd twa
-          bubblewrap init \
-            --manifest https://app.papazz.com.br/manifest.json \
-            --directory . \
-            || true
-
-      - name: Build AAB
-        run: |
-          cd twa
-          echo "papazz123" | bubblewrap build \
-            --skipPwaValidation \
-            || bubblewrap build --skipPwaValidation
-        env:
-          JAVA_HOME: ${{ env.JAVA_HOME }}
+          printf "papazz123\npapazz123\n" | bubblewrap build --skipPwaValidation
 
       - name: Upload AAB artifact
         uses: actions/upload-artifact@v4
@@ -87,9 +89,7 @@ jobs:
       - name: Save keystore as artifact
         if: steps.keystore.outputs.using_existing != 'true'
         run: |
-          cd twa
-          base64 papazz-release-key.keystore > keystore-base64.txt
-          echo ""
+          base64 twa/papazz-release-key.keystore > twa/keystore-base64.txt
           echo "=== IMPORTANTE: Salve este keystore! ==="
           echo "Adicione o conteudo de keystore-base64.txt como secret KEYSTORE_BASE64 no GitHub"
 
