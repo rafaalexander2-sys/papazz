@@ -20,19 +20,19 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Debug Android SDK environment
-        run: |
-          echo "ANDROID_HOME=$ANDROID_HOME"
-          echo "ANDROID_SDK_ROOT=$ANDROID_SDK_ROOT"
-          ls "${ANDROID_HOME}/cmdline-tools/" 2>/dev/null && echo "cmdline-tools found" || echo "cmdline-tools NOT found"
-          find "${ANDROID_HOME}" -name "sdkmanager" 2>/dev/null | head -5 || echo "sdkmanager not found"
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install ImageMagick
+        run: sudo apt-get install -y imagemagick
 
       - name: Accept SDK licenses and install components
         run: |
-          SDKMAN=$(find "${ANDROID_HOME}" -name "sdkmanager" 2>/dev/null | head -1)
-          echo "Using sdkmanager at: $SDKMAN"
-          yes | "$SDKMAN" --licenses > /dev/null 2>&1 || true
-          "$SDKMAN" "platforms;android-34" "build-tools;34.0.0"
+          set -x
+          sdkmanager --licenses < /dev/null || true
+          sdkmanager "platforms;android-34" "build-tools;34.0.0"
+        env:
+          ANDROID_HOME: ${{ env.ANDROID_HOME }}
 
       - name: Install Gradle 8.4
         uses: gradle/actions/setup-gradle@v4
@@ -41,6 +41,7 @@ jobs:
 
       - name: Generate app icons
         run: |
+          set -x
           for dir_size in "mipmap-mdpi:48" "mipmap-hdpi:72" "mipmap-xhdpi:96" "mipmap-xxhdpi:144" "mipmap-xxxhdpi:192"; do
             dir="${dir_size%%:*}"
             size="${dir_size##*:}"
@@ -51,6 +52,7 @@ jobs:
 
       - name: Generate keystore
         run: |
+          set -x
           keytool -genkeypair -v \
             -keystore twa/papazz-release-key.keystore \
             -alias papazz \
@@ -67,7 +69,9 @@ jobs:
             | grep "SHA256:"
 
       - name: Build AAB
-        run: gradle -p twa/android bundleRelease --no-daemon
+        run: |
+          set -x
+          gradle -p twa/android bundleRelease --no-daemon
         env:
           KEYSTORE_PATH: ${{ github.workspace }}/twa/papazz-release-key.keystore
           KEYSTORE_STORE_PASSWORD: papazz123
