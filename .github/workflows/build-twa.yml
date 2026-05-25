@@ -72,12 +72,20 @@ jobs:
         run: |
           set -x
           echo "sdk.dir=$ANDROID_HOME" > twa/android/local.properties
-          gradle -p twa/android :app:bundleRelease --no-daemon --stacktrace 2>&1 | tee /tmp/gradle-output.txt; exit ${PIPESTATUS[0]}
+          gradle -p twa/android :app:bundleRelease --no-daemon --stacktrace 2>&1 | tee twa/gradle-output.txt; exit ${PIPESTATUS[0]}
         env:
           KEYSTORE_PATH: ${{ github.workspace }}/twa/papazz-release-key.keystore
           KEYSTORE_STORE_PASSWORD: papazz123
           KEYSTORE_KEY_ALIAS: papazz
           KEYSTORE_KEY_PASSWORD: papazz123
+
+      - name: Upload Gradle log (always)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gradle-log
+          path: twa/gradle-output.txt
+          retention-days: 7
 
       - name: Upload AAB
         uses: actions/upload-artifact@v4
