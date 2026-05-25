@@ -71,6 +71,7 @@ jobs:
       - name: Build AAB
         run: |
           set -x
+          echo "sdk.dir=$ANDROID_HOME" > twa/android/local.properties
           gradle -p twa/android bundleRelease --no-daemon
         env:
           KEYSTORE_PATH: ${{ github.workspace }}/twa/papazz-release-key.keystore
