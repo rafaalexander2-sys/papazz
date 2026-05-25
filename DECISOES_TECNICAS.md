@@ -1,7 +1,7 @@
 # Decisões Técnicas — Papazz
 
 Registro de decisões arquiteturais tomadas. Data: 2026-05-17.
-Atualizado: 2026-05-25.
+Atualizado: 2026-05-25 (sessao Play Store + TWA build).
 
 ---
 
@@ -30,17 +30,48 @@ AdSense dentro de WebView/TWA viola as políticas do Google e pode banir a conta
 | Banner "Baixe o app" no `www` | Feito |
 | `app.papazz.com.br` no Vercel | Feito |
 | DNS CNAME `app` | Feito |
-| `manifest.json` (obrigatório TWA) | Feito |
-| `/.well-known/assetlinks.json` | Criado — falta SHA-256 real |
-| SHA-256 do Play Console | Pendente |
-| Build APK com Bubblewrap | Pendente |
-| Upload na Play Store | Pendente |
+| `manifest.json` (obrigatório TWA) | Feito — `public/manifest.json` |
+| `/.well-known/assetlinks.json` | Feito — falta SHA-256 real |
+| Projeto Android TWA (`twa/android/`) | Feito — Gradle puro, sem Bubblewrap |
+| GitHub Action build AAB | Feito — `.github/workflows/build-twa.yml` |
+| Conta Play Store | Feito — ID 5486423839757915054 |
+| Build AAB via GitHub Actions | Rodando / aguardando resultado |
+| SHA-256 do keystore | Pendente — sai nos logs do Actions |
+| Atualizar `assetlinks.json` com SHA real | Pendente |
+| Upload AAB na Play Store | Pendente |
+| Salvar keystore como secret no GitHub | Pendente |
 
-### Próximos passos TWA
-1. Play Console > Versoes > Configuracoes > Assinatura de app > copiar SHA-256
-2. Atualizar `public/.well-known/assetlinks.json` com o SHA real
-3. `npm i -g @bubblewrap/cli` → `bubblewrap init --manifest https://app.papazz.com.br/manifest.json`
-4. `bubblewrap build` → gera o AAB para upload
+### Como buildar o AAB
+O build roda automaticamente via GitHub Actions em todo push para `twa/android/**` ou `.github/workflows/build-twa.yml`. Para acionar manual:
+1. GitHub > Actions > "Build TWA (Android AAB)" > Run workflow
+
+O workflow:
+- Gera o keystore na primeira vez (senha: `papazz123`)
+- Imprime o SHA-256 nos logs (buscar por `SHA-256 para o assetlinks.json`)
+- Gera o arquivo `app-release.aab` como artifact "papazz-release"
+- Gera o `keystore-base64.txt` como artifact "papazz-keystore"
+
+### Depois do primeiro build bem-sucedido
+1. Baixar artifact `papazz-keystore` e salvar como secret `KEYSTORE_BASE64` no GitHub (Settings > Secrets)
+2. Copiar SHA-256 dos logs e atualizar `public/.well-known/assetlinks.json`
+3. Baixar `app-release.aab` e fazer upload no Play Console (Teste interno ou Producao)
+4. Play Console > Versoes > Configuracoes > Assinatura de app mostrara o SHA-256 do Google — adicionar esse tambem no `assetlinks.json`
+
+### Estrutura do projeto Android
+```
+twa/
+  android/                    — projeto Gradle (TWA)
+    app/build.gradle          — package br.com.papazz, compileSdk 34
+    app/src/main/
+      AndroidManifest.xml     — LauncherActivity + Digital Asset Links intent-filter
+      res/values/colors.xml   — colorPrimary: #FF6B6B
+  twa-manifest.json           — config legado Bubblewrap (nao usado mais)
+  papazz-release-key.keystore — gerado no CI (nao commitado)
+public/
+  manifest.json               — Web App Manifest (obrigatorio TWA)
+  .well-known/
+    assetlinks.json           — Digital Asset Links (SHA-256 pendente)
+```
 
 ---
 
