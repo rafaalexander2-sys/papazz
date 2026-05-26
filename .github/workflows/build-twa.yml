@@ -73,7 +73,7 @@ jobs:
 
       - name: Verify keystore fingerprint
         run: |
-          EXPECTED_SHA1="E9:24:54:1B:71:08:2B:D8:E6:42:BE:6A:EE:09:E8:04:B0:5E:4C:E7"
+          EXPECTED_SHA1="E6:E3:B1:FF:23:FB:D0:A1:10:0A:69:F8:FD:DB:DD:9F:14:53:B0:33"
           echo "=== Fingerprints do keystore ==="
           keytool -list -v -keystore twa/papazz-release-key.keystore -alias papazz -storepass papazz123 | grep -E "SHA1:|SHA256:"
           ACTUAL_SHA1=$(keytool -list -v -keystore twa/papazz-release-key.keystore -alias papazz -storepass papazz123 | grep "SHA1:" | sed 's/.*SHA1: //' | tr -d ' \r\n')
