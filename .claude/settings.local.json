@@ -15,7 +15,18 @@
       "Bash(npx vercel *)",
       "Bash(nslookup papazz.com.br 8.8.8.8)",
       "Bash(findstr /i \"address name\")",
-      "Bash(curl -sI https://papazz.com.br)"
+      "Bash(curl -sI https://papazz.com.br)",
+      "Bash(rtk ls *)",
+      "Bash(rtk read *)",
+      "Bash(npm install *)",
+      "Bash(npm list *)",
+      "Bash(rtk npm *)",
+      "Bash(npm uninstall *)",
+      "Bash(rtk git *)",
+      "Bash(git checkout *)",
+      "Bash(git rebase *)",
+      "Bash(rtk grep *)",
+      "Bash(rtk find *)"
     ]
   }
 }
