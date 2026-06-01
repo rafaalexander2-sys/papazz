@@ -1,7 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import { Trash2, ChevronDown, ChevronUp, Save, X, Sparkles, AlertCircle, PenLine, Link2, ImageIcon, Pencil, ExternalLink, Eye } from "lucide-react";
+import { Trash2, ChevronDown, ChevronUp, Save, X, Sparkles, AlertCircle, PenLine, Link2, ImageIcon, Pencil, ExternalLink, Eye, Globe } from "lucide-react";
 import { getPostsFromFirestore, addPost, updatePost, deletePost } from "../../services/firestoreService";
 import { uploadImage } from "../../services/storageService";
+import { getAllPostsStatic } from "../../utils/blog";
+
+const STATIC_PAGES = ["", "receitas", "cronograma", "guia", "faq", "blog", "sobre"];
 
 const CATEGORIAS = ["Guias", "Nutrição", "BLW", "Dicas", "Receitas", "Desenvolvimento", "Saúde"];
 
@@ -30,6 +33,8 @@ export default function AdminBlog() {
   const [editingId, setEditingId] = useState(null);
   const [msg, setMsg] = useState(null);
   const [claudeAvailable, setClaudeAvailable] = useState(true);
+  const [indexing, setIndexing] = useState(false);
+  const [indexProgress, setIndexProgress] = useState(null);
   const coverRef = useRef(null);
   const img2Ref = useRef(null);
 
@@ -164,6 +169,45 @@ export default function AdminBlog() {
     setSaving(false);
   }
 
+  async function handleIndexAll() {
+    const siteUrl = typeof window !== "undefined" ? window.location.origin : "https://papazz.com.br";
+    const slugs = new Set(getAllPostsStatic().map((p) => p.slug));
+    posts.forEach((p) => slugs.add(p.slug));
+
+    const urls = [
+      ...STATIC_PAGES.map((s) => `${siteUrl}/${s}`),
+      ...[...slugs].map((s) => `${siteUrl}/blog/${s}`),
+    ];
+
+    if (!confirm(`Solicitar indexação de ${urls.length} URLs no Google?`)) return;
+
+    setIndexing(true);
+    setMsg(null);
+    let ok = 0, fail = 0, notConfigured = false;
+
+    for (let i = 0; i < urls.length; i++) {
+      setIndexProgress({ done: i, total: urls.length });
+      try {
+        const res = await fetch("/api/google-index", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url: urls[i] }),
+        });
+        if (res.status === 503) { notConfigured = true; break; }
+        if (res.ok) ok++; else fail++;
+      } catch { fail++; }
+    }
+
+    setIndexProgress(null);
+    setIndexing(false);
+
+    if (notConfigured) {
+      setMsg({ type: "error", text: "Indexação não configurada. Adicione GOOGLE_SERVICE_ACCOUNT_KEY nas variáveis da Vercel." });
+    } else {
+      setMsg({ type: "success", text: `Indexação enviada: ${ok} ok, ${fail} falhas. O Google processa em alguns dias.` });
+    }
+  }
+
   async function handleDelete(id, title) {
     if (!confirm(`Excluir "${title}"?`)) return;
     await deletePost(id);
@@ -182,6 +226,11 @@ export default function AdminBlog() {
         </div>
         {!creationMode && (
           <div className="flex gap-2">
+            <button onClick={handleIndexAll} disabled={indexing}
+              className="flex items-center gap-2 bg-green-600 text-white px-4 py-2.5 rounded-[10px] font-semibold hover:bg-green-700 transition text-sm disabled:opacity-60">
+              <Globe size={16} />
+              {indexing && indexProgress ? `Indexando ${indexProgress.done}/${indexProgress.total}...` : "Indexar no Google"}
+            </button>
             <button onClick={() => { setCreationMode("ia"); setMsg(null); setIaInput(""); setIaKeywords(""); }}
               className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-4 py-2.5 rounded-[10px] font-semibold hover:from-purple-700 hover:to-indigo-700 transition text-sm">
               <Sparkles size={16} /> Gerar com IA
