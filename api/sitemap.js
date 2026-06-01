@@ -41,6 +41,11 @@ const STATIC_POSTS = [
   "bebe-pode-tomar-leite-de-vaca",
   "cardapio-bebe-10-meses",
   "bebe-so-quer-mamar-nao-come",
+  "bebe-pode-comer-amendoim",
+  "neofobia-alimentar-bebe",
+  "alimentos-ricos-em-ferro-para-bebe",
+  "bebe-com-diarreia-o-que-dar",
+  "cardapio-bebe-12-meses",
 ];
 
 async function getFirestorePosts() {

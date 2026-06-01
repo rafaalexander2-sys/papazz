@@ -4172,4 +4172,474 @@ Fora esses casos, recusar comida e preferir o peito no início é parte normal d
 - [Bebê Recusa Comida no BLW](/blog/bebe-recusa-comida-blw)
     `,
   },
+  {
+    id: 30,
+    slug: "bebe-pode-comer-amendoim",
+    title: "Bebê Pode Comer Amendoim? Como Introduzir o Alergênico Cedo",
+    description: "Sim, o bebê pode comer amendoim a partir dos 6 meses. Introduzir cedo reduz o risco de alergia. Veja como oferecer com segurança e o que observar.",
+    category: "Dúvidas Comuns",
+    date: "2026-06-01",
+    readingTime: "7 min",
+    image: "https://images.unsplash.com/photo-1567360425618-1594206637d2?w=800&h=600&fit=crop",
+    author: "Equipe Papazz",
+    keywords: ["bebê pode comer amendoim", "amendoim na introdução alimentar", "alergia amendoim bebê", "quando dar amendoim ao bebê", "pasta de amendoim bebê"],
+    content: `
+Sim, o bebê pode e **deve** comer amendoim a partir dos 6 meses. A ciência virou o jogo nos últimos anos: introduzir o amendoim cedo **reduz** o risco de alergia, ao contrário do que se pensava antes.
+
+## Por Que Introduzir o Amendoim Cedo
+
+O estudo LEAP (Learning Early About Peanut Allergy), publicado no New England Journal of Medicine, mostrou que bebês de alto risco que consumiram amendoim antes dos 12 meses tiveram **80% menos chance** de desenvolver alergia.
+
+A partir disso, a Sociedade Brasileira de Pediatria atualizou a orientação: não há motivo para adiar alergênicos como amendoim, ovo, peixe e leite. A janela dos 6 aos 12 meses é a ideal para apresentar esses alimentos.
+
+## Como Oferecer Amendoim Ao Bebê
+
+**Nunca ofereça amendoim inteiro.** É um risco de engasgo grave. Use sempre em forma segura:
+
+- **Pasta de amendoim integral** (sem açúcar e sem sal): dissolva uma colher de chá em leite materno ou fruta amassada
+- **Amendoim moído fino** polvilhado sobre a papinha
+- **Pasta diluída** em água morna para textura mais líquida
+
+## Como Fazer a Primeira Oferta com Segurança
+
+1. Faça **em casa**, nunca na creche ou fora
+2. Prefira **pela manhã**, para observar o dia todo
+3. Ofereça uma **quantidade pequena** na primeira vez, equivalente a meia colher de chá de pasta
+4. Não misture com outros alimentos novos no mesmo dia
+5. Observe por 2 horas
+
+## Sinais de Reação Alérgica
+
+A maioria das reações acontece nos primeiros 30 a 60 minutos:
+
+- Urticária ou manchas vermelhas na pele
+- Inchaço nos lábios, língua ou rosto
+- Vômito
+- Tosse, chiado no peito
+- Palidez ou alteração de consciência
+
+**Inchaço de boca ou dificuldade respiratória é emergência. Ligue 192 ou vá ao pronto-socorro imediatamente.**
+
+## Quem Tem Alto Risco de Alergia
+
+Se o bebê tem eczema grave ou já é alérgico a ovo, o risco de alergia ao amendoim é maior. Nesses casos, converse com o pediatra antes de introduzir. Em alguns casos, o médico pode recomendar teste antes da oferta em casa.
+
+Para bebês sem eczema ou alergia conhecida, a introdução pode ser feita normalmente em casa.
+
+## Pasta de Amendoim: Como Escolher
+
+Leia o rótulo. A pasta ideal para o bebê tem:
+
+- Apenas amendoim na lista de ingredientes
+- Zero açúcar
+- Zero sal
+- Zero aditivos
+
+Marcas com amendoim e sal em pequena quantidade (menos de 100mg de sódio por porção) também servem, mas prefira as sem sal quando possível.
+
+## Depois da Primeira Oferta
+
+Se o bebê tolerou bem, continue oferecendo amendoim **regularmente**, pelo menos 2 vezes por semana. A exposição frequente é o que mantém a tolerância.
+
+## Resumo Rápido
+
+| Pergunta | Resposta |
+|---|---|
+| A partir de quando? | 6 meses |
+| Inteiro pode? | Nunca, risco de engasgo |
+| Como oferecer? | Pasta diluída ou moído fino |
+| Oferecer sempre? | Sim, 2x por semana mínimo |
+| Alto risco: fazer o quê? | Consultar pediatra antes |
+
+## Continue Lendo
+
+- [Alergia Alimentar no Bebê: Sintomas](/blog/alergia-alimentar-bebe-sintomas)
+- [Alimentos Proibidos Para Bebê de Até 1 Ano](/blog/alimentos-proibidos-bebe-1-ano)
+    `,
+  },
+  {
+    id: 31,
+    slug: "neofobia-alimentar-bebe",
+    title: "Neofobia Alimentar no Bebê: O Que É e Como Lidar",
+    description: "Neofobia alimentar é o medo de alimentos novos, comum entre 1 e 3 anos. Entenda por que acontece e estratégias para ampliar o cardápio sem brigas.",
+    category: "Dúvidas Comuns",
+    date: "2026-06-01",
+    readingTime: "8 min",
+    image: "https://images.unsplash.com/photo-1576867757603-05b134ebc379?w=800&h=600&fit=crop",
+    author: "Equipe Papazz",
+    keywords: ["neofobia alimentar bebê", "bebê não aceita comida nova", "criança seletiva alimentar", "neofobia alimentar", "criança recusa tudo"],
+    content: `
+Seu bebê comia tudo e de repente passou a recusar qualquer coisa diferente? Provavelmente é **neofobia alimentar**, e é completamente normal.
+
+## O Que é Neofobia Alimentar
+
+Neofobia alimentar é o **medo ou rejeição de alimentos novos ou desconhecidos**. A palavra vem do grego: "neo" (novo) + "phobia" (medo).
+
+É mais comum entre 1 e 3 anos, justamente quando a criança começa a ter mais autonomia e consciência sobre o que coloca na boca. Evolutivamente, faz sentido: na pré-história, evitar alimentos desconhecidos era uma proteção contra envenenamento.
+
+## Como Saber se É Neofobia
+
+Sinais típicos:
+
+- Recusa alimentos que nunca experimentou, só pela aparência
+- Aceita bem os alimentos que já conhece
+- Rejeita o mesmo alimento que comia antes, se mudar a textura ou a forma
+- Cheira ou examina o alimento antes de recusar
+- Aceita o mesmo alimento em contextos diferentes (casa da avó, restaurante)
+
+É diferente de seletividade alimentar grave, que envolve recusa de grupos inteiros de alimentos e pode ter base sensorial mais profunda.
+
+## Por Que Acontece Mais Entre 1 e 3 Anos
+
+Nessa fase, o cérebro da criança está em modo de **autonomia e teste de limites**. Ela quer controlar o que entra no próprio corpo. A neofobia é uma expressão normal desse desenvolvimento.
+
+O fato de o crescimento desacelerar após o primeiro ano também reduz o apetite, o que intensifica a seletividade.
+
+## O Que Ajuda (e O Que Piora)
+
+### O que ajuda:
+
+**Exposição repetida sem pressão**
+Ofereça o alimento novo de 10 a 15 vezes sem insistir que a criança coma. Só colocar no prato já é exposição. A tolerância aumenta com o tempo.
+
+**Comer junto**
+A criança aprende vendo os adultos e irmãos comerem com prazer. Refeições em família aceleram muito a aceitação.
+
+**Envolver na preparação**
+Crianças que ajudam a cozinhar ou escolher o legume no mercado tendem a comer mais.
+
+**Apresentar de formas diferentes**
+Brócolis recusado cozido pode ser aceito assado com azeite. Cenoura rejeitada pode ir em bolinho.
+
+**Misturar o novo com o aceito**
+Apresente o alimento novo ao lado (não misturado) de um que a criança já gosta.
+
+### O que piora:
+
+- Forçar, chantagear ou fazer aviãozinho
+- Criar um prato separado sempre que recusa
+- Demonstrar ansiedade na hora da refeição
+- Oferecer só o que ela aceita para "não dar trabalho"
+- Desistir após a primeira ou segunda recusa
+
+## Quanto Tempo Dura
+
+A neofobia tende a diminuir naturalmente entre os 5 e 6 anos, quando a criança tem mais contexto social e escolar que estimula a variar. Com estratégias certas, melhora bem antes disso.
+
+## Quando Procurar Ajuda
+
+Busque um nutricionista pediátrico ou terapeuta ocupacional se:
+
+- A criança come menos de 15 a 20 alimentos diferentes no total
+- Há rejeição por textura de forma intensa (ex: qualquer coisa cremosa)
+- O problema afeta o crescimento ou causa conflito familiar grave
+- Há sinais de ansiedade intensa em torno da comida
+
+## Resumo Rápido
+
+- Neofobia é normal entre 1 e 3 anos
+- Ofereça o alimento novo várias vezes, sem pressão
+- Coma junto e envolva a criança na cozinha
+- Não force, não ceda totalmente: mantenha a oferta
+- Melhora sozinha, mas estratégia acelera muito
+
+## Continue Lendo
+
+- [Bebê Não Quer Comer: Soluções](/blog/bebe-nao-quer-comer-solucoes)
+- [Bebê Recusa Comida no BLW](/blog/bebe-recusa-comida-blw)
+    `,
+  },
+  {
+    id: 32,
+    slug: "alimentos-ricos-em-ferro-para-bebe",
+    title: "Alimentos Ricos em Ferro Para Bebê: Lista e Como Aproveitar Melhor",
+    description: "Carnes, feijão, lentilha e vegetais escuros são ricos em ferro para o bebê. Veja a lista completa e como combinar para absorção máxima e prevenir anemia.",
+    category: "Nutrição",
+    date: "2026-06-01",
+    readingTime: "8 min",
+    image: "https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=800&h=600&fit=crop",
+    author: "Equipe Papazz",
+    keywords: ["alimentos ricos em ferro para bebê", "ferro na alimentação do bebê", "anemia bebê", "bebê com anemia o que comer", "fonte de ferro bebê"],
+    content: `
+O ferro é um dos nutrientes mais importantes nos primeiros anos de vida. A deficiência de ferro é a causa mais comum de anemia em bebês brasileiros e pode afetar o desenvolvimento cerebral, o crescimento e a imunidade.
+
+A boa notícia: com o cardápio certo, dá para prevenir e tratar com comida.
+
+## Por Que o Ferro é Tão Importante Nessa Fase
+
+Até os 6 meses, o bebê usa o estoque de ferro que recebeu da mãe na gravidez. Depois disso, esse estoque se esgota e o ferro precisa vir da alimentação. Por isso a introdução alimentar é tão importante para esse nutriente.
+
+## Dois Tipos de Ferro
+
+**Ferro heme** (de origem animal): absorvido com muito mais eficiência, entre 15% e 35%.
+**Ferro não-heme** (de origem vegetal): absorção menor, entre 2% e 10%, mas aumenta muito com vitamina C.
+
+## Lista de Alimentos Ricos em Ferro Para Bebê
+
+### Fontes animais (ferro heme, melhor absorção)
+
+| Alimento | Ferro por 100g |
+|---|---|
+| Fígado bovino | 6,5 mg |
+| Carne vermelha moída | 2,5 mg |
+| Frango (coxa/sobrecoxa) | 1,3 mg |
+| Ovo (gema) | 2,7 mg |
+| Atum em água | 1,3 mg |
+| Sardinha | 2,9 mg |
+
+### Fontes vegetais (ferro não-heme, combine com vitamina C)
+
+| Alimento | Ferro por 100g |
+|---|---|
+| Lentilha cozida | 3,3 mg |
+| Feijão preto cozido | 2,0 mg |
+| Grão-de-bico cozido | 2,9 mg |
+| Tofu | 2,7 mg |
+| Espinafre cozido | 3,6 mg |
+| Couve cozida | 1,2 mg |
+| Aveia | 4,7 mg |
+
+## Como Aumentar a Absorção do Ferro Vegetal
+
+A vitamina C quase dobra a absorção do ferro não-heme. Combine sempre:
+
+- Feijão com suco de laranja de sobremesa
+- Lentilha com tomate no prato
+- Espinafre com limão
+- Aveia com morango ou kiwi amassado
+
+## O Que Atrapalha a Absorção do Ferro
+
+Evite esses alimentos junto com as refeições ricas em ferro:
+
+- **Leite e derivados**: o cálcio compete com o ferro
+- **Chá e café**: mesmo chá de ervas reduz absorção
+- **Excesso de fibras** de uma vez
+
+Não precisa eliminar, só não juntar na mesma refeição das principais fontes de ferro.
+
+## Cardápio Prático Para Aumentar o Ferro
+
+**Almoço rico em ferro:**
+Arroz + feijão preto + carne moída + couve refogada + laranja de sobremesa
+
+**Jantar rico em ferro:**
+Lentilha com frango desfiado + cenoura + tomate + limão no prato
+
+**Café com ferro:**
+Aveia com morango amassado ou ovo mexido com cheiro-verde
+
+## Quando Suspeitar de Anemia
+
+Converse com o pediatra se o bebê apresentar:
+
+- Palidez na pele, gengivas ou olhos
+- Cansaço e sonolência fora do comum
+- Falta de apetite persistente
+- Crescimento mais lento que o esperado
+
+O diagnóstico é feito por exame de sangue. Não dê suplemento de ferro por conta própria.
+
+## Resumo Rápido
+
+- Priorize carne vermelha, fígado, ovo e leguminosas
+- Combine ferro vegetal com vitamina C na mesma refeição
+- Evite leite e chá junto com as refeições ricas em ferro
+- Fígado 1 a 2x por semana é uma das melhores fontes
+
+## Continue Lendo
+
+- [Ferro na Alimentação do Bebê](/blog/ferro-na-alimentacao-do-bebe)
+- [Proteínas na Introdução Alimentar](/blog/proteinas-introducao-alimentar)
+    `,
+  },
+  {
+    id: 33,
+    slug: "bebe-com-diarreia-o-que-dar",
+    title: "Bebê Com Diarreia: O Que Dar Para Comer e O Que Evitar",
+    description: "Bebê com diarreia precisa de hidratação e comida leve. Veja o que oferecer, o que evitar e quando procurar o médico durante a diarreia do bebê.",
+    category: "Saúde",
+    date: "2026-06-01",
+    readingTime: "8 min",
+    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop",
+    author: "Equipe Papazz",
+    keywords: ["bebê com diarreia o que dar", "diarreia bebê alimentação", "o que dar de comer para bebê com diarreia", "diarreia bebê introdução alimentar", "bebê com fezes moles"],
+    content: `
+Diarreia em bebê assusta, mas na maioria dos casos passa em poucos dias com cuidados simples de alimentação e hidratação. Veja o que fazer.
+
+## O Que é Diarreia em Bebê
+
+Diarreia é o aumento na frequência e na liquidez das fezes. Em bebês em introdução alimentar, considera-se diarreia quando as fezes ficam muito mais líquidas que o normal do bebê, com aumento de frequência.
+
+Fezes amolecidas depois de uma fruta nova ou legume diferente não são necessariamente diarreia. O padrão do bebê é o ponto de referência.
+
+## Primeira Medida: Hidratação
+
+A diarreia elimina líquidos e eletrólitos. O maior risco é a **desidratação**. A primeira ação é oferecer líquidos com frequência:
+
+- **Leite materno**: continue amamentando normalmente, com mais frequência
+- **Água**: ofereça mais do que o habitual
+- **Soro de reidratação oral (SRO)**: indicado pelo pediatra quando há sinais de desidratação
+
+Não dê suco de fruta, refrigerante ou chá durante a diarreia. Pioram a perda de líquidos.
+
+## O Que Dar Para Comer
+
+### Alimentos seguros e que ajudam
+- **Arroz bem cozido e macio**
+- **Banana**: tem pectina, que ajuda a firmar as fezes
+- **Maçã cozida ou raspada**: também tem pectina
+- **Cenoura cozida e amassada**: nutritiva e de fácil digestão
+- **Batata cozida amassada**: bland e fácil de digerir
+- **Frango desfiado cozido**: proteína leve
+- **Iogurte natural**: os probióticos podem ajudar a recuperar a flora intestinal
+
+### A dieta BRAT (referência popular)
+Banana, Arroz, Maçã (Apple) e Torrada são alimentos brandos classicamente usados. Funcionam bem como base, mas não precisam ser os únicos.
+
+## O Que Evitar Durante a Diarreia
+
+- **Frutas laxantes**: mamão, ameixa, laranja com bagaço, kiwi
+- **Feijão e leguminosas**: podem aumentar os gases e a fermentação
+- **Leite de vaca**: em bebês que já tomam, pode irritar o intestino durante o episódio
+- **Sucos de fruta**
+- **Alimentos gordurosos**
+- **Açúcar e industrializados**
+
+## Continue a Alimentação Normal
+
+A orientação atual é **não interromper a alimentação** durante a diarreia. Deixar o bebê em jejum não acelera a recuperação e pode aumentar a desnutrição. Ofereça o que o bebê aceitar, com mais líquidos.
+
+## Sinais de Alerta: Quando Ir ao Médico
+
+Procure atendimento se:
+
+- O bebê tem **menos de 6 meses**
+- Febre acima de 38,5°C
+- Sangue ou muco nas fezes
+- Vômito frequente que impede hidratação
+- Sinais de desidratação: boca seca, olhos fundos, sem lágrimas ao chorar, moleira afundada, xixi escasso
+- Diarreia com mais de **5 a 6 episódios por dia**
+- O bebê está muito sonolento, prostrado ou irritado
+
+Não dê medicamentos antidiarreicos sem prescrição. Eles não são indicados para bebês.
+
+## Resumo Rápido
+
+| O que fazer | O que evitar |
+|---|---|
+| Oferecer mais líquidos | Sucos de fruta |
+| Banana, arroz, cenoura cozida | Mamão, ameixa, kiwi |
+| Continuar amamentando | Parar a alimentação |
+| Iogurte natural | Leite de vaca puro |
+| Consultar médico se houver sangue ou desidratação | Automedicação |
+
+## Continue Lendo
+
+- [Quando Dar Água Para o Bebê](/blog/quando-dar-agua-para-o-bebe)
+- [Frutas Que Soltam o Intestino do Bebê](/blog/frutas-que-soltam-o-intestino-do-bebe)
+    `,
+  },
+  {
+    id: 34,
+    slug: "cardapio-bebe-12-meses",
+    title: "Cardápio Bebê 12 Meses: Transição Para a Comida da Família",
+    description: "Ao completar 1 ano, o bebê começa a comer a comida da família. Veja como montar o cardápio dos 12 meses, o que muda e o que ainda evitar.",
+    category: "Cardápios",
+    date: "2026-06-01",
+    readingTime: "9 min",
+    image: "https://images.unsplash.com/photo-1555243896-c709bfa0b564?w=800&h=600&fit=crop",
+    author: "Equipe Papazz",
+    keywords: ["cardápio bebê 12 meses", "alimentação bebê 1 ano", "comida bebê 12 meses", "bebê 1 ano o que pode comer", "cardápio 1 ano"],
+    content: `
+O primeiro aniversário marca uma virada na alimentação. Aos 12 meses, o bebê começa a migrar para **a comida da família** e muitas restrições ficam para trás.
+
+## O Que Muda Aos 12 Meses
+
+- **Sal**: uma pitada pequena já pode entrar no prato
+- **Leite de vaca integral**: pode ser oferecido como bebida (400 a 500 ml por dia)
+- **Mel**: finalmente liberado após 1 ano
+- **Comida da família**: o bebê come praticamente o mesmo que os adultos, com menos tempero forte e sem pimenta
+- **Textura**: pedaços maiores e mais firmes, mastigação mais desenvolvida
+
+## O Que Ainda Evitar
+
+Mesmo após 1 ano, algumas restrições continuam:
+
+- **Açúcar adicionado**: recomendação de evitar até os 2 anos
+- **Ultraprocessados**: salgadinho, biscoito recheado, macarrão instantâneo
+- **Embutidos**: salsicha, mortadela, presunto
+- **Refrigerante e suco industrializado**
+- **Pimenta ardida em excesso**
+- **Frutos do mar com alto teor de mercúrio** (peixe-espada, tubarão)
+
+## Estrutura do Dia Aos 12 Meses
+
+| Refeição | Horário |
+|---|---|
+| Café da manhã | Ao acordar |
+| Lanche da manhã | Meio da manhã |
+| Almoço | Meio-dia |
+| Lanche da tarde | Meio da tarde |
+| Jantar | Início da noite |
+| Leite | Antes de dormir (se ainda amamentar) |
+
+## Exemplos de Café da Manhã
+
+- Pão integral com pasta de abacate e ovo mexido
+- Tapioca com queijo e banana
+- Iogurte natural com granola sem açúcar e frutas
+- Mingau de aveia com fruta e canela
+
+## Exemplos de Almoço
+
+- Arroz, feijão, bife grelhado picado e salada de tomate
+- Macarrão com molho de tomate caseiro e frango
+- Arroz, lentilha, peixe grelhado e brócolis
+- Risoto de legumes com frango desfiado
+
+Fruta de sobremesa ou iogurte.
+
+## Exemplos de Lanche
+
+- Fruta em pedaços
+- Iogurte natural
+- Pão com requeijão
+- Bolo simples caseiro sem açúcar (com adoçante natural como banana)
+
+## Exemplos de Jantar
+
+- Sopa de legumes com macarrão e frango
+- Arroz, feijão e ovo mexido com legumes
+- Purê de batata com carne moída e ervilha
+
+## Leite de Vaca: Como Introduzir
+
+Se o bebê estava em fórmula ou leite materno, faça a transição gradualmente. Ofereça o leite de vaca em copo, não em mamadeira. A quantidade ideal é de **400 a 500 ml por dia**. Mais que isso atrapalha o apetite e a absorção de ferro.
+
+Prefira o leite integral. O leite desnatado não tem gordura suficiente para o desenvolvimento do cérebro nessa fase.
+
+## Dicas Para a Transição
+
+- Tempere a comida do bebê junto com a família, separando antes de salgar
+- Envolva o bebê nas refeições à mesa
+- Varie ao máximo as cores e os alimentos
+- Mantenha a rotina de horários mesmo com a mudança de cardápio
+
+## Resumo Rápido
+
+| Item | Antes de 1 ano | Depois de 1 ano |
+|---|---|---|
+| Sal | Não | Pitada pequena |
+| Mel | Não | Sim |
+| Leite de vaca como bebida | Não | Sim, integral |
+| Açúcar | Não | Evitar até 2 anos |
+| Comida da família | Com adaptação | Sim |
+
+## Continue Lendo
+
+- [Cardápio Bebê 10 Meses](/blog/cardapio-bebe-10-meses)
+- [Alimentos Proibidos Para Bebê de Até 1 Ano](/blog/alimentos-proibidos-bebe-1-ano)
+    `,
+  },
 ];
