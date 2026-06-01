@@ -3227,4 +3227,561 @@ Não precisa acertar tudo todos os dias. Pense na semana como unidade:
 - [Cardápio Bebê 7 Meses](/blog/cardapio-bebe-7-meses)
     `,
   },
+  {
+    id: 19,
+    slug: "bebe-pode-comer-ovo",
+    title: "Bebê Pode Comer Ovo? Quando e Como Introduzir com Segurança",
+    description: "Sim, o bebê pode comer ovo desde os 6 meses, inclusive a gema e a clara. Saiba quando introduzir, como oferecer e o que fazer em caso de alergia.",
+    category: "Dúvidas Comuns",
+    date: "2026-05-20",
+    readingTime: "8 min",
+    image: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=800&h=600&fit=crop",
+    author: "Equipe Papazz",
+    keywords: ["bebê pode comer ovo", "ovo na introdução alimentar", "gema para bebê", "clara de ovo bebê", "quando dar ovo ao bebê", "alergia a ovo bebê"],
+    content: `
+Essa é uma das dúvidas que mais aparece no início da introdução alimentar. A resposta curta é: **sim, o bebê pode comer ovo a partir dos 6 meses**, gema e clara, sem precisar esperar.
+
+A recomendação antiga de adiar a clara para depois de 1 ano já foi abandonada. Estudos recentes mostram que oferecer ovo cedo pode até reduzir o risco de alergia.
+
+## A Partir de Que Idade o Bebê Pode Comer Ovo?
+
+Aos **6 meses completos**, junto com o início da introdução alimentar. Não há motivo para separar gema e clara nem para introduzir uma de cada vez por questão de idade.
+
+A orientação atual da Sociedade Brasileira de Pediatria é introduzir os alimentos alergênicos cedo, incluindo ovo, amendoim e peixe, dentro da janela dos 6 aos 12 meses.
+
+## Por Que o Ovo é Tão Recomendado
+
+O ovo é um dos alimentos mais completos para o bebê:
+
+- **Proteína de alto valor biológico**
+- **Ferro**, importante para evitar anemia
+- **Colina**, essencial para o desenvolvimento do cérebro
+- **Vitaminas A, D, E e do complexo B**
+- **Gordura boa** que ajuda na saciedade
+
+## Como Oferecer Ovo ao Bebê
+
+### No método BLW (pedaços)
+- Ovo cozido cortado em gomos
+- Omelete simples cortada em tiras do tamanho de um dedo
+- Ovo mexido em pedaços maiores que o bebê consiga pegar
+
+### No método tradicional (papinha)
+- Ovo cozido amassado com garfo
+- Gema misturada ao purê de legumes
+- Ovo mexido bem amassado
+
+Sempre **bem cozido**. Nada de ovo cru, mole ou com gema molenga, pelo risco de salmonela.
+
+## Quantas Vezes na Semana?
+
+Pode oferecer ovo todos os dias, se quiser. Não existe limite rígido para bebês saudáveis. O ideal é variar as fontes de proteína ao longo da semana, alternando com carne, frango, peixe e feijão.
+
+## Como Introduzir Pensando em Alergia
+
+Ovo é um dos alergênicos mais comuns na infância. Para introduzir com segurança:
+
+1. Ofereça pela **primeira vez em casa**, não na creche ou na rua
+2. Prefira o **período da manhã**, para observar o bebê durante o dia
+3. Comece com **pouca quantidade** na primeira vez
+4. Ofereça **isolado** de outros alimentos novos no mesmo dia
+
+Assim, se houver reação, fica fácil identificar o causador.
+
+## Sinais de Alergia a Ovo
+
+Fique atento nas primeiras ofertas:
+
+- Manchas vermelhas na pele ou urticária
+- Inchaço nos lábios, pálpebras ou rosto
+- Vômito ou diarreia logo após comer
+- Tosse, chiado ou dificuldade para respirar
+
+Reações leves de pele costumam aparecer em minutos. **Qualquer sinal de inchaço de boca ou dificuldade respiratória é emergência. Procure socorro imediatamente.**
+
+## Mito: Ovo Faz Mal Para o Fígado do Bebê
+
+Não faz. Essa é uma crença antiga sem base científica. O ovo é seguro e nutritivo para bebês saudáveis, e o colesterol da gema não prejudica o fígado de uma criança sem problemas de saúde.
+
+## Resumo Rápido
+
+| Dúvida | Resposta |
+|---|---|
+| Idade mínima | 6 meses |
+| Pode dar a clara? | Sim, desde o início |
+| Cru ou mole? | Nunca, sempre bem cozido |
+| Quantas vezes por semana? | Sem limite para bebê saudável |
+| Ofereço isolado? | Sim, na primeira vez |
+
+## Continue Lendo
+
+- [Alergia Alimentar no Bebê: Sintomas](/blog/alergia-alimentar-bebe-sintomas)
+- [Proteínas na Introdução Alimentar](/blog/proteinas-introducao-alimentar)
+    `,
+  },
+  {
+    id: 20,
+    slug: "quando-dar-agua-para-o-bebe",
+    title: "Quando Dar Água Para o Bebê? Quantidade Certa por Idade",
+    description: "A água deve ser oferecida a partir dos 6 meses, junto com a introdução alimentar. Veja a quantidade ideal por idade e como oferecer da forma correta.",
+    category: "Dúvidas Comuns",
+    date: "2026-05-22",
+    readingTime: "7 min",
+    image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=800&h=600&fit=crop",
+    author: "Equipe Papazz",
+    keywords: ["quando dar água para o bebê", "água para bebê 6 meses", "quantidade de água bebê", "bebê pode beber água", "copo de transição bebê"],
+    content: `
+A água entra na rotina do bebê **a partir dos 6 meses**, exatamente quando começa a introdução alimentar. Antes disso, o bebê não precisa de água.
+
+## Por Que Não Dar Água Antes dos 6 Meses
+
+Até os 6 meses, o leite materno ou a fórmula fornecem **toda a hidratação** que o bebê precisa, mesmo em dias quentes. Oferecer água nessa fase pode:
+
+- Reduzir a fome e atrapalhar o ganho de peso
+- Sobrecarregar os rins, ainda imaturos
+- Em excesso, causar intoxicação por água, que é grave
+
+Por isso, água só depois dos 6 meses.
+
+## Quanta Água o Bebê Deve Beber
+
+A quantidade é pequena no começo. O leite continua sendo a principal fonte de líquido.
+
+| Idade | Água por dia (aproximado) |
+|---|---|
+| 6 a 12 meses | 100 a 200 ml |
+| 1 a 2 anos | 200 a 400 ml |
+| Acima de 2 anos | 400 a 600 ml |
+
+Esses valores são uma referência. Em dias quentes ou se o bebê está mais ativo, ele pode beber um pouco mais.
+
+## Como Oferecer Água ao Bebê
+
+### Use copo, não mamadeira
+A recomendação é oferecer água em **copo aberto** ou **copo de transição** (copo 360 ou com canudo). Isso estimula a mastigação, a fala e evita problemas dentários.
+
+### Quando oferecer
+- Durante e após as refeições
+- Em pequenos goles ao longo do dia
+- Sempre que o bebê demonstrar sede
+
+Não force. O bebê regula bem a própria sede.
+
+## Que Tipo de Água Usar
+
+- **Água filtrada ou fervida e resfriada** é o ideal
+- Água mineral pode ser usada, mas escolha as de baixo teor de sódio
+- Não precisa ferver água filtrada de boa procedência todos os dias
+
+## Sinais de Que o Bebê Está Bem Hidratado
+
+- Faz xixi claro várias vezes ao dia
+- Boca e lábios úmidos
+- Está ativo e disposto
+
+Sinais de desidratação incluem xixi muito amarelo e espaçado, boca seca e moleira afundada. Nesses casos, procure o pediatra.
+
+## E Sucos e Chás?
+
+- **Sucos**: evite no primeiro ano. Prefira a fruta inteira, que tem mais fibra e menos açúcar concentrado
+- **Chás**: não são necessários e podem conter substâncias não indicadas para bebês. Só com orientação do pediatra
+
+A água pura é sempre a melhor escolha.
+
+## Resumo Rápido
+
+| Pergunta | Resposta |
+|---|---|
+| A partir de quando? | 6 meses |
+| Em quê oferecer? | Copo, não mamadeira |
+| Quanto por dia (6 a 12m)? | 100 a 200 ml |
+| Suco pode? | Evitar no primeiro ano |
+
+## Continue Lendo
+
+- [Quando Começar a Introdução Alimentar](/blog/quando-comecar-introducao-alimentar)
+- [Introdução Alimentar: 12 Dicas](/blog/introducao-alimentar-12-dicas)
+    `,
+  },
+  {
+    id: 21,
+    slug: "frutas-que-soltam-o-intestino-do-bebe",
+    title: "Frutas Que Soltam o Intestino do Bebê: Lista e Como Usar",
+    description: "Mamão, ameixa, laranja e pera ajudam a soltar o intestino do bebê preso. Veja a lista completa, como oferecer e o que evitar na constipação.",
+    category: "Dúvidas Comuns",
+    date: "2026-05-25",
+    readingTime: "8 min",
+    image: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=800&h=600&fit=crop",
+    author: "Equipe Papazz",
+    keywords: ["frutas que soltam o intestino do bebê", "bebê preso intestino", "constipação bebê", "bebê com prisão de ventre", "mamão para bebê preso"],
+    content: `
+Se o seu bebê está com o intestino preso desde que começou a comida, você não está sozinha. A constipação é muito comum no início da introdução alimentar, quando o corpo se adapta aos alimentos sólidos.
+
+A boa notícia: algumas frutas ajudam muito a soltar o intestino do bebê de forma natural.
+
+## Frutas Que Soltam o Intestino do Bebê
+
+Essas são as mais eficazes, todas liberadas a partir dos 6 meses:
+
+| Fruta | Por que funciona |
+|---|---|
+| **Mamão** | Rico em fibra e água, efeito quase imediato |
+| **Ameixa** | A campeã, tem sorbitol que estimula o intestino |
+| **Laranja (com bagaço)** | Fibra e vitamina C, dê a fruta, não só o suco |
+| **Pera** | Fibra suave, boa para começar |
+| **Manga** | Fibra e água, ótima amassada |
+| **Uva (cortada)** | Efeito laxante leve |
+| **Kiwi** | Muito eficaz, ofereça maduro |
+
+## A Combinação Mais Poderosa
+
+Misturar **mamão com ameixa** é o truque clássico das mães e funciona muito bem. Você pode amassar mamão fresco com uma ameixa cozida sem caroço e oferecer no lanche.
+
+Para bebês muito presos, deixe **2 ou 3 ameixas secas de molho** na água quente por algumas horas, amasse e ofereça uma colher. Use com moderação para não soltar demais.
+
+## Frutas Que Prendem o Intestino
+
+Se o bebê está preso, **reduza** estas por uns dias:
+
+- Banana (principalmente a mais verde)
+- Maçã sem casca
+- Goiaba
+- Caju
+
+A banana madura demais e a maçã raspada são clássicos para prender, então evite na fase de constipação.
+
+## Além das Frutas: O Que Mais Ajuda
+
+### Água
+A partir dos 6 meses, ofereça água ao longo do dia. A falta de líquido é uma das principais causas de intestino preso.
+
+### Mais fibras no prato
+- Legumes como abóbora, beterraba e abobrinha
+- Feijão bem amassado
+- Aveia no mingau ou na fruta
+
+### Movimento
+- Bicicletinha com as perninhas
+- Massagem na barriga em sentido horário
+- Deixar o bebê se mexer no chão
+
+## Quando o Bebê Está Realmente Constipado?
+
+Nem todo bebê faz cocô todos os dias, e isso pode ser normal. O sinal de constipação verdadeira é o **cocô duro e ressecado**, em bolinhas, que causa dor e esforço.
+
+Sinais de alerta:
+- Fezes muito ressecadas, em bolinhas
+- Choro e esforço grande para evacuar
+- Sangue nas fezes por causa de fissura
+- Barriga inchada e dura
+
+## Quando Procurar o Pediatra
+
+Procure ajuda se:
+- A constipação dura mais de uma semana mesmo com ajustes
+- Há sangue frequente nas fezes
+- O bebê está sem apetite, com vômito ou febre
+- A barriga está muito distendida
+
+Não dê laxante ou qualquer remédio por conta própria.
+
+## Resumo Rápido
+
+**Soltam:** mamão, ameixa, laranja com bagaço, pera, manga, kiwi
+**Prendem:** banana, maçã sem casca, goiaba
+**Sempre:** ofereça água e movimente o bebê
+
+## Continue Lendo
+
+- [Quando Dar Água Para o Bebê](/blog/quando-dar-agua-para-o-bebe)
+- [Quantidade Ideal de Comida para o Bebê](/blog/quantidade-ideal-comida-bebe)
+    `,
+  },
+  {
+    id: 22,
+    slug: "tempero-para-comida-de-bebe",
+    title: "Tempero Para Comida de Bebê: O Que Pode e o Que Evitar",
+    description: "Bebê pode comer comida temperada com alho, cebola e ervas desde os 6 meses. Veja o que pode, o que evitar e por que sal e açúcar ficam de fora.",
+    category: "Dúvidas Comuns",
+    date: "2026-05-27",
+    readingTime: "7 min",
+    image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800&h=600&fit=crop",
+    author: "Equipe Papazz",
+    keywords: ["tempero para comida de bebê", "bebê pode comer com sal", "açúcar para bebê", "alho e cebola bebê", "comida de bebê sem sal"],
+    content: `
+A comida do bebê não precisa ser sem graça. Você pode e deve temperar, desde que use os temperos certos. A regra de ouro é simples: **tempero natural sim, sal e açúcar não**.
+
+## O Que Pode Usar no Tempero do Bebê
+
+A partir dos 6 meses, libere o sabor com:
+
+- **Alho** e **cebola**, refogados em pouco azeite
+- **Ervas frescas**: salsinha, cebolinha, coentro, manjericão, orégano
+- **Azeite de oliva** extravirgem
+- **Suco de limão** em pequena quantidade
+- **Açafrão, cúrcuma, cominho** em pouca quantidade
+- **Tomate, pimentão e cheiro-verde** para dar sabor
+
+Temperar bem desde o início ajuda o bebê a aceitar a comida da família e amplia o paladar.
+
+## Por Que Não Dar Sal Para o Bebê
+
+Antes de 1 ano, **nada de sal adicionado**. O motivo:
+
+- Os rins do bebê ainda são imaturos e não dão conta do excesso de sódio
+- Cria preferência por alimentos salgados desde cedo
+- Aumenta o risco de pressão alta no futuro
+
+O bebê já recebe o sódio natural dos próprios alimentos, que é suficiente. Depois de 1 ano, você pode usar uma pitada bem pequena.
+
+## Por Que Não Dar Açúcar Para o Bebê
+
+A recomendação é **zero açúcar até os 2 anos**. Isso inclui:
+
+- Açúcar de mesa, mel, melado e rapadura
+- Achocolatado e sucos adoçados
+- Bolacha, bolo e iogurte adoçado
+
+O açúcar vicia o paladar, aumenta o risco de cárie e obesidade, e faz o bebê rejeitar o sabor natural dos alimentos. A doçura das frutas é mais que suficiente.
+
+Atenção ao **mel**: além do açúcar, ele é proibido antes de 1 ano pelo risco de botulismo.
+
+## Temperos Para Evitar ou Usar Com Cuidado
+
+- **Pimenta ardida**: evite, irrita o estômago do bebê
+- **Caldos industrializados e temperos prontos**: cheios de sódio e aditivos, evite
+- **Shoyu e molhos prontos**: muito sal, deixe para mais tarde
+- **Embutidos como bacon para dar sabor**: não use
+
+## Como Refogar a Comida do Bebê
+
+Um refogado simples já transforma o prato:
+
+1. Aqueça um fio de azeite
+2. Doure alho e cebola picados bem fininhos
+3. Acrescente os legumes e a proteína
+4. Finalize com cheiro-verde fresco
+
+Esse é o mesmo tempero da comida da família, só sem o sal. Na prática, você pode separar a porção do bebê antes de salgar o resto.
+
+## A Comida do Bebê Pode Ser a Mesma da Família
+
+Sim, e esse é o ideal. Cozinhe normalmente, **separe a porção do bebê antes de adicionar sal e temperos fortes**, e amasse ou corte conforme a fase. Isso facilita a rotina e ajuda o bebê a comer de tudo.
+
+## Resumo Rápido
+
+| Tempero | Pode? |
+|---|---|
+| Alho, cebola, ervas | Sim, desde 6 meses |
+| Azeite de oliva | Sim |
+| Sal | Não antes de 1 ano |
+| Açúcar e mel | Não antes de 1 e 2 anos |
+| Caldo industrializado | Evitar |
+
+## Continue Lendo
+
+- [Como Fazer Papinha Nutritiva](/blog/como-fazer-papinha-nutritiva)
+- [Alimentos Proibidos Para Bebê de Até 1 Ano](/blog/alimentos-proibidos-bebe-1-ano)
+    `,
+  },
+  {
+    id: 23,
+    slug: "como-congelar-papinha",
+    title: "Como Congelar Papinha: Guia Prático Para Ganhar Tempo",
+    description: "Aprenda a congelar papinha com segurança, quanto tempo dura, como descongelar e quais alimentos não congelam bem. Organize a semana do seu bebê.",
+    category: "Guias",
+    date: "2026-05-29",
+    readingTime: "7 min",
+    image: "https://images.unsplash.com/photo-1607690424560-35d967d6ad7c?w=800&h=600&fit=crop",
+    author: "Equipe Papazz",
+    keywords: ["como congelar papinha", "congelar comida de bebê", "quanto tempo dura papinha congelada", "descongelar papinha", "papinha caseira congelada"],
+    content: `
+Congelar papinha é o segredo das mães organizadas. Você cozinha uma vez e tem comida saudável pronta para vários dias, sem recorrer a industrializados.
+
+## Por Que Congelar a Papinha
+
+- Economiza tempo no dia a dia
+- Garante comida caseira mesmo na correria
+- Reduz desperdício de alimentos
+- Mantém a maior parte dos nutrientes
+
+Ao contrário do que muitos pensam, o congelamento **preserva bem** as vitaminas quando feito do jeito certo.
+
+## Passo a Passo Para Congelar
+
+1. **Cozinhe** a papinha normalmente, sem sal
+2. **Resfrie rápido**, deixe esfriar em até 1 hora fora do fogo
+3. **Porcione** em potes pequenos ou forminhas de gelo de silicone
+4. **Identifique** com o nome e a data
+5. **Leve ao freezer** assim que esfriar
+
+A forminha de gelo é ótima porque você descongela só a quantidade que o bebê come, em cubinhos.
+
+## Quanto Tempo Dura a Papinha Congelada
+
+| Local | Duração |
+|---|---|
+| Freezer (-18°C) | Até 30 dias |
+| Geladeira (após descongelar) | 24 horas |
+| Temperatura ambiente | Nunca reaproveitar |
+
+O ideal é consumir em até **2 a 3 semanas** para manter sabor e nutrientes no melhor estado.
+
+## Como Descongelar Com Segurança
+
+A forma certa importa para evitar contaminação:
+
+- **Na geladeira**: passe da noite para o dia, é o método mais seguro
+- **No banho-maria**: aqueça em fogo baixo mexendo
+- **No micro-ondas**: descongele e aqueça mexendo bem, e teste a temperatura antes de servir
+
+Nunca descongele deixando a papinha na pia em temperatura ambiente, e **não recongele** papinha que já foi descongelada.
+
+## Alimentos Que Não Congelam Bem
+
+Alguns perdem textura ou qualidade:
+
+- **Batata** pura, fica com textura arenosa
+- **Folhas cruas** como alface
+- **Ovo cozido** picado, fica borrachudo
+- **Banana e abacate**, escurecem e mudam o gosto
+
+Frutas em geral são melhores frescas. Já purês de legumes, carnes e feijão congelam muito bem.
+
+## Dicas Para Manter os Nutrientes
+
+- Cozinhe no vapor sempre que possível
+- Use pouca água no cozimento
+- Não cozinhe demais os legumes
+- Aqueça só a porção que o bebê vai comer
+
+## Higiene é Essencial
+
+- Lave bem as mãos e os utensílios
+- Use potes limpos e bem fechados
+- Não junte papinha nova com sobra antiga
+- Descarte o que o bebê deixou no prato, não volte para o pote
+
+## Resumo Rápido
+
+| Pergunta | Resposta |
+|---|---|
+| Dura quanto no freezer? | Até 30 dias |
+| Pode recongelar? | Não |
+| Melhor recipiente? | Forminha de silicone |
+| Descongelar como? | Geladeira ou banho-maria |
+
+## Continue Lendo
+
+- [Como Fazer Papinha Nutritiva](/blog/como-fazer-papinha-nutritiva)
+- [15 Receitas Para Bebê de 6 Meses](/blog/15-receitas-bebe-6-meses)
+    `,
+  },
+  {
+    id: 24,
+    slug: "cardapio-bebe-9-meses",
+    title: "Cardápio Bebê 9 Meses: Exemplos Completos do Dia Todo",
+    description: "Monte o cardápio do bebê de 9 meses com café, almoço, lanche e jantar. Texturas, novos alimentos e exemplos práticos de refeições para a fase.",
+    category: "Cardápios",
+    date: "2026-05-31",
+    readingTime: "9 min",
+    image: "https://images.unsplash.com/photo-1488477181946-6428a0291777?w=800&h=600&fit=crop",
+    author: "Equipe Papazz",
+    keywords: ["cardápio bebê 9 meses", "alimentação bebê 9 meses", "o que bebê de 9 meses pode comer", "comida bebê 9 meses", "refeições bebê 9 meses"],
+    content: `
+Aos 9 meses, o bebê já é quase um comedor experiente. Ele come mais texturas, segura melhor os alimentos e provavelmente já faz três refeições principais mais um ou dois lanches.
+
+Veja como montar um cardápio variado e equilibrado para essa fase.
+
+## O Que Muda Aos 9 Meses
+
+- O bebê passa a aceitar **pedaços maiores** e comida mais consistente
+- A pinça (polegar e indicador) está se desenvolvendo, ótimo para o BLW
+- Já dá para oferecer **três refeições e dois lanches** por dia
+- O leite continua importante, mas a comida ganha mais espaço
+
+## Estrutura do Dia
+
+| Refeição | Horário aproximado |
+|---|---|
+| Café da manhã | Ao acordar |
+| Lanche da manhã | Meio da manhã |
+| Almoço | Meio-dia |
+| Lanche da tarde | Meio da tarde |
+| Jantar | Início da noite |
+
+O leite materno ou a fórmula entram entre as refeições e antes de dormir.
+
+## Exemplos de Café da Manhã
+
+- Mingau de aveia com fruta amassada
+- Pão integral amassado com fruta
+- Iogurte natural sem açúcar com pedaços de banana
+- Ovo mexido com tirinhas de mamão
+
+## Exemplos de Almoço
+
+Monte sempre com quatro grupos: **proteína, carboidrato, legume e leguminosa**.
+
+- Arroz, feijão amassado, frango desfiado e abóbora
+- Purê de batata, carne moída e brócolis no vapor
+- Macarrão, feijão, peixe sem espinha e cenoura
+- Arroz, lentilha, ovo cozido e abobrinha
+
+Finalize com uma fruta de sobremesa.
+
+## Exemplos de Lanche
+
+- Fruta picada em pedaços que o bebê segura
+- Iogurte natural
+- Pera ou banana amassada
+- Palitos de queijo branco sem sal
+
+## Exemplos de Jantar
+
+O jantar pode ser parecido com o almoço, com troca de ingredientes:
+
+- Sopa grossa de legumes com frango desfiado
+- Purê de mandioquinha com carne e couve refogada
+- Arroz, feijão e legumes amassados
+
+## Texturas Para a Fase
+
+Aos 9 meses, evite bater tudo no liquidificador. O ideal é:
+
+- **Amassar com garfo** em vez de peneirar
+- Oferecer **pedaços macios** que o bebê segura
+- Deixar a comida com **textura grossa**, não líquida
+
+Pular as texturas mais firmes nessa idade pode dificultar a mastigação depois.
+
+## Novos Alimentos Para Incluir
+
+- Peixes sem espinha como tilápia e pescada
+- Leguminosas variadas: lentilha, grão-de-bico, ervilha
+- Mais variedade de frutas e legumes coloridos
+- Queijos brancos sem sal
+
+## O Que Ainda Evitar
+
+- Sal e açúcar adicionados
+- Mel (só depois de 1 ano)
+- Alimentos duros e redondos inteiros (uva, pipoca, castanha)
+- Industrializados, embutidos e frituras
+
+## Resumo Rápido
+
+| Item | Aos 9 meses |
+|---|---|
+| Refeições | 3 principais + 2 lanches |
+| Textura | Amassada com pedaços macios |
+| Novos alimentos | Peixe, leguminosas variadas |
+| Continua proibido | Sal, açúcar, mel |
+
+## Continue Lendo
+
+- [Cardápio Bebê 8 Meses](/blog/cardapio-bebe-8-meses)
+- [Cardápio Bebê 7 Meses](/blog/cardapio-bebe-7-meses)
+    `,
+  },
 ];

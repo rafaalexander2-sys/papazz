@@ -30,6 +30,12 @@ const STATIC_POSTS = [
   "bebe-recusa-comida-blw",
   "proteinas-introducao-alimentar",
   "diversidade-alimentar-precoce",
+  "bebe-pode-comer-ovo",
+  "quando-dar-agua-para-o-bebe",
+  "frutas-que-soltam-o-intestino-do-bebe",
+  "tempero-para-comida-de-bebe",
+  "como-congelar-papinha",
+  "cardapio-bebe-9-meses",
 ];
 
 async function getFirestorePosts() {
