@@ -36,6 +36,11 @@ const STATIC_POSTS = [
   "tempero-para-comida-de-bebe",
   "como-congelar-papinha",
   "cardapio-bebe-9-meses",
+  "bebe-pode-comer-feijao",
+  "primeira-fruta-do-bebe",
+  "bebe-pode-tomar-leite-de-vaca",
+  "cardapio-bebe-10-meses",
+  "bebe-so-quer-mamar-nao-come",
 ];
 
 async function getFirestorePosts() {

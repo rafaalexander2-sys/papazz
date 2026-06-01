@@ -3784,4 +3784,392 @@ Pular as texturas mais firmes nessa idade pode dificultar a mastigação depois.
 - [Cardápio Bebê 7 Meses](/blog/cardapio-bebe-7-meses)
     `,
   },
+  {
+    id: 25,
+    slug: "bebe-pode-comer-feijao",
+    title: "Bebê Pode Comer Feijão? Quando e Como Oferecer",
+    description: "Sim, o bebê pode comer feijão a partir dos 6 meses. Veja como oferecer o caldo e o grão, qual o melhor tipo e como evitar gases e desconforto.",
+    category: "Dúvidas Comuns",
+    date: "2026-06-01",
+    readingTime: "7 min",
+    image: "https://images.unsplash.com/photo-1515543904379-3d757afe72e4?w=800&h=600&fit=crop",
+    author: "Equipe Papazz",
+    keywords: ["bebê pode comer feijão", "feijão para bebê", "caldo de feijão bebê", "feijão na introdução alimentar", "bebê com gases feijão"],
+    content: `
+Sim, o bebê pode comer feijão a partir dos **6 meses**, junto com o início da introdução alimentar. O feijão é um dos alimentos mais importantes do prato brasileiro e faz muito bem para o bebê.
+
+## Por Que o Feijão é Tão Importante
+
+O feijão combina muito bem com o arroz e forma uma dupla rica em:
+
+- **Ferro**, fundamental para prevenir anemia
+- **Proteína vegetal**
+- **Fibras**, que ajudam o intestino
+- **Vitaminas do complexo B**
+
+A combinação de feijão com uma fonte de vitamina C, como laranja de sobremesa, ajuda o corpo a absorver melhor o ferro.
+
+## Como Oferecer Feijão ao Bebê
+
+### Comece pelo caldo
+No início, ofereça o **caldo grosso do feijão**, sem os grãos. Amasse alguns grãos no caldo para engrossar. Evite só o caldo ralo, que tem pouco nutriente.
+
+### Depois, o grão amassado
+Com o tempo, amasse os grãos com o garfo e misture ao arroz. Por volta dos 8 a 9 meses, o bebê já come o grão inteiro bem cozido e macio.
+
+### No BLW
+Ofereça o feijão bem cozido amassado junto com o arroz, formando bolinhas que o bebê consegue pegar.
+
+## Qual o Melhor Feijão Para o Bebê
+
+Pode usar o feijão que a família já come:
+
+- **Carioca** e **preto** são os mais comuns e nutritivos
+- **Branco** e **fradinho** também servem
+
+O importante é cozinhar bem, até ficar macio, e **temperar sem sal** para o bebê. Use alho e cebola refogados para dar sabor.
+
+## Feijão Dá Gases no Bebê?
+
+Pode causar um pouco de gases no início, enquanto o intestino se adapta. Para reduzir:
+
+- **Deixe de molho** algumas horas antes de cozinhar e descarte essa água
+- Cozinhe bem, até ficar bem macio
+- Ofereça em pequena quantidade no começo
+
+O desconforto costuma diminuir conforme o bebê se acostuma. Não é motivo para tirar o feijão do cardápio.
+
+## Quantidade no Prato
+
+Uma a duas colheres de sopa de feijão amassado por refeição já é uma boa porção no início. O ideal é o feijão aparecer no almoço e no jantar, junto com arroz, um legume e uma proteína.
+
+## Resumo Rápido
+
+| Pergunta | Resposta |
+|---|---|
+| A partir de quando? | 6 meses |
+| Como começar? | Caldo grosso com grãos amassados |
+| Qual tipo? | O mesmo da família, sem sal |
+| Dá gases? | Pode, mas melhora com adaptação |
+
+## Continue Lendo
+
+- [Ferro na Alimentação do Bebê](/blog/ferro-na-alimentacao-do-bebe)
+- [Proteínas na Introdução Alimentar](/blog/proteinas-introducao-alimentar)
+    `,
+  },
+  {
+    id: 26,
+    slug: "primeira-fruta-do-bebe",
+    title: "Qual a Primeira Fruta do Bebê? Como Oferecer na Estreia",
+    description: "Não existe uma fruta obrigatória para começar. Veja as melhores opções de primeira fruta do bebê aos 6 meses, como amassar e oferecer com segurança.",
+    category: "Dúvidas Comuns",
+    date: "2026-06-01",
+    readingTime: "6 min",
+    image: "https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?w=800&h=600&fit=crop",
+    author: "Equipe Papazz",
+    keywords: ["primeira fruta do bebê", "qual fruta dar primeiro ao bebê", "papa de fruta bebê", "fruta para bebê 6 meses", "primeira papinha de fruta"],
+    content: `
+Muita gente acha que existe uma fruta certa para começar, mas não existe. **Qualquer fruta madura e amassada serve como primeira fruta do bebê**, a partir dos 6 meses.
+
+## Não Existe Ordem Obrigatória
+
+A recomendação antiga de seguir uma sequência rígida de frutas caiu. Hoje a orientação é oferecer **variedade desde o início**, respeitando o que está fresco e disponível.
+
+O importante é a fruta estar **madura, lavada e amassada** ou em pedaço seguro.
+
+## Melhores Frutas Para Começar
+
+Todas liberadas aos 6 meses, fáceis de amassar e bem aceitas:
+
+- **Banana**: prática, doce e fácil de amassar
+- **Mamão**: macio e ajuda o intestino
+- **Abacate**: cremoso e rico em gordura boa
+- **Manga**: doce e nutritiva
+- **Pera** e **maçã**: cozidas e amassadas, ou raspadas
+
+## Como Oferecer a Primeira Fruta
+
+### Método tradicional
+- Amasse a fruta com o garfo
+- Ofereça em uma colher pequena
+- Comece com poucas colheres
+
+### Método BLW
+- Ofereça em pedaços que o bebê segura, do tamanho de um dedo
+- Banana e manga em gomos firmes
+- Abacate em tiras
+
+## Precisa Cozinhar a Fruta?
+
+- **Frutas macias** (banana, mamão, abacate, manga): cruas, só amassadas
+- **Frutas firmes** (maçã, pera): pode cozinhar ou raspar para amaciar
+
+Não precisa adoçar nem coar. A fruta natural já é perfeita.
+
+## Quando Oferecer a Fruta no Dia
+
+A fruta costuma entrar nos **lanches**, de manhã ou de tarde, e como sobremesa após o almoço. Não substitua refeição principal por fruta.
+
+## Erros Comuns
+
+- **Adoçar a fruta**: nunca, o bebê precisa conhecer o sabor natural
+- **Oferecer só suco**: prefira a fruta inteira, tem mais fibra
+- **Misturar muitas frutas de uma vez**: no início, ofereça uma de cada vez para observar reações
+
+## Resumo Rápido
+
+| Pergunta | Resposta |
+|---|---|
+| Tem ordem certa? | Não |
+| Quando começar? | 6 meses |
+| Precisa adoçar? | Nunca |
+| Suco ou fruta? | Fruta inteira amassada |
+
+## Continue Lendo
+
+- [Frutas Que Soltam o Intestino do Bebê](/blog/frutas-que-soltam-o-intestino-do-bebe)
+- [Primeira Papinha do Bebê: Guia](/blog/primeira-papinha-bebe-guia)
+    `,
+  },
+  {
+    id: 27,
+    slug: "bebe-pode-tomar-leite-de-vaca",
+    title: "Bebê Pode Tomar Leite de Vaca? A Idade Certa e os Riscos",
+    description: "O leite de vaca integral só é indicado a partir de 1 ano. Entenda por que não dar antes, os riscos e o que oferecer enquanto isso.",
+    category: "Dúvidas Comuns",
+    date: "2026-06-01",
+    readingTime: "7 min",
+    image: "https://images.unsplash.com/photo-1550583724-b2692b85b150?w=800&h=600&fit=crop",
+    author: "Equipe Papazz",
+    keywords: ["bebê pode tomar leite de vaca", "leite de vaca bebê 1 ano", "quando dar leite de vaca", "leite integral bebê", "leite de vaca antes de 1 ano"],
+    content: `
+O leite de vaca integral só deve ser oferecido como bebida **a partir de 1 ano de idade**. Antes disso, ele não é indicado e pode trazer riscos para o bebê.
+
+## Por Que Não Dar Leite de Vaca Antes de 1 Ano
+
+O leite de vaca puro, como bebida principal, antes de 1 ano pode causar:
+
+- **Anemia**, porque tem pouco ferro e ainda atrapalha a absorção do ferro de outros alimentos
+- **Sobrecarga nos rins**, por excesso de proteína e minerais
+- **Microssangramentos no intestino**, que pioram a anemia
+- **Maior risco de alergia** à proteína do leite
+
+Por isso, até 1 ano, a bebida deve ser leite materno ou fórmula infantil.
+
+## E Derivados Como Iogurte e Queijo?
+
+Aqui muita gente se confunde. **Iogurte natural e queijos** podem entrar **a partir dos 6 meses**, em pequena quantidade, como parte das refeições.
+
+A restrição é para o **leite de vaca líquido como bebida principal**, não para os derivados em porções pequenas. O processamento do iogurte e do queijo muda a estrutura da proteína e a quantidade consumida é pequena.
+
+## O Que Oferecer Até 1 Ano
+
+- **Leite materno**, sempre que possível, é o ideal
+- **Fórmula infantil**, quando o leite materno não é possível
+- A partir dos 6 meses, a comida entra junto, mas o leite continua importante
+
+## A Partir de 1 Ano
+
+Depois de 1 ano, o leite de vaca **integral** pode ser oferecido como bebida. Use o integral, não o desnatado, porque a criança precisa da gordura para o desenvolvimento do cérebro.
+
+A quantidade recomendada fica em torno de 400 a 500 ml por dia. Leite demais nessa fase também atrapalha o apetite e a absorção de ferro.
+
+## E Se o Bebê Já Tomou Antes de 1 Ano?
+
+Não entre em pânico. Um gole ou um contato pequeno não causa dano permanente. O cuidado é não tornar o leite de vaca a **bebida principal** antes de 1 ano. Ajuste a partir de agora e converse com o pediatra.
+
+## Resumo Rápido
+
+| Item | Antes de 1 ano | Depois de 1 ano |
+|---|---|---|
+| Leite de vaca como bebida | Não | Sim, integral |
+| Iogurte natural | Sim, desde 6 meses | Sim |
+| Queijo branco sem sal | Sim, desde 6 meses | Sim |
+
+## Continue Lendo
+
+- [Ferro na Alimentação do Bebê](/blog/ferro-na-alimentacao-do-bebe)
+- [Alimentos Proibidos Para Bebê de Até 1 Ano](/blog/alimentos-proibidos-bebe-1-ano)
+    `,
+  },
+  {
+    id: 28,
+    slug: "cardapio-bebe-10-meses",
+    title: "Cardápio Bebê 10 Meses: Refeições do Dia Todo com Exemplos",
+    description: "Veja como montar o cardápio do bebê de 10 meses com pedaços maiores, novos alimentos e exemplos de café, almoço, lanche e jantar.",
+    category: "Cardápios",
+    date: "2026-06-01",
+    readingTime: "9 min",
+    image: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=800&h=600&fit=crop",
+    author: "Equipe Papazz",
+    keywords: ["cardápio bebê 10 meses", "alimentação bebê 10 meses", "o que bebê de 10 meses come", "comida bebê 10 meses", "refeições bebê 10 meses"],
+    content: `
+Aos 10 meses, o bebê já come bem mais variado e participa cada vez mais das refeições da família. É a fase de firmar a rotina de três refeições principais e dois lanches.
+
+## O Que Muda Aos 10 Meses
+
+- O bebê come **pedaços maiores** e mastiga melhor, mesmo com poucos dentes
+- A pinça está afiada, ele pega pedaços pequenos com facilidade
+- Já come quase tudo que a família come, com adaptações
+- O leite continua, mas a comida é a principal fonte de energia
+
+## Estrutura do Dia
+
+| Refeição | Horário aproximado |
+|---|---|
+| Café da manhã | Ao acordar |
+| Lanche da manhã | Meio da manhã |
+| Almoço | Meio-dia |
+| Lanche da tarde | Meio da tarde |
+| Jantar | Início da noite |
+
+## Exemplos de Café da Manhã
+
+- Tapioca pequena com queijo branco
+- Mingau de aveia com fruta
+- Pão integral com pasta de abacate
+- Ovo mexido com fruta picada
+
+## Exemplos de Almoço
+
+Sempre com **proteína, carboidrato, legume e leguminosa**:
+
+- Arroz, feijão, isca de carne macia e abóbora
+- Purê de batata, frango desfiado e brócolis
+- Macarrão com molho de tomate caseiro, lentilha e cenoura
+- Arroz, grão-de-bico amassado, peixe sem espinha e abobrinha
+
+Fruta de sobremesa.
+
+## Exemplos de Lanche
+
+- Fruta em pedaços
+- Iogurte natural sem açúcar
+- Palitos de queijo branco
+- Panqueca simples de banana e aveia
+
+## Exemplos de Jantar
+
+- Sopa grossa com frango e legumes
+- Arroz, feijão e legumes amassados
+- Purê de mandioquinha com carne moída e couve
+
+## Texturas e Mastigação
+
+Aos 10 meses, capriche nos **pedaços macios** e evite voltar para a comida muito amassada. Variar texturas treina a mastigação e prepara para a comida da família.
+
+## Novos Alimentos Para Incluir
+
+- Maior variedade de peixes sem espinha
+- Massas e tapioca
+- Mais leguminosas: grão-de-bico, ervilha, lentilha
+- Frutas e legumes coloridos variados
+
+## O Que Ainda Evitar
+
+- Sal e açúcar adicionados
+- Mel (só depois de 1 ano)
+- Leite de vaca como bebida (só depois de 1 ano)
+- Alimentos duros e redondos inteiros
+- Frituras, embutidos e ultraprocessados
+
+## Resumo Rápido
+
+| Item | Aos 10 meses |
+|---|---|
+| Refeições | 3 principais + 2 lanches |
+| Textura | Pedaços macios, mais firme |
+| Novos alimentos | Massas, mais peixes e leguminosas |
+| Continua proibido | Sal, açúcar, mel, leite de vaca |
+
+## Continue Lendo
+
+- [Cardápio Bebê 9 Meses](/blog/cardapio-bebe-9-meses)
+- [Cardápio Bebê 8 Meses](/blog/cardapio-bebe-8-meses)
+    `,
+  },
+  {
+    id: 29,
+    slug: "bebe-so-quer-mamar-nao-come",
+    title: "Bebê Só Quer Mamar e Não Come: Por Que e O Que Fazer",
+    description: "É normal o bebê preferir o peito no início da introdução alimentar. Veja por que isso acontece e estratégias práticas para ele aceitar a comida.",
+    category: "Dúvidas Comuns",
+    date: "2026-06-01",
+    readingTime: "8 min",
+    image: "https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=800&h=600&fit=crop",
+    author: "Equipe Papazz",
+    keywords: ["bebê só quer mamar não come", "bebê não come só mama", "bebê recusa comida e quer peito", "introdução alimentar bebê não aceita", "bebê prefere o peito"],
+    content: `
+Se o seu bebê empurra a comida e só quer o peito, calma. Isso é **muito comum** no começo da introdução alimentar e quase sempre faz parte do processo de adaptação.
+
+## Por Que o Bebê Só Quer Mamar
+
+Nos primeiros meses de introdução, o leite ainda é a **principal fonte de nutrição**. A comida é uma novidade e o bebê está apenas aprendendo. É natural que ele prefira o conforto e o sabor conhecido do peito.
+
+Outros motivos comuns:
+
+- Está mamando logo antes da refeição e já chega sem fome
+- A textura nova causa estranheza
+- Está num pico de desenvolvimento ou desconforto, como nascimento de dentes
+- Sente a tensão dos pais na hora da comida
+
+## A Regra de Ouro do Primeiro Ano
+
+**Até 1 ano, o leite vem antes da comida.** Comida é experimentação, não substituição. Nessa fase, o objetivo é o bebê **conhecer** sabores e texturas, não bater meta de quantidade.
+
+Então, se ele comeu pouco e mamou bastante, está tudo bem.
+
+## Estratégias Para Ele Aceitar Melhor a Comida
+
+### 1. Espace o peito da refeição
+Tente oferecer a comida quando o bebê está com fome, mas não faminto. Um intervalo entre a mamada e a refeição ajuda.
+
+### 2. Coma junto
+Bebês aprendem imitando. Sente o bebê à mesa nas refeições da família e coma na frente dele.
+
+### 3. Deixe explorar com as mãos
+Permita que ele toque, amasse e brinque com a comida. Faz parte do aprendizado e diminui a rejeição.
+
+### 4. Sem pressão e sem distração
+Nada de forçar, fazer aviãozinho ou ligar a TV. Ambiente calmo e tranquilo funciona melhor.
+
+### 5. Ofereça com constância
+Um alimento pode precisar ser oferecido **8 a 15 vezes** até ser aceito. Não desista após uma recusa.
+
+### 6. Varie texturas e cores
+Pratos coloridos e diferentes formas de servir o mesmo alimento despertam mais interesse.
+
+## O Que Não Fazer
+
+- Forçar ou brigar na hora da comida
+- Substituir a refeição por mamadeira de leite toda vez
+- Demonstrar ansiedade e frustração na frente do bebê
+- Oferecer só o que ele já gosta, sem insistir em variedade
+
+## Quando Se Preocupar
+
+Procure o pediatra se:
+
+- O bebê está **perdendo peso** ou não ganha há semanas
+- Recusa **toda e qualquer** comida por muito tempo, mesmo com tentativas
+- Tem sinais de engasgo real ou dor ao comer
+- Está apático, sem energia ou doente
+
+Fora esses casos, recusar comida e preferir o peito no início é parte normal do caminho.
+
+## Resumo Rápido
+
+- No primeiro ano, **leite é a base**, comida é aprendizado
+- Espace a mamada da refeição
+- Coma junto e sem pressão
+- Ofereça o mesmo alimento **várias vezes**
+- Procure o pediatra se houver perda de peso
+
+## Continue Lendo
+
+- [Bebê Não Quer Comer: Soluções](/blog/bebe-nao-quer-comer-solucoes)
+- [Bebê Recusa Comida no BLW](/blog/bebe-recusa-comida-blw)
+    `,
+  },
 ];
