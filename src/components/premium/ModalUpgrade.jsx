@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
+import { usePlatform } from "../../context/PlatformContext";
 
 export default function ModalUpgrade({ onClose }) {
   const { user } = useAuth();
+  const { isApp } = usePlatform();
   const [planoSelecionado, setPlanoSelecionado] = useState("anual");
   const [loading, setLoading] = useState(false);
   const [erro, setErro] = useState("");
@@ -81,54 +83,70 @@ export default function ModalUpgrade({ onClose }) {
             <BeneficioItem titulo="Sem Anuncios" descricao="Experiencia limpa e focada no seu bebe" />
           </div>
 
-          <div className="grid grid-cols-2 gap-4 mb-6">
-            <button
-              onClick={() => setPlanoSelecionado("mensal")}
-              className={`border-2 rounded-[10px] p-4 text-center transition ${
-                planoSelecionado === "mensal"
-                  ? "border-[#FF6B6B] bg-red-50"
-                  : "border-gray-200 hover:border-[#FFD700]"
-              }`}
-            >
-              <p className="text-sm text-gray-600 font-corpo mb-1">Mensal</p>
-              <p className="text-3xl font-titulo font-bold text-gray-900">R$ 19,90</p>
-              <p className="text-xs text-gray-500 font-corpo">por mes</p>
-            </button>
+          {isApp ? (
+            <>
+              <p className="text-center font-corpo text-gray-700 mb-6">
+                A assinatura Premium chega em breve no app.
+              </p>
+              <button
+                onClick={onClose}
+                className="w-full bg-[#FF6B6B] hover:bg-[#ff5252] text-white font-corpo font-bold py-4 rounded-[10px] transition"
+              >
+                Entendi
+              </button>
+            </>
+          ) : (
+            <>
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <button
+                  onClick={() => setPlanoSelecionado("mensal")}
+                  className={`border-2 rounded-[10px] p-4 text-center transition ${
+                    planoSelecionado === "mensal"
+                      ? "border-[#FF6B6B] bg-red-50"
+                      : "border-gray-200 hover:border-[#FFD700]"
+                  }`}
+                >
+                  <p className="text-sm text-gray-600 font-corpo mb-1">Mensal</p>
+                  <p className="text-3xl font-titulo font-bold text-gray-900">R$ 19,90</p>
+                  <p className="text-xs text-gray-500 font-corpo">por mes</p>
+                </button>
 
-            <button
-              onClick={() => setPlanoSelecionado("anual")}
-              className={`border-2 rounded-[10px] p-4 text-center relative transition ${
-                planoSelecionado === "anual"
-                  ? "border-[#FF6B6B] bg-red-50"
-                  : "border-[#FFD700] bg-yellow-50"
-              }`}
-            >
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#FFD700] text-white text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap">
-                Economize 37%
+                <button
+                  onClick={() => setPlanoSelecionado("anual")}
+                  className={`border-2 rounded-[10px] p-4 text-center relative transition ${
+                    planoSelecionado === "anual"
+                      ? "border-[#FF6B6B] bg-red-50"
+                      : "border-[#FFD700] bg-yellow-50"
+                  }`}
+                >
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#FFD700] text-white text-xs font-bold px-3 py-1 rounded-full whitespace-nowrap">
+                    Economize 37%
+                  </div>
+                  <p className="text-sm text-gray-600 font-corpo mb-1">Anual</p>
+                  <p className="text-3xl font-titulo font-bold text-gray-900">R$ 149</p>
+                  <p className="text-xs text-gray-500 font-corpo">R$ 12,42/mes</p>
+                </button>
               </div>
-              <p className="text-sm text-gray-600 font-corpo mb-1">Anual</p>
-              <p className="text-3xl font-titulo font-bold text-gray-900">R$ 149</p>
-              <p className="text-xs text-gray-500 font-corpo">R$ 12,42/mes</p>
-            </button>
-          </div>
 
-          {erro && (
-            <div className="bg-red-50 border border-red-200 rounded-[10px] p-3 mb-4">
-              <p className="text-red-600 font-corpo text-sm text-center">{erro}</p>
-            </div>
+              {erro && (
+                <div className="bg-red-50 border border-red-200 rounded-[10px] p-3 mb-4">
+                  <p className="text-red-600 font-corpo text-sm text-center">{erro}</p>
+                </div>
+              )}
+
+              <button
+                onClick={assinar}
+                disabled={loading}
+                className="w-full bg-[#FF6B6B] hover:bg-[#ff5252] disabled:opacity-60 text-white font-corpo font-bold py-4 rounded-[10px] transition mb-4"
+              >
+                {loading ? "Aguarde..." : "Assinar Premium Agora"}
+              </button>
+
+              <p className="text-center text-sm text-gray-500 font-corpo">
+                Garantia de 7 dias. Cancele quando quiser.
+              </p>
+            </>
           )}
-
-          <button
-            onClick={assinar}
-            disabled={loading}
-            className="w-full bg-[#FF6B6B] hover:bg-[#ff5252] disabled:opacity-60 text-white font-corpo font-bold py-4 rounded-[10px] transition mb-4"
-          >
-            {loading ? "Aguarde..." : "Assinar Premium Agora"}
-          </button>
-
-          <p className="text-center text-sm text-gray-500 font-corpo">
-            Garantia de 7 dias. Cancele quando quiser.
-          </p>
         </div>
       </div>
     </div>
