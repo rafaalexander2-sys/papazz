@@ -1,7 +1,7 @@
 # Decisões Técnicas — Papazz
 
 Registro de decisões arquiteturais tomadas. Data: 2026-05-17.
-Atualizado: 2026-05-25 (sessao Play Store + TWA build).
+Atualizado: 2026-10-02 (reset da chave de upload no Play Console).
 
 ---
 
@@ -30,47 +30,64 @@ AdSense dentro de WebView/TWA viola as políticas do Google e pode banir a conta
 | Banner "Baixe o app" no `www` | Feito |
 | `app.papazz.com.br` no Vercel | Feito |
 | DNS CNAME `app` | Feito |
-| `manifest.json` (obrigatório TWA) | Feito — `public/manifest.json` |
-| `/.well-known/assetlinks.json` | Feito — falta SHA-256 real |
-| Projeto Android TWA (`twa/android/`) | Feito — Gradle puro, sem Bubblewrap |
-| GitHub Action build AAB | Feito — `.github/workflows/build-twa.yml` |
-| Conta Play Store | Feito — ID 5486423839757915054 |
-| Build AAB via GitHub Actions | Rodando / aguardando resultado |
-| SHA-256 do keystore | Pendente — sai nos logs do Actions |
-| Atualizar `assetlinks.json` com SHA real | Pendente |
-| Upload AAB na Play Store | Pendente |
-| Salvar keystore como secret no GitHub | Pendente |
+| `manifest.json` (obrigatório TWA) | Feito: `public/manifest.json` |
+| Projeto Android TWA (`twa/android/`) | Feito: Gradle puro, sem Bubblewrap |
+| GitHub Action build AAB | Feito: `.github/workflows/build-twa.yml` |
+| Conta Play Store | Feito: ID 5486423839757915054 |
+| App criado no Play Console (`br.com.papazz`) | Feito |
+| Secret `KEYSTORE_BASE64` no GitHub | Feito: chave SHA1 `E6:E3:B1:FF...` |
+| Reset da chave de upload no Play Console | Solicitado em 2026-10-03. Aguardando e-mail do Google |
+| Upload AAB versionCode 2 (teste interno) | Pendente: depois que o reset valer |
+| `assetlinks.json` com SHA-256 da chave do Google | Feito: `42:D8...` (vale após merge na main) |
+| Ficha da loja, classificação, segurança de dados | Pendente |
+
+### Chaves de assinatura (Play App Signing)
+O Google assina o app final com a chave dele (chave de assinatura do app). Nós só assinamos o upload (chave de upload).
+
+| Chave | SHA1 | Onde fica |
+|---|---|---|
+| Upload original (PERDIDA) | `E9:24:54:1B:71:08:2B:D8:E6:42:BE:6A:EE:09:E8:04:B0:5E:4C:E7` | Gerada num build de 25/mai, antes do secret existir. Artifact expirou. Irrecuperável. |
+| Upload nova | `E6:E3:B1:FF:23:FB:D0:A1:10:0A:69:F8:FD:DB:DD:9F:14:53:B0:33` | Secret `KEYSTORE_BASE64` (alias `papazz`, senha `papazz123`) |
+| Assinatura do app (Google) | SHA-256 `42:D8:EF:AC:D6:D6:A6:BE:B0:B8:27:1E:05:8E:F4:99:3F:78:20:AC:1F:10:66:60:10:49:EA:24:AB:5E:9D:8B` | Gerenciada pelo Google. Já no `assetlinks.json` |
+
+SHA-256 da chave de upload nova: `4B:0A:23:7A:20:96:E2:4E:4D:7F:6C:91:5D:74:13:5C:24:DC:D6:E2:63:54:41:92:69:A3:19:62:44:08:BA:B0`
+
+### O que deu errado (não repetir)
+Cada build do CI gerava um keystore novo. O primeiro AAB enviado registrou uma chave que só existia num artifact de 7 dias. O secret foi salvo com o keystore de outro run. Hoje o workflow falha se o secret não existir, em vez de gerar chave nova.
+
+### Reset da chave de upload
+1. Play Console > Protegido com o Google Play > Proteção da Google Play Store > Gerencie a Assinatura de apps do Google Play
+2. Seção "Certificado da chave de upload" > Solicitar redefinição da chave de upload
+3. Motivo: perdi a chave de upload. Anexar `upload_certificate.pem` (artifact `upload-certificate` do Actions)
+4. Google aprova (horas a 2 dias úteis) e manda e-mail com a data em que a chave nova passa a valer (cerca de 48h depois)
+
+### SHA-256 do Google para o `assetlinks.json`
+Play Console > Protegido com o Google Play > Distribuição na Google Play Store > Acessar a Assinatura de Apps do Google Play > seção "Chave de assinatura do app". Copiar o SHA-256 e adicionar em `public/.well-known/assetlinks.json` (manter o da chave de upload também). Sem isso o app abre com barra de endereço do navegador.
 
 ### Como buildar o AAB
-O build roda automaticamente via GitHub Actions em todo push para `twa/android/**` ou `.github/workflows/build-twa.yml`. Para acionar manual:
-1. GitHub > Actions > "Build TWA (Android AAB)" > Run workflow
+Roda sozinho em todo push para `twa/android/**` ou `.github/workflows/build-twa.yml`. Manual: GitHub > Actions > "Build TWA (Android AAB)" > Run workflow.
 
 O workflow:
-- Gera o keystore na primeira vez (senha: `papazz123`)
-- Imprime o SHA-256 nos logs (buscar por `SHA-256 para o assetlinks.json`)
-- Gera o arquivo `app-release.aab` como artifact "papazz-release"
-- Gera o `keystore-base64.txt` como artifact "papazz-keystore"
+- Restaura o keystore do secret `KEYSTORE_BASE64` (falha se não existir)
+- Confere se o SHA1 bate com a chave de upload registrada (falha se não bater)
+- Gera `app-release.aab` no artifact `papazz-release`
+- Gera `upload_certificate.pem` no artifact `upload-certificate`
 
-### Depois do primeiro build bem-sucedido
-1. Baixar artifact `papazz-keystore` e salvar como secret `KEYSTORE_BASE64` no GitHub (Settings > Secrets)
-2. Copiar SHA-256 dos logs e atualizar `public/.well-known/assetlinks.json`
-3. Baixar `app-release.aab` e fazer upload no Play Console (Teste interno ou Producao)
-4. Play Console > Versoes > Configuracoes > Assinatura de app mostrara o SHA-256 do Google — adicionar esse tambem no `assetlinks.json`
+A cada novo envio para a Play Store, subir `versionCode` em `twa/android/app/build.gradle`.
 
 ### Estrutura do projeto Android
 ```
 twa/
-  android/                    — projeto Gradle (TWA)
-    app/build.gradle          — package br.com.papazz, compileSdk 34
+  android/                    projeto Gradle (TWA)
+    app/build.gradle          package br.com.papazz, compileSdk/targetSdk 35, minSdk 21
     app/src/main/
-      AndroidManifest.xml     — LauncherActivity + Digital Asset Links intent-filter
-      res/values/colors.xml   — colorPrimary: #FF6B6B
-  twa-manifest.json           — config legado Bubblewrap (nao usado mais)
-  papazz-release-key.keystore — gerado no CI (nao commitado)
+      AndroidManifest.xml     LauncherActivity + Digital Asset Links intent-filter
+      res/values/colors.xml   colorPrimary: #FF6B6B
+  twa-manifest.json           config legado Bubblewrap (não usado)
 public/
-  manifest.json               — Web App Manifest (obrigatorio TWA)
+  manifest.json               Web App Manifest (obrigatório TWA)
   .well-known/
-    assetlinks.json           — Digital Asset Links (SHA-256 pendente)
+    assetlinks.json           Digital Asset Links
 ```
 
 ---
