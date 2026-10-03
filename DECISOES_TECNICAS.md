@@ -38,7 +38,7 @@ AdSense dentro de WebView/TWA viola as políticas do Google e pode banir a conta
 | Secret `KEYSTORE_BASE64` no GitHub | Feito: chave SHA1 `E6:E3:B1:FF...` |
 | Reset da chave de upload no Play Console | Pendente: pedir com o `upload_certificate.pem` |
 | Upload AAB versionCode 2 (teste interno) | Pendente: depois que o reset valer |
-| `assetlinks.json` com SHA-256 da chave do Google | Pendente: copiar do Play Console |
+| `assetlinks.json` com SHA-256 da chave do Google | Feito: `42:D8...` (vale após merge na main) |
 | Ficha da loja, classificação, segurança de dados | Pendente |
 
 ### Chaves de assinatura (Play App Signing)
@@ -48,7 +48,7 @@ O Google assina o app final com a chave dele (chave de assinatura do app). Nós 
 |---|---|---|
 | Upload original (PERDIDA) | `E9:24:54:1B:71:08:2B:D8:E6:42:BE:6A:EE:09:E8:04:B0:5E:4C:E7` | Gerada num build de 25/mai, antes do secret existir. Artifact expirou. Irrecuperável. |
 | Upload nova | `E6:E3:B1:FF:23:FB:D0:A1:10:0A:69:F8:FD:DB:DD:9F:14:53:B0:33` | Secret `KEYSTORE_BASE64` (alias `papazz`, senha `papazz123`) |
-| Assinatura do app (Google) | ver Play Console | Gerenciada pelo Google |
+| Assinatura do app (Google) | SHA-256 `42:D8:EF:AC:D6:D6:A6:BE:B0:B8:27:1E:05:8E:F4:99:3F:78:20:AC:1F:10:66:60:10:49:EA:24:AB:5E:9D:8B` | Gerenciada pelo Google. Já no `assetlinks.json` |
 
 SHA-256 da chave de upload nova: `4B:0A:23:7A:20:96:E2:4E:4D:7F:6C:91:5D:74:13:5C:24:DC:D6:E2:63:54:41:92:69:A3:19:62:44:08:BA:B0`
 
