@@ -1,4 +1,4 @@
-const EMAIL = "privacidade@papazz.com.br";
+const EMAIL = "contato@casacriative.com.br";
 
 function Secao({ id, titulo, children }) {
   return (
