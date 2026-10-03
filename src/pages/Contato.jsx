@@ -138,10 +138,10 @@ export default function Contato() {
                 </h3>
 
                 <a
-                  href="mailto:contato@papazz.com.br"
+                  href="mailto:contato@casacriative.com.br"
                   className="text-[#FF6B6B] font-corpo text-sm hover:underline"
                 >
-                  contato@papazz.com.br
+                  contato@casacriative.com.br
                 </a>
                 <p className="text-gray-600 font-corpo text-xs mt-2">
                   Respondemos em até 48 horas
