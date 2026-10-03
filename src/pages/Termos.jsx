@@ -312,10 +312,10 @@ export default function Termos() {
               <li>
                 <strong>Email:</strong>{" "}
                 <a
-                  href="mailto:legal@papazz.com.br"
+                  href="mailto:contato@casacriative.com.br"
                   className="text-[#FF6B6B] hover:underline"
                 >
-                  legal@papazz.com.br
+                  contato@casacriative.com.br
                 </a>
               </li>
               <li>

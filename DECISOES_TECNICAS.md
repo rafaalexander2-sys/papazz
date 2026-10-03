@@ -36,7 +36,7 @@ AdSense dentro de WebView/TWA viola as políticas do Google e pode banir a conta
 | Conta Play Store | Feito: ID 5486423839757915054 |
 | App criado no Play Console (`br.com.papazz`) | Feito |
 | Secret `KEYSTORE_BASE64` no GitHub | Feito: chave SHA1 `E6:E3:B1:FF...` |
-| Reset da chave de upload no Play Console | Solicitado em 2026-10-03. Aguardando e-mail do Google |
+| Reset da chave de upload no Play Console | Aprovado. Chave nova vale a partir de 2026-10-05 02:17 UTC (04/out 23:17 BRT) |
 | Upload AAB versionCode 2 (teste interno) | Pendente: depois que o reset valer |
 | `assetlinks.json` com SHA-256 da chave do Google | Feito: `42:D8...` (vale após merge na main) |
 | Ficha da loja, classificação, segurança de dados | Pendente |

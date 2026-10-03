@@ -116,7 +116,7 @@ export default function Footer() {
           <div>
             <h3 className="font-titulo font-bold text-white mb-4">Contato</h3>
             <p className="text-gray-400 text-sm font-corpo mb-2">
-              Email: contato@papazz.com.br
+              Email: contato@casacriative.com.br
             </p>
             <p className="text-gray-400 text-sm font-corpo">
               Instagram: @papazz
