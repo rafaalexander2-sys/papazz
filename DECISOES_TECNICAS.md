@@ -81,7 +81,7 @@ A cada novo envio para a Play Store, subir `versionCode` em `twa/android/app/bui
 ```
 twa/
   android/                    projeto Gradle (TWA)
-    app/build.gradle          package br.com.papazz, compileSdk/targetSdk 35, minSdk 21
+    app/build.gradle          package br.com.papazz, compileSdk/targetSdk 35, minSdk 24
     app/src/main/
       AndroidManifest.xml     LauncherActivity + Digital Asset Links intent-filter
       res/values/colors.xml   colorPrimary: #FF6B6B
